@@ -9,7 +9,7 @@
 #define _LIST_H
 #endif
 #define List_Init(list,list_node_t) \
-    list=(* list_node_t)malloc(sizeof(list_node_t));\
+    list=(list_node_t*)malloc(sizeof(list_node_t));\
     list->next=list;\
     list->prev=list;\
 
