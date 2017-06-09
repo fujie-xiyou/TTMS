@@ -12,4 +12,4 @@ typedef struct {
     int rowsCount;  //搴т綅琛屾暟
     int colsCount;  //搴т綅鍒楁暟
 } *studio_t;
-//乱码问题后面再谈 
+//乱码问题后面再谈   
