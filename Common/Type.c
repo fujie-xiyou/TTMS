@@ -11,7 +11,7 @@ typedef struct {
     char name[30];  //æ¼”å‡ºå…åç§°
     int rowsCount;  //åº§ä½è¡Œæ•°
     int colsCount;  //åº§ä½åˆ—æ•°
-} *studio_t;
+} *studio_t;//123 
 //ÂÒÂëÎÊÌâºóÃæÔÙÌ¸   
 #include 
 try//ÎÒ¾ÍÊÔÒ»ÏÂ
