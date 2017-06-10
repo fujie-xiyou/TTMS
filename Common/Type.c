@@ -11,5 +11,8 @@ typedef struct {
     char name[30];  //Ф╪■Е┤╨Е▌┘Е░█Г╖╟
     int rowsCount;  //Е╨╖Д╫█Х║▄Ф∙╟
     int colsCount;  //Е╨╖Д╫█Е┬≈Ф∙╟
-} *studio_t;
+} *studio_t;//123 
 //брбКнйлБ╨СцФтыл╦   
+#include 
+try//нр╬мйтр╩об║ё║ётыйтр╩об║ё║ёсжйтакр╩об
+0.0 
