@@ -14,4 +14,4 @@ typedef struct {
 } *studio_t;//123 
 //乱码问题后面再谈   
 #include 
-try//我就试一下。。再试一下
+try//我就试一下。。再试一下。。又试了一下
