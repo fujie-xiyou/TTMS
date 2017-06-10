@@ -13,3 +13,5 @@ typedef struct {
     int colsCount;  //搴т綅鍒楁暟
 } *studio_t;
 //乱码问题后面再谈   
+#include 
+try//我就试一下
