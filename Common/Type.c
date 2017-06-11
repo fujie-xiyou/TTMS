@@ -15,3 +15,4 @@ typedef struct {
 //乱码问题后面再谈   
 #include 
 try//我就试一下。。再试一下。。又试了一下
+0.0 
