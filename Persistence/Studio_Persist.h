@@ -1,11 +1,24 @@
-/*************************************************************************
-	>    File Name: Studio_Persist.h
-	>       Author: fujie
-	>         Mail: fujie.me@qq.com
-	> Created Time: 2017å¹´06æœˆ10æ—¥ æ˜ŸæœŸå…­ 17æ—¶23åˆ†31ç§’
- ************************************************************************/
+/*
+ * StudioPersist.h
+ *
+ *  Created on: 2015Äê4ÔÂ24ÈÕ
+ *      Author: Administrator
+ */
 
-#ifndef _STUDIO_PERSIST_H
-#define _STUDIO_PERSIST_H
-#endif
+#ifndef STUDIO_PERSIST_H_
+#define STUDIO_PERSIST_H_
+
+#include "../Service/Studio.h"
+
 int Studio_Perst_Insert(const studio_t *data);
+
+int Studio_Perst_Update(const studio_t *data);
+
+int Studio_Perst_DeleteByID(int ID);
+
+int Studio_Perst_SelectByID(int ID, studio_t *buf);
+
+int Studio_Perst_SelectAll(studio_list_t list);
+
+
+#endif /* STUDIO_PERSIST_H_ */
