@@ -18,8 +18,12 @@
 #include <sys/time.h>
 
 //登录函数，提示用户输入用户名和密码，登录成功return 1，否则提示重新登录，超过3次，登录失败
+<<<<<<< HEAD
 int SysLogin() 
 {
+=======
+int SysLogin() {
+>>>>>>> 8b7664a905b28df2542313cf451bcd3f84734f11
 
 	return 1;
 
