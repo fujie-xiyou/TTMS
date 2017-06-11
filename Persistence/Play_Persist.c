@@ -28,7 +28,15 @@ static const char PLAY_DATA_TEMP_FILE[] = "PlayTmp.dat";//删除或更新时，暂时保存
  * Return:      写入文件的记录数
  */
 int Play_Perst_Insert(const play_t *data) {
-  return 0;
+    FILE *fp;
+    int rtn=0;
+    if(fp=fopen(PLAY_DATA_FILE,"ab")==NULL){
+        fprintf(stderr,"%s打开失败!\n",PLAY_DATA_FILE);
+        return rtn;
+    }
+    rtn=fwrite(data,sizeof(play_t),1,fp);
+    fclose(fp);
+    return rtn;
 }
 
 /*
@@ -40,7 +48,24 @@ int Play_Perst_Insert(const play_t *data) {
  * Return:      更新的剧目信息数，0表示未找到，1表示找到并更新
  */
 int Play_Perst_Update(const play_t *data) {
-   return 0;
+    FILE *fp;
+    int found=0;
+    play_t buf;
+    if(fp=fopen(PLAY_DATA_FILE,"wb+")==NULL){
+        fprintf("stderr","%s打开失败!",PLAY_DATA_FILE);
+        return found;
+    }
+    while(!feof(fp)){//如果未到文件结尾,继续循环
+        fread(&buf,sizeof(play_t),1,fp);
+        if(buf.id==data->id){
+            fseek(fp,-sizeof(buf),SEEK_CUR);
+            fwrite(data,sizeof(buf),1,fp);
+            found=1;           
+            break;
+        }
+    }
+    fclose(fp);
+    return found;
 }
 
 /*
@@ -52,7 +77,32 @@ int Play_Perst_Update(const play_t *data) {
  * Return:      0表示删除失败，1表示删除成功
  */
 int Play_Perst_DeleteByID(int ID) {
-   return 0;
+    FILE *fp,*fd;
+    int found=0;
+    play_t buf;
+    if(rename(PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE)){
+        fprintf(stderr,"%s重命名失败!\n",PLAY_DATA_FILE);
+        return found;
+    }
+    if(fp=fopen(PLAY_DATA_TEMP_FILE,"wb+")==NULL || 
+       pd=fopen(PLAY_DATA_FILE,"wb")==NULL){
+        fprintf(stderr,"%s或%s打开失败!\n",PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE);
+        return found;
+    }
+    while(!feof(fp)) {
+        fread(&buf,sizeof(buf),1,fp);
+        if(buf.id==ID) {
+            found=1;
+        }
+        else {
+            fwrite(&buf,sizeof(buf),1,fd);
+        }
+    }
+
+    fclose(fp);
+    fclose(fd);
+    remove(PLAY_DATA_TEMP_FILE);
+    return found;
 }
 
 /*
@@ -62,9 +112,26 @@ int Play_Perst_DeleteByID(int ID) {
  * Input:       待查找的剧目ID号，保存查找结果的内存的地址
  * Output:      无
  * Return:      0表示未找到，1表示找到了
+ * 注意:        实体buf必须已经在主调函数中初始化;
  */
 int Play_Perst_SelectByID(int ID, play_t *buf) {
-   return 0;
+    FILE *fp;
+    int found=0;
+    play_t data;
+    if(fp=fopen(PLAY_DATA_FILE,"wb+")==NULL){
+        printf("%s打开失败!\n",PLAY_DATA_FILE);
+        return found;
+    }
+    while(!feof(fp)){
+        fread(&data,sizeof(play_t),1,fp);
+        if(data.id==ID){
+            *buf=data;
+            found=1;
+            break; 
+        }
+    }
+    fclose(fp);
+    return found;
 }
 
 
@@ -75,9 +142,29 @@ int Play_Perst_SelectByID(int ID, play_t *buf) {
  * Input:       list剧目信息链表的头指针
  * Output:      提示建立链表时，申请空间失败
  * Return:      返回查找到的记录数目
+ * 注意:        list务必在主调函数中初始化!!!
  */
 int Play_Perst_SelectAll(play_list_t list) {
-   return 0;
+    FILE *fp;
+    int recCount=0;
+    play_t buf;
+    play_list_t newNode;
+    if(fp=fopen(PLAY_DATA_FILE,"rb")==NULL){
+        printf("%s打开失败!\n",PLAY_DATA_FILE);
+        return 0;
+    }
+    while(!feof(fp)){
+        fread(buf,sizeof(buf),1,fp);
+        if(newNode=(play_list_t)malloc(sizeof(play_node_t))==NULL){
+            printf("内存申请失败!\n");
+            break;
+        }
+        newNode->data=buf;
+        List_AddTail(list,newNode);
+        recCount++;
+    }
+    fclose(fp);
+    return recCount;
 }
 
 
@@ -88,8 +175,29 @@ int Play_Perst_SelectAll(play_list_t list) {
  * Input:       list为查找到的剧目信息链表，condt为模糊查询的关键字
  * Output:      提示建立链表时，申请空间失败
  * Return:      返回查找到的记录数目
+ * 注意:        list务必在主调函数中初始化!!!
  */
 int Play_Perst_SelectByName(play_list_t list, char condt[]) {
-   return 0;
+    int recCount=0;
+    FILE *fp;
+    play_t buf;
+    play_list_t newNode;
+    if(fp=fopen(PLAY_DATA_FILE,"rb")==NULL){
+        printf("%s打开失败!",PLAY_DATA_FILE);
+        return 0;
+    }
+    while(!feof(fp)){
+        fread(&buf,sizeof(buf),1,fp);
+        if(strstr(buf.name,condt)){
+            if(newNode=(play_list_t)malloc(sizeof(play_node_t))){
+                printf("内存申请失败!\n");
+                break;
+            }
+            newNode->data=buf;
+            List_AddTail(list,newNode);
+            recCount++;
+        }
+    }
+    fclose(fp);
+    return recCount;
 }
-

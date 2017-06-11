@@ -32,7 +32,15 @@ static const char SCHEDULE_DATA_TEMP_FILE[] = "ScheduleTmp.dat";////删除或更新时
  */
 int Schedule_Perst_Insert(const schedule_t *data)
 {
-   return 0;
+    FILE *fp;
+    int rtn=0;
+    if(fp=fopen(SCHEDULE_DATA_FILE,"ab")==NULL){
+        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
+        return rtn;
+    }
+    rtn=fwrite(data,sizeof(schedule_t),1,fp);
+    fclose(fp);
+    return rtn;
 }
 
 /*
