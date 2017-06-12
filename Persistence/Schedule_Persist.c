@@ -118,8 +118,23 @@ int Schedule_Perst_DeleteByID(int ID){
  * Return:      0表示未找到，1表示找到了
  */
 int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
-    
-    return 0;
+    int rtn=0;
+    FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
+    if(fp==NULL){
+        printf("%s打开失败!\n");
+        return rtn;
+    }
+    schedule_t data;
+    while(!feof(fp)){
+        fread(&data,sizeof(data),1,fp);
+        if(data.id==ID){
+            *buf=data;
+            rtn=1;
+            break;
+        }
+    }
+    fclose(fp);
+    return rtn;
 }
 
 /*
@@ -131,7 +146,34 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
  * Return:      返回查找到的记录数目
  */
 int Schedule_Perst_SelectAll(schedule_list_t list){
-   return 0;
+    int recCount=0;
+    schedule_list_t newNode;
+    schedule_t data;
+
+    assert(NULL!=list);
+
+    List_Free(list,schedule_node_t);
+
+    FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
+    if(fp==NULL){
+        printf("%s打开失败!\n");
+        return recCount;
+    }
+    while(!feof(fp)){
+        fread(&data,sizeof(data),1,fp);
+        newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
+        if(newNode==NULL){
+            printf("内存申请失败!\n");
+            break;
+        }
+        newNode->data=data;
+        List_AddTail(list,newNode);
+        recCount++;
+    }
+    fclose(fp);
+
+
+    return recCount;
 }
 
 /*
@@ -143,5 +185,29 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
  * Return:      返回查找到的记录数目
  */
 int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
-   return 0;
+    int recCount=0;
+    schedule_list_t newNode;
+    schedule_t data;
+    assert(NULL!=list);
+    List_Free(list,schedule_node_t);
+    FILE *fp fopen(SCHEDULE_DATA_FILE,"rb");
+    if(fp==NULL){
+        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
+        return recCount;
+    }
+    while(!feof(fp)){
+        fread(&data,sizeof(data),1,fp);
+        if(data.id==play_id){
+            newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
+            if(newNode==NULL){
+                printf("内存申请失败!\n");
+                break;
+            }
+            newNode->data=data;
+            List_AddTail(list,newNode);
+            recCount++;
+        }
+    }
+    fclose(fp);
+    return recCount;
 }
