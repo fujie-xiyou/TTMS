@@ -21,8 +21,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 int SysLogin() 
 {
+=======
+int SysLogin() {
+>>>>>>> 8b7664a905b28df2542313cf451bcd3f84734f11
 =======
 int SysLogin() {
 >>>>>>> 8b7664a905b28df2542313cf451bcd3f84734f11
