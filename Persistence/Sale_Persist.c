@@ -11,13 +11,34 @@ static const char SALE_DATA_FILE[] = "Sale.dat";
 static const char SALE_DATA_TEMP_FILE[] = "SaleTmp.dat";
 
 int Sale_Perst_Insert(const sale_t *data) {
-	
-	return 0;
+    FILE *fp=fopen(SALE_DATA_FILE,"ab");
+    int rtn=0;
+    if(fp==NULL){
+        printf("&s打开失败!\n",SALE_DATA_FILE);
+        return rtn;
+    }
+    rtn=fwrite(data,sizeof(sale_t),1,fp);
+    fclose(fp);
+    return rtn;
 }
 
-
 int Sale_Perst_DeleteByID(int saleID) {
-	
+    if(!rename(SALE_DATA_FILE,SALE_DATA_TEMP_FILE)){
+
+    }
+
+    FILE *fp=fopen(SALE_DATA_FILE,"wb+");
+    sale_t buf;
+    if(fp==NULL){
+        printf("%s打开失败！\n",SALE_DATA_FILE);
+        return 0;
+    }
+    while(!feof(fp)){
+        fread(&buf,sizeof(buf),1,fp);
+        if(buf.id!=saleID){
+
+        }
+    }
 
 	return 0;
 }
