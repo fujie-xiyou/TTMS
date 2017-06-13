@@ -100,5 +100,6 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
  * Return:      нч
  */
 void Schedule_UI_MgtEntry(int play_id){
+	int 
 
 }
