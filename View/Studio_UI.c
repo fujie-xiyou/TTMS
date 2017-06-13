@@ -40,7 +40,7 @@ void Studio_UI_MgtEntry(void) {
 	do {
 		/*system("cls");*/
 		printf("\n==================================================================\n");
-		printf("********************** Projection Room List **********************\n");
+		printf("********************** 演出厅列表 **********************\n");
 		printf("%5s  %18s  %10s  %10s  %10s\n", "ID", "Name", "Rows Count",
 				"Columns Count", "Seats Count");
 		printf("------------------------------------------------------------------\n");
@@ -52,7 +52,7 @@ void Studio_UI_MgtEntry(void) {
 					pos->data.seatsCount);
 			pos = pos->next;
 		}
-		printf("------- Total Records:%2d ----------------------- Page %2d/%2d ----\n",
+		printf("------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",//Total Records,page
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf(
@@ -61,7 +61,7 @@ void Studio_UI_MgtEntry(void) {
 				"[P]revPage|[N]extPage | [A]dd|[D]elete|[U]pdate | [S]eat | [R]eturn");
 		printf(
 				"\n==================================================================\n");
-		printf("Your Choice:");
+		printf("你的选择:");//Your Choice
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -77,7 +77,7 @@ void Studio_UI_MgtEntry(void) {
 			break;
 		case 'd':
 		case 'D':
-			printf("Input the ID:");
+			printf("输入ID:");
 			scanf("%d", &id);
 			if (Studio_UI_Delete(id)) {	//从新载入数据
 				paging.totalRecords = Studio_Srv_FetchAll(head);
@@ -86,7 +86,7 @@ void Studio_UI_MgtEntry(void) {
 			break;
 		case 'u':
 		case 'U':
-			printf("Input the ID:");
+			printf("输入ID:");
 			scanf("%d", &id);
 			if (Studio_UI_Modify(id)) {	//从新载入数据
 				paging.totalRecords = Studio_Srv_FetchAll(head);
@@ -95,7 +95,7 @@ void Studio_UI_MgtEntry(void) {
 			break;
 		case 's':
 		case 'S':
-			printf("Input the ID:");
+			printf("输入ID:");
 			scanf("%d", &id);
 			Seat_UI_MgtEntry(id);
 			paging.totalRecords = Studio_Srv_FetchAll(head);
@@ -127,14 +127,14 @@ int Studio_UI_Add(void) {
 	do {
 		/*system("cls");*/
 		printf("\n=======================================================\n");
-		printf("****************  Add New Projection Room  ****************\n");
+		printf("****************  添加新演出厅 ****************\n");// Add New Projection Room 
 		printf("-------------------------------------------------------\n");
-		printf("Room Name:");
+		printf("演出厅名称:");//Room Name
 		fflush(stdin);
 		gets(rec.name);
-		printf("Row Count of Seats:");
+		printf("座位的排数:");//Row Count of Seats
 		scanf("%d", &(rec.rowsCount));
-		printf("Column Count of Seats:");
+		printf("座位的列数:");//Column Count of Seats
 		scanf("%d", &(rec.colsCount));
 		rec.seatsCount = 0;
 		printf("=======================================================\n");
@@ -144,9 +144,9 @@ int Studio_UI_Add(void) {
 
 		if (Studio_Srv_Add(&rec)) {
 			newRecCount += 1;
-			printf("The new room added successfully!\n");
+			printf("新演出厅添加成功!\n");//The new room added successfully	
 		} else
-			printf("The new room added failed!\n");
+			printf("新演出厅添加失败!\n");//The new room added failed!
 		printf("-------------------------------------------------------\n");
 		printf("[A]dd more, [R]eturn:");
 		fflush(stdin);
@@ -164,13 +164,13 @@ int Studio_UI_Modify(int id) {
 
 	/*Load record*/
 	if (!Studio_Srv_FetchByID(id, &rec)) {
-		printf("The room does not exist!\nPress [Enter] key to return!\n");
+		printf("该演出厅不存在!\n按[Enter]键返回!\n");//The room does not exist!\nPress [Enter] key to return!\n
 		getchar();
 		return 0;
 	}
 
 	printf("\n=======================================================\n");
-	printf("****************  Update Projection Room  ****************\n");
+	printf("****************  更新演出厅  ****************\n");//Update Projection Room
 	printf("-------------------------------------------------------\n");
 	printf("Room ID:%d\n", rec.id);
 	printf("Room Name[%s]:", rec.name);
@@ -181,9 +181,9 @@ int Studio_UI_Modify(int id) {
 	seatcount = Seat_Srv_FetchByRoomID(list, rec.id);
 	if(seatcount){
 		do{			//如果座位文件中已有座位信息，则更新的行列必须比以前大，否则不允许更改
-			printf("Row Count of Seats should >= [%d]:", rec.rowsCount);
+			printf("座位的排数应该 >= [%d]:", rec.rowsCount);//Row Count of Seats should
 			scanf("%d", &(newrow));
-			printf("Column Count of Seats should >= [%d]:", rec.colsCount);
+			printf("座位的列数应该 >= [%d]:", rec.colsCount);//Column Count of Seats should
 			scanf("%d", &(newcolumn));
 		}while(	newrow<rec.rowsCount||newcolumn<rec.colsCount);
 		rec.rowsCount=newrow;
@@ -191,9 +191,9 @@ int Studio_UI_Modify(int id) {
 		rec.seatsCount=seatcount;
 	}
 	else{
-		printf("Row Count of Seats:");
+		printf("座位的排数:");//Row Count of Seats
 		scanf("%d", &rec.rowsCount);
-		printf("Column Count of Seats:");
+		printf("座位的列数:");
 		scanf("%d", &rec.colsCount);
 		rec.seatsCount=0;
 	}
@@ -203,9 +203,9 @@ int Studio_UI_Modify(int id) {
 	if (Studio_Srv_Modify(&rec)) {
 		rtn = 1;
 		printf(
-				"The room data updated successfully!\nPress [Enter] key to return!\n");
+				"演出厅数据更新成功!\nPress [Enter] key to return!\n");//The room data updated successfully
 	} else
-		printf("The room data updated failed!\nPress [Enter] key to return!\n");
+		printf("演出厅数据更新失败!\nPress [Enter] key to return!\n");//The room data updated failed
 
 	getchar();
 	return rtn;
@@ -218,12 +218,12 @@ int Studio_UI_Delete(int id) {
 	if (Studio_Srv_DeleteByID(id)) {
 		//在删除放映厅时，同时根据放映厅id删除座位文件中的座位
 		if(Seat_Srv_DeleteAllByRoomID(id))
-			printf("The seats of the room deleted successfully!\n");
+			printf("演出厅座位删除成功!\n");//The seats of the room deleted successfully
 		printf(
-				"The room deleted successfully!\nPress [Enter] key to return!\n");
+				"该演出厅删除成功!\n按[Enter]键返回!\n");//The room deleted successfully!\nPress [Enter] key to return
 		rtn = 1;
 	} else {
-		printf("The room does not exist!\nPress [Enter] key to return!\n");
+		printf("该演出厅不存在!\n按[Enter]键返回!\n");//The room does not exist!\nPress [Enter] key to return
 	}
 
 	getchar();

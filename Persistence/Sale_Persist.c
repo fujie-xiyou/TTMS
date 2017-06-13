@@ -23,6 +23,26 @@ int Sale_Perst_Insert(const sale_t *data) {
 }
 
 int Sale_Perst_DeleteByID(int saleID) {
+<<<<<<< HEAD
+    if(!rename(SALE_DATA_FILE,SALE_DATA_TEMP_FILE)){
+
+    }
+
+    FILE *fp=fopen(SALE_DATA_FILE,"wb+");
+    sale_t buf;
+    if(fp==NULL){
+        printf("%s打开失败！\n",SALE_DATA_FILE);
+        return 0;
+    }
+    while(!feof(fp)){
+        fread(&buf,sizeof(buf),1,fp);
+        if(buf.id!=saleID){
+
+        }
+    }
+
+	return 0;
+=======
     int rtn=0;
     if(!rename(SALE_DATA_FILE,SALE_DATA_TEMP_FILE)){
         printf("%s重命名失败!\n");
@@ -52,6 +72,7 @@ int Sale_Perst_DeleteByID(int saleID) {
     fclose(fd);
     remove(SALE_DATA_TEMP_FILE);
 	return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 //根据用户ID载入给定时间区间内的销售记录
