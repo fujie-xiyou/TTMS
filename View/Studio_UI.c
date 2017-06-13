@@ -12,7 +12,8 @@
 #include "../Service/EntityKey.h"
 #include "Seat_UI.h"
 
-static const int STUDIO_PAGE_SIZE = 5;// 
+
+static const int STUDIO_PAGE_SIZE = 5;// // 
 
 #include <stdio.h>
 
