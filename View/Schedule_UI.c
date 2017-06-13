@@ -39,7 +39,7 @@ void Schedule_UI_ListAll(void) {
  * Return:      添加的记录数
  */
 int Schedule_UI_Add(int play_id) {
-	return 0;
+	
 }
 
 /*

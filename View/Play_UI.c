@@ -27,13 +27,44 @@
 	 * Return:      返回查找到的记录数目
 	 */
 void Play_UI_ShowList(play_list_t list, Pagination_t paging) {
+	int i;
+	play_node_t *pos;
+
+	List_Init(list, studio_node_t);
+	paging.offset = 0;
+	paging.pageSize = ;//不知道
+
+	//载入数据
+	paging.totalRecords = Play_Srv_FetchAll(play);
+	Paging_Locate_FirstPage(play, paging); 
 	printf("***************剧目信息********************\n");
 	printf("ID\t名称\t类型\t出品地区\t等级\t时长\t开始时间\t结束时间\t票价\n");
-	while(list) 
-	{
-		printf();
-		list=list->next;
-	}
+		printf("------------------------------------------------------------------\n");
+		//显示数据
+		for (i = 0, pos = (play_node_t *) (paging.curPos);
+				pos != list && i < paging.pageSize; i++) {
+			printf("ID:%d\t",rec.id);
+		printf("剧目名称:%s\t",rec.name);
+		fflush(stdin);
+		printf("\n");
+		printf("剧目类型:");//不会 
+		printf("出品地区:%s\t", rec.area);
+		printf("剧目等级：");//不会
+		printf("时长:%d\t",rec.duration);
+		printf("开始日期：");//不会 
+		printf("结束日期：");//不会
+		printf("票价:%d\t",rec.price);
+			pos = pos->next;
+		}
+		printf("------- Total Records:%2d ----------------------- Page %2d/%2d ----\n",
+				paging.totalRecords, Pageing_CurPage(paging),
+				Pageing_TotalPages(paging));
+		printf(
+				"******************************************************************\n");
+		
+		
+	//释放链表空间
+	List_Destroy(list, studio_node_t);
 
 }
 
@@ -123,6 +154,7 @@ void Play_UI_MgtEntry(int flag){
 	//释放链表空间
 	List_Destroy(head, play_node_t);
 
+
 }
 
 
@@ -137,7 +169,7 @@ void Play_UI_MgtEntry(int flag){
 int Play_UI_Add(void)
 {
 	play_t rec;
-//	int newRecCount = 0;
+	int newRecCount = 0;
 	char choice;
 
 	do {
@@ -146,12 +178,10 @@ int Play_UI_Add(void)
 		printf("****************  添加新的剧目 ****************\n");
 		printf("-------------------------------------------------------\n");
 		printf("剧目名称:");
-		fflush(stdin);
-		gets(rec.name);
-		printf("\n");
+		scanf("%s",rec.name);
 		printf("剧目类型:");
-		scanf();//不会 
-		printf("出品地区：");
+		//buhui
+		printf("出品地区：%d");
 		scanf("%d\n", rec.area);
 		printf("剧目等级：");
 		//不会
@@ -170,7 +200,7 @@ int Play_UI_Add(void)
 		rec.id = EntKey_Srv_CompNewKey("Play");
 
 		if (Play_Srv_Add(&rec)) {
-			newRecCount += 1;
+			newRecCoun+=1;
 			printf("添加成功!\n");
 		} else
 			printf("添加失败!\n");
@@ -179,7 +209,8 @@ int Play_UI_Add(void)
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
-	return newRecCount;
+	
+	return newRecCoun;
 }
 
 /*
@@ -191,6 +222,64 @@ int Play_UI_Add(void)
  * Return:      更新的剧目信息数，0表示未找到，1表示找到并更新
  */
 int Play_UI_Modify(int id){
+	play_t rec;
+	int rtn = 0;
+
+	/*Load record*/
+	if (!Play_Srv_FetchByID(id, &rec)) {
+		printf("not exit!\nPress [Enter] key to return!\n");
+		getchar();
+		return 0;
+	}
+	else
+	{
+		printf("\n=======================================================\n");
+		printf("****************  原来剧目信息 ****************\n");
+		printf("-------------------------------------------------------\n");
+		printf("ID\t名称\t类型\t出品地区\t等级\t时长\t开始时间\t结束时间\t票价\n");
+		printf("ID:%d\t",rec.id);
+		printf("剧目名称:%s\t",rec.name);
+		fflush(stdin);
+		printf("\n");
+		printf("剧目类型:");//不会 
+		printf("出品地区:%s\t", rec.area);
+		printf("剧目等级：");//不会
+		printf("时长:%d\t",rec.duration);
+		printf("开始日期：");//不会 
+		printf("结束日期：");//不会
+		printf("票价:%d\t",rec.price);
+		 
+		printf("=======================================================\n");
+		printf("****************  输入新的剧目信息 ****************\n");
+		printf("-------------------------------------------------------\n");
+		printf("剧目名称:");
+		scanf("%s",rec.name);
+		printf("剧目类型:");
+		//buhui
+		printf("出品地区：%d");
+		scanf("%d\n", rec.area);
+		printf("剧目等级：");
+		//不会
+		printf("时长:");
+		scanf("%d\n",rec.duration);
+		printf("开始日期：");
+		//不会 
+		printf("结束日期：");
+		//不会
+		printf("票价：");
+		scanf("%d\n",rec.price);
+		 
+		printf("=======================================================\n");
+
+	if (Play_Srv_Modify(&rec)) {
+		rtn = 1;
+		printf(
+				"修改成功!\nPress [Enter] key to return!\n");
+	} else
+		printf("修改失败!\nPress [Enter] key to return!\n");
+
+	getchar();
+	return rtn;
 	return 0;
 }
 
@@ -203,8 +292,19 @@ int Play_UI_Modify(int id){
  * Return:      0表示删除失败，1表示删除成功
  */
 int Play_UI_Delete(int id){
+	int rtn = 0;
 
-	return 0;
+	if (Play_Srv_DeleteByID(id)) {
+		//在删除放映厅时，同时根据放映厅id删除座位文件中的座位
+		if(Seat_Srv_DeleteAllByRoomID(id))
+			printf("删除成功!\n");
+		rtn = 1;
+	} else {
+		printf("删除失败!\nPress [Enter] key to return!\n");
+	}
+
+	getchar();
+	return rtn;
 }
 
 /*
@@ -216,6 +316,16 @@ int Play_UI_Delete(int id){
  * Return:      0表示未找到，1表示找到了
  */
 int Play_UI_Query(int id){
+	int rtn=0;
+	if(Play_Srv_FetchByID（id）)
+	{
+		printf("成功!\n");
+		rtn=1;
+	}
+	else
+	{
+		printf("失败！");
+	}
 
-	return 0;
+	return rtn;
 }

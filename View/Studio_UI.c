@@ -11,6 +11,7 @@
 #include "../Service/seat.h"
 #include "../Service/EntityKey.h"
 #include "Seat_UI.h"
+#define ACCOUNT_PAGE_SIZE 5 
 
 static const int STUDIO_PAGE_SIZE = 5;
 
@@ -26,7 +27,7 @@ void Studio_UI_MgtEntry(void) {
 
 	List_Init(head, studio_node_t);
 	paging.offset = 0;
-	paging.pageSize = STUDIO_PAGE_SIZE;
+	paging.pageSize = ACCOUNT_PAGE_SIZE;
 
 	//‘ÿ»Î ˝æ›
 	paging.totalRecords = Studio_Srv_FetchAll(head);
