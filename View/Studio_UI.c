@@ -41,8 +41,8 @@ void Studio_UI_MgtEntry(void) {
 		/*system("cls");*/
 		printf("\n==================================================================\n");
 		printf("********************** 演出厅列表 **********************\n");
-		printf("%5s  %18s  %10s  %10s  %10s\n", "ID", "Name", "Rows Count",
-				"Columns Count", "Seats Count");
+		printf("%5s  %18s  %10s  %10s  %10s\n", "编号", "演出厅名", "行数",
+				"列数", "座位数");
 		printf("------------------------------------------------------------------\n");
 		//显示数据
 		for (i = 0, pos = (studio_node_t *) (paging.curPos);
@@ -58,10 +58,10 @@ void Studio_UI_MgtEntry(void) {
 		printf(
 				"******************************************************************\n");
 		printf(
-				"[P]revPage|[N]extPage | [A]dd|[D]elete|[U]pdate | [S]eat | [R]eturn");
+				"[P]上一页|[N]下一页 | [A]添加|[D]删除|[U]修改 | [S]座位 | [R]返回");
 		printf(
 				"\n==================================================================\n");
-		printf("你的选择:");//Your Choice
+		printf("功能选择:");//Your Choice
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -148,7 +148,7 @@ int Studio_UI_Add(void) {
 		} else
 			printf("新演出厅添加失败!\n");//The new room added failed!
 		printf("-------------------------------------------------------\n");
-		printf("[A]dd more, [R]eturn:");
+		printf("[A]添加更多, [R]返回:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
@@ -172,8 +172,8 @@ int Studio_UI_Modify(int id) {
 	printf("\n=======================================================\n");
 	printf("****************  更新演出厅  ****************\n");//Update Projection Room
 	printf("-------------------------------------------------------\n");
-	printf("Room ID:%d\n", rec.id);
-	printf("Room Name[%s]:", rec.name);
+	printf("演出厅编号:%d\n", rec.id);
+	printf("演出厅名[%s]:", rec.name);
 	fflush(stdin);
 	gets(rec.name);
 
@@ -203,9 +203,9 @@ int Studio_UI_Modify(int id) {
 	if (Studio_Srv_Modify(&rec)) {
 		rtn = 1;
 		printf(
-				"演出厅数据更新成功!\nPress [Enter] key to return!\n");//The room data updated successfully
+				"演出厅数据更新成功!\n按[Enter]返回!\n");//The room data updated successfully
 	} else
-		printf("演出厅数据更新失败!\nPress [Enter] key to return!\n");//The room data updated failed
+		printf("演出厅数据更新失败!\n按[Enter]返回\n");//The room data updated failed
 
 	getchar();
 	return rtn;

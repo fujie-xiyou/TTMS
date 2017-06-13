@@ -13,17 +13,17 @@ void Main_Menu(void) {
 	char choice;
 	do {
 		printf("\n==================================================================\n");
-		printf("**************** Theater Ticket Management System ****************\n");
-		printf("[S]tudio Management.\n");
-		printf("[P]lay Management.\n");
-		printf("[T]icket Sale.\n");
-		printf("[R]eturn Ticket.\n");
-		printf("[Q]ueries\n");
-		printf("Ra[n]king and Statistics.\n");
-		printf("[A]ccount Management.\n");
-		printf("[E]xist.\n");
+		printf("**************** HLW剧院票务管理系统 ****************\n");
+		printf("[S]演出厅管理.\n");
+		printf("[P]剧目管理.\n");
+		printf("[T]售票.\n");
+		printf("[R]退票.\n");
+		printf("[Q]查询.\n");
+		printf("[N]排序和统计.\n");
+		printf("[A]账户管理.\n");
+		printf("[E]退出.\n");
 		printf("\n==================================================================\n");
-		printf("Please input your choice:");
+		printf("请输入你的选择:");
 		fflush(stdin);
 		choice = getchar();
 		switch (choice) {

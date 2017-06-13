@@ -18,16 +18,16 @@ void DisplayQueryPlay(void)
 	do {
 		fflush(stdin);
 		memset(fileName, 0, sizeof(fileName));
-		printf("Please input the play name:");
+		printf("请输入剧目列表:");
 		scanf("%s",fileName);
 		printf("\n=======================================================\n");
-		printf("\n****************  Play Information List  ***********\n");
+		printf("\n****************  剧目信息列表  ***********\n");
 		if (Query_PlayName(fileName,&play)) {
-			printf("ID\t\tName\t\tArea\t Rating\t\tStart date\t End date\tPrice\n");
+			printf("编号\t\t剧名\t\t地区\t 级别\t\t上演时间\t 结束时间\t票价\n");
 			printf("-------------------------------------------------------\n");
 			printf("%d\t\t%s\t\t%s\t%s\t%d-%d-%d\t%d-%d-%d\t%d\n", play.id,
 								play.name,	play.area,
-								(play.rating==1?"child   ":(play.rating==2?"teenager":"adult   ")),
+								(play.rating==1?"儿童   ":(play.rating==2?"青年":"成人   ")),
 								play.start_date.year,play.start_date.month,
 								play.start_date.day,play.end_date.year,
 								play.end_date.month,play.end_date.day,play.price);
@@ -36,15 +36,15 @@ void DisplayQueryPlay(void)
 	//		seat_list_t list, int studio_id
 			if (Query_Schedule_By_PlayId(play.id, &sched)) {
 				Query_Studio_By_Schedule(sched.studio_id, &studio);
-				printf("the play will be show at %d:%d:%d %d:%d on %s studio\n", sched.date.year, sched.date.month,
+				printf("此剧目将于 %d:%d:%d %d:%d 在 %s 演出厅表演\n", sched.date.year, sched.date.month,
 																			sched.date.day,sched.time.hour,
 																			sched.time.minute, studio.name);
-				printf("have the seat %d , have sold %d, have %d is selling\n", Seat_Number_Count(sched.studio_id), Sold_Ticket_Count(sched.id),
+				printf("共有 %d 座位, 已售 %d, 待售 %d \n", Seat_Number_Count(sched.studio_id), Sold_Ticket_Count(sched.id),
 																			Seat_Number_Count(sched.studio_id)-Sold_Ticket_Count(sched.id));
 			} else {
-				printf("sorry, the play is not show!\n");
+				printf("抱歉,此剧目不上演!\n");
 			}
-			printf("[R]eturn, [B]ooking, [A]gain:");
+			printf("[R]返回, [B]售票, [A]重新载入:");
 			fflush(stdin);
 			scanf("%c", &choice);
 			switch(choice) {
@@ -57,8 +57,8 @@ void DisplayQueryPlay(void)
 				break;
 			}
 		} else {
-			printf("the play name is not exit!\n");
-			printf("[R]eturn, [B]ooking, [A]gain:");
+			printf("此剧目名不存在!\n");
+			printf("[R]返回, [B]售票, [A]重新载入:");
 			fflush(stdin);
 			scanf("%c", &choice);
 			switch(choice) {
