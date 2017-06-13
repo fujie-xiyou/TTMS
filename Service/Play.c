@@ -20,7 +20,7 @@
  * Return:      添加的记录数
  */
 inline int Play_Srv_Add(const play_t *data) {
-	return 0;
+    return Play_Perst_Insert(data);
 }
 
 /*
@@ -32,7 +32,7 @@ inline int Play_Srv_Add(const play_t *data) {
  * Return:      更新的剧目信息数，0表示未找到，1表示找到并更新
  */
 inline int Play_Srv_Modify(const play_t *data) {
-	return 0;
+    return Play_Perst_Update(data);
 }
 
 /*
@@ -44,7 +44,7 @@ inline int Play_Srv_Modify(const play_t *data) {
  * Return:      0表示删除失败，1表示删除成功
  */
 inline int Play_Srv_DeleteByID(int ID) {
-	return 0;
+	return Play_Perst_DeleteByID(int ID);
 }
 
 /*
@@ -56,8 +56,7 @@ inline int Play_Srv_DeleteByID(int ID) {
  * Return:      0表示未找到，1表示找到了
  */
 inline int Play_Srv_FetchByID(int ID, play_t *buf) {
-	return 0;
-
+	return Play_Perst_SelctByID(ID,buf);
 }
 
 /*
@@ -69,7 +68,7 @@ inline int Play_Srv_FetchByID(int ID, play_t *buf) {
  * Return:      返回查找到的记录数目
  */
 inline int Play_Srv_FetchAll(play_list_t list) {
-	return 0;
+	return Play_Perst_SelctAll(list);
 }
 
 /*
@@ -81,7 +80,7 @@ inline int Play_Srv_FetchAll(play_list_t list) {
  * Return:      返回查找到的记录数目
  */
 int Play_Srv_FetchByName(play_list_t list, char condt[]){
-	return 0;
+	return Play_Srv_SelectByName(list,condt);
 }
 
 
@@ -95,7 +94,19 @@ int Play_Srv_FetchByName(play_list_t list, char condt[]){
  * Return:      返回查找到的记录数目
  */
 int Play_Srv_FilterByName(play_list_t list, char filter[]){
-	return 0;
+    int rtn=0;
+    if(!List_IsEmpty()){
+        return rtn;
+    }
+    play_list_t curPos;
+    List_ForEach(list,curPos){
+        if(strstr(curPos->data->name,filter)){
+            rtn++;
+        }else{
+            List_FreeNode(curPos);
+        }
+    }
+    return rtn;
 }
 
 
