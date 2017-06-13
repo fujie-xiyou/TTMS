@@ -12,7 +12,12 @@
 #include "../Service/EntityKey.h"
 #include "Seat_UI.h"
 
+<<<<<<< HEAD
+
+static const int STUDIO_PAGE_SIZE = 5;// // 
+=======
 static const int STUDIO_PAGE_SIZE = 5;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 
 #include <stdio.h>
 
