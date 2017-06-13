@@ -22,7 +22,12 @@
  * Return:      添加的记录数
  */
 inline int Schedule_Srv_Add(const schedule_t *data) {
-	return 0;
+    int rtn=0;
+    rtn=Schedule_Perst_Insert(data);
+    if(!rtn) return rtn;
+    rtn=Ticket_Srv_AddBatch(data->id,data->studio_id);
+    if(rtn) return rtn;
+	return 2;
 }
 
 /*
@@ -34,7 +39,12 @@ inline int Schedule_Srv_Add(const schedule_t *data) {
  * Return:      更新的演出计划信息数，0表示未找到，1表示找到并更新
  */
 inline int Schedule_Srv_Modify(const schedule_t *data) {
-	return 0;
+    int rtn=0;
+    rtn=Schedule_Perst_Update(data);
+    Ticket_Srv_DeleteBatch(data->id);
+    Ticket_Srv_AddBatch(data->id,data->studio_id);
+
+	return rtn;
 }
 
 /*
@@ -46,7 +56,10 @@ inline int Schedule_Srv_Modify(const schedule_t *data) {
  * Return:      0表示删除失败，1表示删除成功
  */
 inline int Schedule_Srv_DeleteByID(int ID) {
-	return 0;
+    int rtn=Schedule_Perst_DeleteByID(ID);
+    if (!rtn) return rtn;
+    return Ticket_Srv_DeleteBatch(ID);
+
 }
 
 /*
@@ -58,7 +71,7 @@ inline int Schedule_Srv_DeleteByID(int ID) {
  * Return:      0表示未找到，1表示找到了
  */
 inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf) {
-	return 0;
+    return Schedule_Perst_SelectByID(ID,buf);
 
 }
 
@@ -71,7 +84,7 @@ inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf) {
  * Return:      返回查找到的记录数目
  */
 inline int Schedule_Srv_FetchAll(schedule_list_t list) {
-	return 0;
+	return Schedule_Perst_SelectAll(list);
 }
 
 /*
@@ -83,7 +96,7 @@ inline int Schedule_Srv_FetchAll(schedule_list_t list) {
  * Return:      返回查找到的记录数目
  */
 inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id) {
-	return 0;
+	return Schedule_Perst_SelectByPlay(list,play_id);
 }
 
 /*
@@ -95,6 +108,24 @@ inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id) {
  * Return:      返回票房收入
  */
 int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
-	return 0;
+    int Allseat=0;
+    *soldCount=0;
+    *totalCount=0;
+    int value=0;
+    int sold=0;//记录整个剧卖出的票数
+    int total=0;//记录整个剧卖出的票数安排的票数(座位数)
+    schedule_list_t list;
+    List_Init(list,schedule_node_t);
+    Schedule_Perst_SelectByPlay(list,play_id);
+    schedule_list_t curPos=NULL;
+    List_ForEach(list,curPos){
+        value+=Ticket_Srv_StaRevBySchID(curPos->id,soldCount,totalCount);
+        total+=*totalCount;
+        sold+=*soldCount;
+
+    }
+    *soldCount=sold;
+    *totalCount=total;
+	return value;
 }
 

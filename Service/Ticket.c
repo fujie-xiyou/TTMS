@@ -128,7 +128,7 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id) {
 	return count;
 }
 
-//根据演出计划ID，统计上座率及票房，返回票房输入
+//根据演出计划ID，统计上座率及票房，返回票房收入
 int Ticket_Srv_StatRevBySchID(int schedule_id, int *soldCount, int *totalCount){
 	//根据计划ID提取所有演出票
 	int value=0;
