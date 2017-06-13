@@ -10,7 +10,7 @@
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Common/list.h"
-#include <stdio.h>
+#include <stdio.h>//真的汉化了。。
 
 //根据状态返回对应表示状态符号
 inline char Seat_UI_Status2Char(seat_status_t status) {
