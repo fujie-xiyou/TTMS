@@ -4,7 +4,7 @@
  *  Created on: 2015年4月24日
  *      Author: Administrator
  */
-#include "Studio_UI.h"//测试中 
+#include "Studio_UI.h"
 
 #include "../Common/list.h"
 #include "../Service/studio.h"
