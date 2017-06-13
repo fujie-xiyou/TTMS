@@ -107,7 +107,7 @@ void Seat_UI_MgtEntry(int roomID) {
 			printf("\n");
 		}
 
-		printf("[A]dd|[D]elete|[U]pdate | [R]eturn:");
+		printf("[A]添加|[D]删除|[U]修改|[R]返回:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -193,7 +193,7 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //输入一个
 			printf("新座位添加失败!\n");//The new seat added failed!
 		printf(
 				"------------------------------------------------------------------\n");
-		printf("[A]dd more, [R]eturn:");
+		printf("[A]添加更多, [R]返回:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
@@ -209,7 +209,7 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 	printf(
 			"\n==================================================================\n");
 	printf(
-			"***************************  更新座位 ************************\n");//Update Seat 
+			"***************************  修改座位 ************************\n");//Update Seat 
 	printf(
 			"------------------------------------------------------------------\n");
 
@@ -241,7 +241,7 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 			printf("The seat is not exist!\n");
 		printf(
 				"-------------------------------------------------------------------\n");
-		printf("[U]pdate more, [R]eturn:");
+		printf("[U]修改更多, [R]返回:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -292,7 +292,7 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 
 		printf(
 				"------------------------------------------------------------------\n");
-		printf("[D]elete more, [R]eturn:");
+		printf("[D]删除更多, [R]返回:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
