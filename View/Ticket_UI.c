@@ -32,7 +32,7 @@ void Ticket_UI_Print(int ID){
 	//根据ID载入票
 	ticket_t ticket;
 	if(!Ticket_Srv_FetchByID(ID, &ticket)){
-		printf("The ticket with ID:%d does not exist! \n Press [Enter] key to return!\n ", ID);
+		printf("编号为:%d的票不存在! \n 按下[Enter]返回!\n ", ID);
 		return ;
 	}
 
@@ -50,10 +50,10 @@ void Ticket_UI_Print(int ID){
 
 	//显示票信息
 	printf("\n--------------------------------------------------\n");
-	printf("|%9s%-10d%15s%-5d%5s%-4d|\n", "Ticket ID:", ticket.id,
-			"Row:", seat.row, "Col:", seat.column );
-	printf("|%9s%-39s|\n", "Play Name:", play.name);
-	printf("|%9s%-11d %16d-%2d-%2d %2d:%2d|\n", "Price:", play.price,
+	printf("|%9s%-10d%15s%-5d%5s%-4d|\n", "编号:", ticket.id,
+			"行:", seat.row, "列:", seat.column );
+	printf("|%9s%-39s|\n", "剧目名称:", play.name);
+	printf("|%9s%-11d %16d-%2d-%2d %2d:%2d|\n", "票价:", play.price,
 				sch.date.year, sch.date.month, sch.date.day,
 				sch.time.hour, sch.time.minute);
 	printf("--------------------------------------------------\n");
@@ -70,18 +70,18 @@ void Ticket_UI_ListBySch(const schedule_t *sch,	ticket_list_t tickList, seat_lis
 	seat_node_t *pSeat;
 
 	if (!Studio_Srv_FetchByID(sch->studio_id, &studioRec)) {  //获得对应id放映厅的信息
-		printf("The room does not exist!\nPress [Enter] key to return!\n");
+		printf("此放映厅不存在!\n按下[Enter]返回!\n");
 		getchar();
 		return;
 	}
 
 	if (!Play_Srv_FetchByID(sch->play_id, &playRec)) {  //获得对应id剧目的信息
-		printf("The play does not exist!\nPress [Enter] key to return!\n");
+		printf("此剧目不存在!\n按下[Enter]返回!\n");
 		getchar();
 		return;
 	}
 
-	printf( "********************** Ticket List for %s ***********************\n", playRec.name);
+	printf( "********************** %s 的票列表***********************\n", playRec.name);
 	printf("%5c", ' ');
 	for (i = 1; i <= studioRec.colsCount; i++) {
 		printf("%3d", i);
@@ -123,7 +123,7 @@ void ListTickets(void){
 	paging.offset = 0;
 	paging.pageSize = TICKET_PAGE_SIZE;
 
-	printf("please input the schedule id to list the tickets!\n");
+	printf("请输入演出计划编号以显示票列表!\n");
 	scanf("%d",&schedule_id);
 
 	//载入数据
@@ -135,8 +135,8 @@ void ListTickets(void){
 	Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
 	do {
 		printf("\n=======================================================\n");
-		printf("****************  Ticket Information List  ****************\n");
-		printf("ID\t\tPlay Name\t\tSeat Row\tSeat Col\t Date\tTime\t\tPrice\tStatus\n");
+		printf("****************  票列表  ****************\n");
+		printf("编号\t\t剧名\t\t座位行\t座位列\t 日期\t时间\t\t价格\t状态\n");
 		printf("-------------------------------------------------------\n");
 		//显示数据
 		for (i = 0, pos = (ticket_node_t *) (paging.curPos);
@@ -146,22 +146,22 @@ void ListTickets(void){
 					schedule_rec.date.year,schedule_rec.date.month,
 					schedule_rec.date.day,schedule_rec.time.hour,
 					schedule_rec.time.minute,pos->data.price,
-					pos->data.status==0?"to sell":"sold");
+					pos->data.status==0?"待售":"已售");
 			pos = pos->next;
 		}
 		printf(
-				"== Total Records:%d =========================== Page %d/%d ==\n",
+				"== 总计记录:%d条 =========================== 页 %d/%d ==\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
-		printf("[P]revPage|[N]extPage | [U]pdate | [R]eturn ");
+		printf("[P]上一页|[N]下一页 | [U]修改 | [R]返回 ");
 		fflush(stdin);
 		scanf("%c", &choice);
 		switch (choice) {
 		case 'u':
 		case 'U':
-			printf("Input the ID:");
+			printf("输入票编号:");
 			scanf("%d", &id);
-			if (UpdateTicket(id)) {	//从新载入数据
+			if (UpdateTicket(id)) {	//重新载入数据
 				paging.totalRecords = Ticket_Srv_FetchBySchID(head,schedule_rec.id);
 				List_Paging(head, paging, ticket_node_t);
 			}
@@ -194,7 +194,7 @@ int UpdateTicket(int id){
 
 	/*Load record*/
 	if (!Ticket_Srv_FetchByID(id, &rec)) {
-		printf("The play does not exist!\nPress [Enter] key to return!\n");
+		printf("此票不存在!\n按下[Enter]返回!\n");
 		getchar();
 		return 0;
 	}
@@ -203,26 +203,26 @@ int UpdateTicket(int id){
 	//需要增加查找座位信息
 
 	printf("\n=======================================================\n");
-	printf("****************  Update Ticket Information  ****************\n");
+	printf("****************  修改票信息  ****************\n");
 	printf("-------------------------------------------------------\n");
-	printf("Ticket ID:%d\n", rec.id);
-	printf("Play Name[%s]:", play_rec.name);
+	printf("票编号:%d\n", rec.id);
+	printf("剧名[%s]:", play_rec.name);
 	//需要输出座位的行列号
-	printf("Schedule date(yyyy-mm-dd)[%d-%d-%d]:",schedule_rec.date.year,
+	printf("演出日期(yyyy-mm-dd)[%d-%d-%d]:",schedule_rec.date.year,
 			schedule_rec.date.month,schedule_rec.date.day);
-	printf("Schedule time[%d:%d]:",schedule_rec.time.hour,schedule_rec.time.minute);
-	printf("Ticket price[%d]:",rec.price);
+	printf("演出时间[%d:%d]:",schedule_rec.time.hour,schedule_rec.time.minute);
+	printf("票价[%d]:",rec.price);
 	scanf("%d",&(rec.price));
-	printf("Ticket status[%s](0.to sell,1.sold):",rec.status==1?"to sell":"sold");
+	printf("票状态[%s](0.to sell,1.sold):",rec.status==1?"待售":"已售");
 	scanf("%d",&rec.status);
 	printf("-------------------------------------------------------\n");
 
 	if (Ticket_Srv_Modify(&rec)) {
 		rtn = 1;
 		printf(
-				"The ticket information updated successfully!\nPress [Enter] key to return!\n");
+				"此票信息修改成功!\n按下[Enter]返回!\n");
 	} else
-		printf("The ticket information updated failed!\nPress [Enter] key to return!\n");
+		printf("此票信息修改失败!\n按下[Enter]返回!\n");
 
 	getchar();
 	return rtn;
@@ -237,8 +237,8 @@ int QueryTicket(int id){
 	ticket_t rec;
 	if (Ticket_Srv_FetchByID(id,&rec)) {
 		printf("\n=======================================================\n");
-		printf("*******************  Ticket Information   *******************\n");
-		printf("ID\t\tPlay Name\t\tSeat Row\tSeat Col\t Date\tTime\t\tPrice\tStatus\n");
+		printf("*******************  票信息  *******************\n");
+		printf("编号\t\t剧名\t\t座位行\t座位列\t 日期\t时间\t\t价格\t状态\n");
 		printf("-------------------------------------------------------\n");
 		Schedule_Srv_FetchByID(id,&schedule_rec);
 		Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
@@ -252,7 +252,7 @@ int QueryTicket(int id){
 	}
 	else
 	{
-		printf("The ticket does not exist!\nPress [Enter] key to return!\n");
+		printf("此票不存在!\n按下[Enter]返回!\n");
 	}
 	printf("-------------------------------------------------------\n");
 

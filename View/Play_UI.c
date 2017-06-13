@@ -328,4 +328,8 @@ int Play_UI_Query(int id){
 	}
 
 	return rtn;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e16e868011bc71ee46c5bb5bf12bf02719003980

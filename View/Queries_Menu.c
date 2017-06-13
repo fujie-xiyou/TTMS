@@ -10,14 +10,14 @@ void Queries_Menu(void){
 	char choice;
 	do {
 		printf("\n==================================================================\n");
-		printf("************************Information Queries*************************\n");
-		printf("[S]tudio   Query.\n");
-		printf("[P]lay     Query.\n");
-		printf("[T]icket   Query.\n");
-		printf("S[c]hedule Queries\n");
-		printf("[R]eturn.\n");
+		printf("************************信息查询*************************\n");
+		printf("[S]演出厅查询.\n");
+		printf("[P]剧目查询.\n");
+		printf("[T]票信息查询.\n");
+		printf("[C]演出计划查询\n");
+		printf("[R]返回.\n");
 		printf("\n==================================================================\n");
-		printf("Please input your choice:");
+		printf("请输入功能选项:");
 		fflush(stdin);
 		choice = getchar();
 		switch (choice) {
