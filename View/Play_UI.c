@@ -10,8 +10,8 @@
 #include "Play_UI.h"
 #include "Schedule_UI.h"
 
-#include "../Common/list.h"
-#include "../Service/play.h"
+#include "../Common/List.h"
+#include "../Service/Play.h"
 #include "../Service/EntityKey.h"
 
 #include <stdio.h>
@@ -32,7 +32,7 @@ void Play_UI_ShowList(play_list_t list, Pagination_t paging) {
 
 	List_Init(list, studio_node_t);
 	paging.offset = 0;
-	paging.pageSize = ;//不知道
+	paging.pageSize =0 ;//不知道
 
 	//载入数据
 	paging.totalRecords = Play_Srv_FetchAll(play);
@@ -133,7 +133,7 @@ void Play_UI_MgtEntry(int flag){
 			break;
 		case 's':
 		case 'S'://////有问题 
-			Play_UI_ShoeList(play_list_t list,Pagination_t paging) 
+			Play_UI_ShoeList(list,paging);
 			paging.totalRecords = Play_Srv_FetchAll(head);
 			List_Paging(head, paging, play_node_t);
 			break;
@@ -317,7 +317,8 @@ int Play_UI_Delete(int id){
  */
 int Play_UI_Query(int id){
 	int rtn=0;
-	if(Play_Srv_FetchByID（id）)
+    play_t buf;
+	if(Play_Srv_FetchByID(id,&buf))
 	{
 		printf("成功!\n");
 		rtn=1;
@@ -328,8 +329,5 @@ int Play_UI_Query(int id){
 	}
 
 	return rtn;
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> e16e868011bc71ee46c5bb5bf12bf02719003980

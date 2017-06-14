@@ -6,11 +6,11 @@
  */
 
 #include "Account_UI.h"//
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Service/Account.h"
 #include "../Service/EntityKey.h"
 #include "Account_UI.h"
-#include<windows.h>
+//#include<windows.h>
 #include <stdio.h>
 #include<assert.h>
 #include<string.h>
