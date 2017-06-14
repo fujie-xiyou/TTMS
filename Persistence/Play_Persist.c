@@ -84,7 +84,11 @@ int Play_Perst_DeleteByID(int ID) {
         fprintf(stderr,"%s重命名失败!\n",PLAY_DATA_FILE);
         return found;
     }
+<<<<<<< HEAD
+    if(fp=fopen(PLAY_DATA_TEMP_FILE,"wb+")==NULL || 
+=======
     if(fp=fopen(PLAY_DATA_TEMP_FILE,"rb")==NULL || 
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
        pd=fopen(PLAY_DATA_FILE,"wb")==NULL){
         fprintf(stderr,"%s或%s打开失败!\n",PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE);
         return found;
@@ -145,8 +149,11 @@ int Play_Perst_SelectByID(int ID, play_t *buf) {
  * 注意:        list务必在主调函数中初始化!!!
  */
 int Play_Perst_SelectAll(play_list_t list) {
+<<<<<<< HEAD
+=======
     assert(NULL!=list);
     List_Free(list,play_node_t);
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
     FILE *fp;
     int recCount=0;
     play_t buf;
@@ -180,8 +187,11 @@ int Play_Perst_SelectAll(play_list_t list) {
  * 注意:        list务必在主调函数中初始化!!!
  */
 int Play_Perst_SelectByName(play_list_t list, char condt[]) {
+<<<<<<< HEAD
+=======
     assert(NULL!=list);
     List_Free(list,play_node_t);
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
     int recCount=0;
     FILE *fp;
     play_t buf;

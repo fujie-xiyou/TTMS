@@ -52,6 +52,9 @@ int Schedule_Perst_Insert(const schedule_t *data)
  * Return:      更新的演出计划信息数，0表示未找到，1表示找到并更新
  */
 int Schedule_Perst_Update(const schedule_t *data){
+<<<<<<< HEAD
+   return 0;
+=======
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"wb+");
     schedule_t buf;
     int rtn=0;
@@ -73,6 +76,7 @@ int Schedule_Perst_Update(const schedule_t *data){
     }
     fclose(fp);
     return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 /*
@@ -84,6 +88,9 @@ int Schedule_Perst_Update(const schedule_t *data){
  * Return:      0表示删除失败，1表示删除成功
  */
 int Schedule_Perst_DeleteByID(int ID){
+<<<<<<< HEAD
+   return 0;
+=======
     rename(SCHEDULE_DATA_FILE,SCHEDULE_DATA_TEMP_FILE);
     schedule_t buf;
     int rtn=0;
@@ -107,6 +114,7 @@ int Schedule_Perst_DeleteByID(int ID){
         }
     }
     return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 /*
@@ -118,6 +126,9 @@ int Schedule_Perst_DeleteByID(int ID){
  * Return:      0表示未找到，1表示找到了
  */
 int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
+<<<<<<< HEAD
+   return 0;
+=======
     int rtn=0;
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
@@ -135,6 +146,7 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
     }
     fclose(fp);
     return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 /*
@@ -146,6 +158,9 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
  * Return:      返回查找到的记录数目
  */
 int Schedule_Perst_SelectAll(schedule_list_t list){
+<<<<<<< HEAD
+   return 0;
+=======
     int recCount=0;
     schedule_list_t newNode;
     schedule_t data;
@@ -174,6 +189,7 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
 
 
     return recCount;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 /*
@@ -185,6 +201,9 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
  * Return:      返回查找到的记录数目
  */
 int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
+<<<<<<< HEAD
+   return 0;
+=======
     int recCount=0;
     schedule_list_t newNode;
     schedule_t data;
@@ -210,4 +229,5 @@ int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
     }
     fclose(fp);
     return recCount;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }

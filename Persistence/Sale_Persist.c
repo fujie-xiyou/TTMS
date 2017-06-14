@@ -11,6 +11,17 @@ static const char SALE_DATA_FILE[] = "Sale.dat";
 static const char SALE_DATA_TEMP_FILE[] = "SaleTmp.dat";
 
 int Sale_Perst_Insert(const sale_t *data) {
+<<<<<<< HEAD
+	
+	return 0;
+}
+
+
+int Sale_Perst_DeleteByID(int saleID) {
+	
+
+	return 0;
+=======
     FILE *fp=fopen(SALE_DATA_FILE,"ab");
     int rtn=0;
     if(fp==NULL){
@@ -52,10 +63,17 @@ int Sale_Perst_DeleteByID(int saleID) {
     fclose(fd);
     remove(SALE_DATA_TEMP_FILE);
 	return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 //根据用户ID载入给定时间区间内的销售记录
 int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
+<<<<<<< HEAD
+		user_date_t endDate) {
+
+	
+	return 0;
+=======
 	    user_date_t endDate) {
     assert(NULL!=list);
     int rtn=0;
@@ -83,12 +101,18 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
 
 	fclose(fp);
 	return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 
 //根据给定时间区间内的销售记录
 int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
 		user_date_t endDate) {
+<<<<<<< HEAD
+
+	
+	return 0;
+=======
     assert(NULL!=list);
     List_Free(list,sale_node_t);
     int rtn=0;
@@ -114,6 +138,7 @@ int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
     }
     fclose(fp);
 	return rtn;
+>>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 }
 
 /*

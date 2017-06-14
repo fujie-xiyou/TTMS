@@ -39,7 +39,7 @@ void Schedule_UI_ListAll(void) {
  * Return:      添加的记录数
  */
 int Schedule_UI_Add(int play_id) {
-	return 0;
+	
 }
 
 /*
@@ -100,5 +100,6 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
  * Return:      无
  */
 void Schedule_UI_MgtEntry(int play_id){
+	int 
 
 }
