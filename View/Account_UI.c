@@ -5,13 +5,10 @@
  *      Author: Administrator
  */
 
-<<<<<<< HEAD
 #include "Account_UI.h"//
 #include "../Common/List.h"
-=======
 #include "Account_UI.h"
 #include "../Common/list.h"
->>>>>>> c5a85cfa58bfe836049685a38495ca61dccf7fad
 #include "../Service/Account.h"
 #include "../Service/EntityKey.h"
 #include "Account_UI.h"

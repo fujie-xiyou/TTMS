@@ -166,9 +166,4 @@ typedef struct
 	(paging).totalRecords/(paging).pageSize:\
 	(paging).totalRecords/(paging).pageSize+1)
 
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
 #endif /* LIST_H_ */
