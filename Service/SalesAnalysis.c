@@ -21,7 +21,7 @@ inline int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_dat
     sale_list_t saleList;
     sale_list_t pSale;
     List_Init(saleList,sale_node_t);
-    Sale_Perst_SelectByUsrID(saleList,usrID);
+    Sale_Perst_SelectByUsrID(saleList,usrID,stDate,endDate);
     List_ForEach(saleList,pSale){
         amount+=pSale->data.value;
     }
@@ -41,7 +41,7 @@ int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list) {
     List_Init(playlist,play_node_t);
     Play_Srv_FetchAll(playlist);
     List_ForEach(playlist,pos){
-        if(!newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t))){
+        if(!(newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t)))){
             printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
             return rtn;
         }
@@ -74,7 +74,7 @@ void SalesAnalysis_Srv_SortBySale(salesanalysis_list_t list){
         if(List_IsEmpty(list)){
             List_AddTail(list,p);
         }else{
-            List_ForEach(lsit,q){
+            List_ForEach(list,q){
                 if(q->data.sales>p->data.sales){
                     List_InsertBefore(q,p);
                 }

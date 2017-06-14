@@ -7,11 +7,11 @@
 
 #include "Seat_Persist.h"
 #include "../Service/Seat.h"
-#include "../common/List.h"
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <io.h>
+//#include <io.h>
 
 static const char SEAT_DATA_FILE[] = "Seat.dat";
 static const char SEAT_DATA_TEMP_FILE[] = "SeatTmp.dat";

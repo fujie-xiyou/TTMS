@@ -2,11 +2,11 @@
 //#include "../Persistence/Common_Persist.h"
 #include "../Service/Ticket.h"
 #include "../Service/Seat.h"
-#include "../common/List.h"
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <io.h>
+//#include <io.h>
 
 static const char TICKET_DATA_FILE[]="Ticket.dat";
 static const char TICKET_DATA_TEMP_FILE[]="TicketTemp.dat";

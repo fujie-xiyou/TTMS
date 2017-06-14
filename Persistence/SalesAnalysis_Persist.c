@@ -8,7 +8,7 @@
 #include "../Persistence/EntityKey_Persist.h"
 //#include "../Service/play.h"
 #include "../Service/Sale.h"
-#include "../Service/Salesanalysis.h"
+#include "../Service/SalesAnalysis.h"
 #include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -21,10 +21,7 @@ static const char SALESANALYSIS_DATA_FILE[] = "salesanalysis.dat";
 
 //将一条salesanalysis记录（*data）写入salesanalysis.dat文件；成功return 1，否则return 0
 int Salesanalysis_Perst_Insert(const salesanalysis_t *data) {
-<<<<<<< HEAD
 
-	return 1;
-=======
     int rtn=0;
     FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"rb");
     if(fp==NULL){
@@ -34,29 +31,26 @@ int Salesanalysis_Perst_Insert(const salesanalysis_t *data) {
     rtn=fwrite(data,sizeof(salesanalysis_t),1,fp);
     fclose(fp);
 	return rtn;
->>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
+
 
 }
 
 //遍历读salesanalysis.dat文件建立销售分析（salesanalysis）链表
 int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
-<<<<<<< HEAD
 
-	return 1;
-=======
     assert(NULL!=list);
     int rtn=0;
     List_Free(list,salesanalysis_node_t);
     FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("&s打开失败\n",SALESANALYSIS_DATA_FILE);
+        printf("%s打开失败\n",SALESANALYSIS_DATA_FILE);
         return rtn;
     }
     salesanalysis_t buf;
     salesanalysis_list_t newNode=NULL;
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
-        if(!newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t))){
+        if(!(newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t)))){
             printf("内存申请失败\n");
             break;
         }
@@ -66,19 +60,17 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
     }
     fclose(fp);
 	return rtn;
->>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
+
 
 }
 
 //遍历读Sale.dat文件建立list（sale_list_t） 链表，返回链表list长度
 int Sale_Perst_SelectAll(sale_list_t list) {
-<<<<<<< HEAD
 
-	return 1;
-=======
     assert(NULL!=list);
     List_Free(list,sale_node_t);
     int rtn=0;
+    sale_list_t newNode;
     FILE *fp=fopen(SALE_DATA_FILE,"rb");
     if(fp==NULL){
         printf("%s打开失败!\n",SALE_DATA_FILE);
@@ -87,7 +79,7 @@ int Sale_Perst_SelectAll(sale_list_t list) {
     sale_t buf;
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
-        if(!newNode=(sale_list_t)malloc(sizeof(sale_node_t))){
+        if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
             printf("内存申请失败!\n");
             return rtn;
         }
@@ -98,7 +90,7 @@ int Sale_Perst_SelectAll(sale_list_t list) {
     fclose(fp);
 
 	return rtn;
->>>>>>> 0dc59cc64f1aef033bd59ee334fd2f946479f43c
+
 
 }
 

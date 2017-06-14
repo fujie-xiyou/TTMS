@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../Common/list.h"
+#include "../Common/List.h"
 
 void ListTest_Init() {
 	TestList_t head=NULL;

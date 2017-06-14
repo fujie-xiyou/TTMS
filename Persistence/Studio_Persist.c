@@ -7,7 +7,7 @@
 
 #include "Studio_Persist.h"
 #include "../Service/Studio.h"
-#include "../common/List.h"
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

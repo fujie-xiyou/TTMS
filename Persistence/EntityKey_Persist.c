@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <io.h>
+//#include <io.h>
 
 //定义存储所有实体主键的文件名为EntityKey.dat
 static const char ENTITY_KEY_FILE[] = "EntityKey.dat";
