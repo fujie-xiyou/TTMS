@@ -41,7 +41,7 @@ void SalesAanalysis_UI_MgtEntry() {
 	{
 		case 'b':
 		case 'B':
-			
+		    break;	
 	}
 	 
 
