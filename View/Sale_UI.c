@@ -2,9 +2,9 @@
 #include "Schedule_UI.h"
 #include "Sale_UI.h"
 #include "Ticket_UI.h"
-#include "../Service/ticket.h"
-#include "../Service/seat.h"
-#include "../Service/studio.h"
+#include "../Service/Ticket.h"
+#include "../Service/Seat.h"
+#include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Service/Sale.h"
 

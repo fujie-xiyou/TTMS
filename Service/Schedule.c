@@ -8,7 +8,7 @@
 
 
 #include "Schedule.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Persistence/Schedule_Persist.h"
 #include "Ticket.h"
 #include <stdio.h>
@@ -119,7 +119,7 @@ int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
     Schedule_Perst_SelectByPlay(list,play_id);
     schedule_list_t curPos=NULL;
     List_ForEach(list,curPos){
-        value+=Ticket_Srv_StaRevBySchID(curPos->id,soldCount,totalCount);
+        value+=Ticket_Srv_StaRevBySchID(curPos->data.id,soldCount,totalCount);
         total+=*totalCount;
         sold+=*soldCount;
 

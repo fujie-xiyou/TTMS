@@ -9,7 +9,7 @@
 #include "../Service/Seat.h"
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include <stdio.h>//真的汉化了。。
 
 //根据状态返回对应表示状态符号

@@ -8,8 +8,8 @@
 #include "../Persistence/EntityKey_Persist.h"
 //#include "../Service/play.h"
 #include "../Service/Sale.h"
-#include "../Service/salesanalysis.h"
-#include "../Common/list.h"
+#include "../Service/Salesanalysis.h"
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

@@ -1,9 +1,9 @@
 #ifndef QUERYPERSIST_H
 #define QUERYPERSIST_H
 
-#include "../Service/play.h"
-#include "../Service/schedule.h"
-#include "../Service/studio.h"
+#include "../Service/Play.h"
+#include "../Service/Schedule.h"
+#include "../Service/Studio.h"
 
 //Query play by name
 //0: error, the play is not exits

@@ -7,7 +7,7 @@
 */
 
 #include "Play.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Persistence/Play_Persist.h"
 #include <string.h>
 
@@ -44,7 +44,7 @@ inline int Play_Srv_Modify(const play_t *data) {
  * Return:      0表示删除失败，1表示删除成功
  */
 inline int Play_Srv_DeleteByID(int ID) {
-	return Play_Perst_DeleteByID(int ID);
+	return Play_Perst_DeleteByID(ID);
 }
 
 /*
@@ -95,12 +95,12 @@ int Play_Srv_FetchByName(play_list_t list, char condt[]){
  */
 int Play_Srv_FilterByName(play_list_t list, char filter[]){
     int rtn=0;
-    if(!List_IsEmpty()){
+    if(!List_IsEmpty(list)){
         return rtn;
     }
     play_list_t curPos;
     List_ForEach(list,curPos){
-        if(strstr(curPos->data->name,filter)){
+        if(strstr(curPos->data.name,filter)){
             rtn++;
         }else{
             List_FreeNode(curPos);

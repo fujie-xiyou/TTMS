@@ -7,7 +7,7 @@
 
 #include "Seat_Persist.h"
 #include "../Service/Seat.h"
-#include "../common/list.h"
+#include "../common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

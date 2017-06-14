@@ -1,10 +1,10 @@
 #ifndef 	SALETICKET_UI_H_
 #define 	SALETICKET_UI_H_
 
-#include "../Service/play.h"
-#include "../Service/schedule.h"
-#include "../Service/seat.h"
-#include "../Service/account.h"
+#include "../Service/Play.h"
+#include "../Service/Schedule.h"
+#include "../Service/Seat.h"
+#include "../Service/Account.h"
 #include "../Service/Ticket.h"
 
 void 	DisplayTicketMenu(account_t *acco_p);

@@ -9,8 +9,8 @@
 
 #ifndef PLAY_UI_H_
 	#define PLAY_UI_H_
-	#include "../Common/list.h"
-	#include "../Service/play.h"
+	#include "../Common/List.h"
+	#include "../Service/Play.h"
 
 	static const int PLAY_PAGE_SIZE=6;
 

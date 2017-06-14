@@ -8,9 +8,9 @@
 
 
 #include "Schedule_Persist.h"
-#include "../Service/schedule.h"
-#include "../Common/list.h"
-#include "../Service/ticket.h"
+#include "../Service/Schedule.h"
+#include "../Common/List.h"
+#include "../Service/Ticket.h"
 //#include "../Persistence/Common_Persist.h"
 #include "../View/Ticket_UI.h"
 #include <stdlib.h>

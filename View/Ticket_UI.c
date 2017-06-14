@@ -1,10 +1,10 @@
 #include "Ticket_UI.h"
 
-#include "../Common/list.h"
-#include "../Service/ticket.h"
-#include "../Service/schedule.h"
-#include "../Service/play.h"
-#include "../Service/studio.h"
+#include "../Common/List.h"
+#include "../Service/Ticket.h"
+#include "../Service/Schedule.h"
+#include "../Service/Play.h"
+#include "../Service/Studio.h"
 
 #include <stdio.h>
 #include <stdlib.h>

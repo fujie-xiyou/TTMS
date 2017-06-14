@@ -4,7 +4,7 @@
  *  Created on: 2015Äê4ÔÂ25ÈÕ
  *      Author: Administrator
  */
-#include "common.h"
+#include "Common.h"
 
 #include<stdio.h>
 #include<fcntl.h>

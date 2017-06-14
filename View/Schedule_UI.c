@@ -10,7 +10,7 @@
 #include "Schedule_UI.h"
 #include "Play_UI.h"
 
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Service/Schedule.h"
 #include "../Service/Play.h"
 #include "../Service/Studio.h"

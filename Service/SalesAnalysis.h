@@ -7,7 +7,7 @@
 #ifndef SALESANALYSIS_H_
 #define SALESANALYSIS_H_
 
-#include "../Common/common.h"
+#include "../Common/Common.h"
 #include "../Service/Play.h"
 #include "../Service/Sale.h"
 

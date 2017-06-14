@@ -8,8 +8,8 @@
 
 
 #include "Play_Persist.h"
-#include "../Service/play.h"
-#include "../Common/list.h"
+#include "../Service/Play.h"
+#include "../Common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>

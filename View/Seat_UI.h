@@ -7,8 +7,8 @@
 
 #ifndef SEAT_UI_H_
 #define SEAT_UI_H_
-#include "../Common/list.h"
-#include "../Service/seat.h"
+#include "../Common/List.h"
+#include "../Service/Seat.h"
 
 void Seat_UI_MgtEntry(int roomID);
 

@@ -5,10 +5,10 @@
  *      Author: Administrator
  */
 #include "SalesAnalysis_UI.h"
-#include "../Common/list.h"
-#include "../Common/common.h"
+#include "../Common/List.h"
+#include "../Common/Common.h"
 #include "../Service/SalesAnalysis.h"
-#include <conio.h>
+//#include <conio.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <assert.h>

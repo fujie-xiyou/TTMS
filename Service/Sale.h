@@ -1,6 +1,6 @@
 #ifndef SALE_H_
 #define SALE_H_
-#include "../Common/common.h"
+#include "../Common/Common.h"
 #include "Account.h"
 #include "Ticket.h"
 

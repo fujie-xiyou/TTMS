@@ -3,7 +3,7 @@
 #include <string.h>
 #include "EntityKey.h"
 #include "../Common/Common.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Persistence/EntityKey_Persist.h"
 
 /*根据传入的实体名entName，为新实体分配一个唯一的主键。函数返回值为取新实体的主键值*/

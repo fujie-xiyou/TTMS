@@ -1,8 +1,8 @@
 #include "Ticket_Persist.h"
 //#include "../Persistence/Common_Persist.h"
-#include "../Service/ticket.h"
-#include "../Service/seat.h"
-#include "../common/list.h"
+#include "../Service/Ticket.h"
+#include "../Service/Seat.h"
+#include "../common/List.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

@@ -8,8 +8,8 @@
 #ifndef ACCOUNT_UI_H_
 #define ACCOUNT_UI_H_
 
-#include "../Common/list.h"
-#include "../Service/account.h"
+#include "../Common/List.h"
+#include "../Service/Account.h"
 
 static const int ACCOUNT_PAGE_SIZE = 3;
 

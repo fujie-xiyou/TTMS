@@ -13,7 +13,7 @@
 #include "Ticket.h"
 #include "Play.h"
 #include "Schedule.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 
 //计算员工usrID在给定时间区间的销售额，返回销售额
 inline int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate){

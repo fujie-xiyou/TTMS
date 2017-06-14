@@ -80,9 +80,9 @@ typedef struct
 	}
 
 //判断链表是否为空，list为头指针
-#define List_IsEmpty(list)  ((list != NULL)	\
+#define List_IsEmpty(list)  (((list) != NULL)	\
 	&& ((list)->next == list)				\
-	&& (list == (list)->prev))
+	&& ((list) == (list)->prev))
 
 //从删除链表结点node，
 #define List_DelNode(node) {\

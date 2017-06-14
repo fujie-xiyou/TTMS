@@ -1,9 +1,9 @@
 #include "Ticket.h"
 #include "EntityKey.h"
 
-#include "../Common/list.h"
-#include "../Service/schedule.h"
-#include "../Service/play.h"
+#include "../Common/List.h"
+#include "../Service/Schedule.h"
+#include "../Service/Play.h"
 #include "../Persistence/Ticket_Persist.h"
 #include "../Persistence/Play_Persist.h"
 #include "../Persistence/Schedule_Persist.h"

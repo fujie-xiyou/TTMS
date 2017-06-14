@@ -7,11 +7,11 @@
 
 #ifndef SALESANALYSIS_UI_H_
 #define SALESANALYSIS_UI_H_
-#include "../Common/list.h"
-#include "../Service/account.h"
-#include "../Service/play.h"
+#include "../Common/List.h"
+#include "../Service/Account.h"
+#include "../Service/Play.h"
 #include "../Service/Sale.h"
-#include "../Service/salesanalysis.h"
+#include "../Service/SalesAnalysis.h"
 
 
 void SalesAanalysis_UI_BoxOffice();

@@ -6,7 +6,7 @@
  */
 #include "Account.h"
 #include "EntityKey.h"
-#include "../Common/list.h"
+#include "../Common/List.h"
 #include "../Persistence/Account_Persist.h"
 #include <string.h>
 #include <stdlib.h>
@@ -18,7 +18,7 @@ void Account_Srv_InitSys(){
     if(Account_Perst_CheckAccFile("Account.dat")) return;
     account_t data_admin;
     data_admin.id=EntKey_Srv_ComNewKey("account");
-    data_admin.account_type_t=9;
+    data_admin.type=9;
     strcpy(data_admin.username,"admin");
     strcpy(data_admin.password,"admin");
     Account_Srv_Add(&data_admin);
