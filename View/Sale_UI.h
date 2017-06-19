@@ -19,8 +19,8 @@ void Sale_UI_ShowScheduler(int playID);
 //根据计划ID，显示演出票
 void Sale_UI_ShowTicket(int schID);
 
-inline int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList);
 
+int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList);
 
 void Sale_UI_MgtEntry();
 

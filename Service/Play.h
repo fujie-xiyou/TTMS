@@ -49,7 +49,7 @@ typedef struct play_node {
  * Output:      无
  * Return:      添加的记录数
  */
-inline int Play_Srv_Add(const play_t *data);
+int Play_Srv_Add(const play_t *data);
 
 /*
  * Function:    Play_Srv_Modify
@@ -59,7 +59,7 @@ inline int Play_Srv_Add(const play_t *data);
  * Output:      无
  * Return:      更新的剧目信息数，0表示未找到，1表示找到并更新
  */
-inline int Play_Srv_Modify(const play_t *data);
+int Play_Srv_Modify(const play_t *data);
 
 /*
  * Function:    Play_Srv_DeleteByID
@@ -69,7 +69,7 @@ inline int Play_Srv_Modify(const play_t *data);
  * Output:      无
  * Return:      0表示删除失败，1表示删除成功
  */
-inline int Play_Srv_DeleteByID(int ID);
+int Play_Srv_DeleteByID(int ID);
 
 /*
  * Function:    Play_Srv_FetchByID
@@ -79,7 +79,7 @@ inline int Play_Srv_DeleteByID(int ID);
  * Output:      无
  * Return:      0表示未找到，1表示找到了
  */
-inline int Play_Srv_FetchByID(int ID, play_t *buf);
+int Play_Srv_FetchByID(int ID, play_t *buf);
 
 /*
  * Function:    Play_Srv_FetchAll
@@ -89,7 +89,7 @@ inline int Play_Srv_FetchByID(int ID, play_t *buf);
  * Output:      无
  * Return:      返回查找到的记录数目
  */
-inline int Play_Srv_FetchAll(play_list_t list);
+int Play_Srv_FetchAll(play_list_t list);
 
 /*
  * Function:    Play_Srv_FetchByName
@@ -99,7 +99,7 @@ inline int Play_Srv_FetchAll(play_list_t list);
  * Output:      无
  * Return:      返回查找到的记录数目
  */
-inline int Play_Srv_FetchByName(play_list_t list, char condt[]);
+int Play_Srv_FetchByName(play_list_t list, char condt[]);
 
 /*
  * Function:    Play_Srv_FilterByName

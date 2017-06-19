@@ -37,30 +37,30 @@ int Seat_Srv_RoomInit(seat_list_t list, int roomID,int rowsCount,int colsCount);
 void Seat_Srv_SortSeatList(seat_list_t list );
 
 //将结点node加入到已排序链表list中
-inline void Seat_Srv_AddToSoftedList(seat_list_t list , seat_node_t *node);
+void Seat_Srv_AddToSoftedList(seat_list_t list , seat_node_t *node);
 
 /*单个添加座位*/
-inline int Seat_Srv_Add(const seat_t *data);
+int Seat_Srv_Add(const seat_t *data);
 
 /*批量添加座位*/
-inline int Seat_Srv_AddBatch(seat_list_t list);
+int Seat_Srv_AddBatch(seat_list_t list);
 
-inline int Seat_Srv_Modify(const seat_t *data);
+int Seat_Srv_Modify(const seat_t *data);
 
-inline int Seat_Srv_DeleteByID(int ID);
+int Seat_Srv_DeleteByID(int ID);
 
-inline int Seat_Srv_DeleteAllByRoomID(int roomID);
+int Seat_Srv_DeleteAllByRoomID(int roomID);
 
 /*根据放映厅ID提取有效的座位*/
-inline int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID);
+int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID);
 
-inline int Seat_Srv_FetchByID(int ID, seat_t *buf);
+int Seat_Srv_FetchByID(int ID, seat_t *buf);
 
 int Seat_Srv_FetchByRoomID(seat_list_t list, int roomID);
 
-inline seat_node_t * Seat_Srv_FindByRowCol(seat_list_t list, int row, int column);
+seat_node_t * Seat_Srv_FindByRowCol(seat_list_t list, int row, int column);
 
-inline seat_node_t * Seat_Srv_FindByID(seat_list_t list, int seatID);
+seat_node_t * Seat_Srv_FindByID(seat_list_t list, int seatID);
 
 
 #endif //SEAT_H_

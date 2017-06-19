@@ -36,7 +36,7 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id);
 int Ticket_Srv_StatRevBySchID(int schedule_id, int *soldCount, int *totalCount);
 
 //根据座位ID在list中找对应票
-inline ticket_node_t * Ticket_Srv_FindBySeatID(ticket_list_t list, int seat_id);
+ticket_node_t * Ticket_Srv_FindBySeatID(ticket_list_t list, int seat_id);
 
 
 #endif //TICKET_H_

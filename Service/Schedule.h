@@ -35,7 +35,7 @@ typedef struct schedule_node {
  * Output:      无
  * Return:      添加的记录数
  */
-inline int Schedule_Srv_Add(const schedule_t *data);
+int Schedule_Srv_Add(const schedule_t *data);
 
 /*
  * Function:    Schedule_Srv_Modify
@@ -45,7 +45,7 @@ inline int Schedule_Srv_Add(const schedule_t *data);
  * Output:      无
  * Return:      更新的演出计划信息数，0表示未找到，1表示找到并更新
  */
-inline int Schedule_Srv_Modify(const schedule_t *data);
+int Schedule_Srv_Modify(const schedule_t *data);
 
 /*
  * Function:    Schedule_Srv_DeleteByID
@@ -55,7 +55,7 @@ inline int Schedule_Srv_Modify(const schedule_t *data);
  * Output:      无
  * Return:      0表示删除失败，1表示删除成功
  */
-inline int Schedule_Srv_DeleteByID(int ID);
+int Schedule_Srv_DeleteByID(int ID);
 
 /*
  * Function:    Schedule_Srv_FetchByID
@@ -65,7 +65,7 @@ inline int Schedule_Srv_DeleteByID(int ID);
  * Output:      无
  * Return:      0表示未找到，1表示找到了
  */
-inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf);
+int Schedule_Srv_FetchByID(int ID, schedule_t *buf);
 
 /*
  * Function:    Schedule_Srv_FetchAll
@@ -75,7 +75,7 @@ inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf);
  * Output:      无
  * Return:      返回查找到的记录数目
  */
-inline int Schedule_Srv_FetchAll(schedule_list_t list);
+int Schedule_Srv_FetchAll(schedule_list_t list);
 
 /*
  * Function:    Schedule_Srv_FetchByPlay
@@ -85,7 +85,7 @@ inline int Schedule_Srv_FetchAll(schedule_list_t list);
  * Output:      无
  * Return:      返回查找到的记录数目
  */
-inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id);
+int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id);
 
 /*
  * Function:    Schedule_Srv_StatRevByPlay

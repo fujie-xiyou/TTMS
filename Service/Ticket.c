@@ -18,7 +18,7 @@ int Ticket_Srv_AddBatch(int schedule_id, int studio_id){
 	seat_list_t seat_head;
 	ticket_node_t *newNode;
 	schedule_t sch;
-	play_t     play;
+	play_t play;
 
 	long id_seed;
 

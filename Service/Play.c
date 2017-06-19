@@ -56,7 +56,7 @@ inline int Play_Srv_DeleteByID(int ID) {
  * Return:      0表示未找到，1表示找到了
  */
 inline int Play_Srv_FetchByID(int ID, play_t *buf) {
-	return Play_Perst_SelctByID(ID,buf);
+	return Play_Perst_SelectByID(ID,buf);
 }
 
 /*
@@ -68,7 +68,7 @@ inline int Play_Srv_FetchByID(int ID, play_t *buf) {
  * Return:      返回查找到的记录数目
  */
 inline int Play_Srv_FetchAll(play_list_t list) {
-	return Play_Perst_SelctAll(list);
+	return Play_Perst_SelectAll(list);
 }
 
 /*
@@ -80,7 +80,7 @@ inline int Play_Srv_FetchAll(play_list_t list) {
  * Return:      返回查找到的记录数目
  */
 int Play_Srv_FetchByName(play_list_t list, char condt[]){
-	return Play_Srv_SelectByName(list,condt);
+	return Play_Perst_SelectByName(list,condt);
 }
 
 

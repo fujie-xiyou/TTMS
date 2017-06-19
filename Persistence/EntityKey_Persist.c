@@ -30,21 +30,15 @@ long EntKey_Perst_GetNewKeys(char entName[], int count) {
 		printf("Entity count must be bigger than 0!\n");
 		return 0;
 	}
-
-	//判断文件是否存在
-	if (access(ENTITY_KEY_FILE, 0)) {
-		//新建文件
+		//以更新模式打开
+	fp = fopen(ENTITY_KEY_FILE, "rb+");
+	if (NULL == fp) {
 		fp = fopen(ENTITY_KEY_FILE, "wb+");
 		if (NULL == fp) {
 			return 0;
 		}
-	} else {
-		//以更新模式打开
-		fp = fopen(ENTITY_KEY_FILE, "rb+");
-		if (NULL == fp) {
-			return 0;
-		}
 	}
+
 
 	while (!feof(fp)) {
 		if (fread(&ent, sizeof(entity_key_t), 1, fp)) {

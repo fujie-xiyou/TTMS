@@ -107,8 +107,8 @@ inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id) {
  * Output:      无
  * Return:      返回票房收入
  */
-int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
-    int Allseat=0;
+inline int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
+    //int Allseat=0;
     *soldCount=0;
     *totalCount=0;
     int value=0;
@@ -119,7 +119,7 @@ int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
     Schedule_Perst_SelectByPlay(list,play_id);
     schedule_list_t curPos=NULL;
     List_ForEach(list,curPos){
-        value+=Ticket_Srv_StaRevBySchID(curPos->data.id,soldCount,totalCount);
+        value+=Ticket_Srv_StatRevBySchID(curPos->data.id,soldCount,totalCount);
         total+=*totalCount;
         sold+=*soldCount;
 

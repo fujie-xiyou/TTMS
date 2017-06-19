@@ -49,7 +49,7 @@ void Studio_UI_MgtEntry(void) {
 					pos->data.seatsCount);
 			pos = pos->next;
 		}
-		printf("------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",//Total Records,page
+		printf("------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf(
@@ -128,7 +128,7 @@ int Studio_UI_Add(void) {
 		printf("-------------------------------------------------------\n");
 		printf("演出厅名称:");//Room Name
 		fflush(stdin);
-		gets(rec.name);
+		fgets(rec.name,30,stdin);
 		printf("座位的排数:");//Row Count of Seats
 		scanf("%d", &(rec.rowsCount));
 		printf("座位的列数:");//Column Count of Seats
@@ -161,7 +161,8 @@ int Studio_UI_Modify(int id) {
 
 	/*Load record*/
 	if (!Studio_Srv_FetchByID(id, &rec)) {
-		printf("该演出厅不存在!\n按[Enter]键返回!\n");//The room does not exist!\nPress [Enter] key to return!\n
+		printf("该演出厅不存在!\n按[Enter]键返回!\n");
+		//The room does not exist!\nPress [Enter] key to return!\n
 		getchar();
 		return 0;
 	}
@@ -172,7 +173,7 @@ int Studio_UI_Modify(int id) {
 	printf("演出厅编号:%d\n", rec.id);
 	printf("演出厅名[%s]:", rec.name);
 	fflush(stdin);
-	gets(rec.name);
+	fgets(rec.name,30,stdin);
 
 	List_Init(list, seat_node_t);
 	seatcount = Seat_Srv_FetchByRoomID(list, rec.id);

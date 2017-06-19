@@ -17,7 +17,7 @@ extern account_t gl_CurUser;
 void Account_Srv_InitSys(){
     if(Account_Perst_CheckAccFile("Account.dat")) return;
     account_t data_admin;
-    data_admin.id=EntKey_Srv_ComNewKey("account");
+    data_admin.id=EntKey_Srv_CompNewKey("Account");
     data_admin.type=9;
     strcpy(data_admin.username,"admin");
     strcpy(data_admin.password,"admin");

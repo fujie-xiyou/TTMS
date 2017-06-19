@@ -202,8 +202,8 @@ int Seat_Perst_SelectAll(seat_list_t list) {
 	assert(NULL!=list);
 
 	//文件不存在
-	if (access(SEAT_DATA_FILE, 0))
-		return 0;
+	//if (access(SEAT_DATA_FILE, 0))
+//		return 0;
 
 	List_Free(list, seat_node_t);
 
@@ -236,11 +236,6 @@ int Seat_Perst_SelectByRoomID(seat_list_t list, int roomID) {
 	int recCount = 0;
 
 	assert(NULL!=list);
-
-	//文件不存在
-	if (access(SEAT_DATA_FILE, 0)) {
-		return 0;
-	}
 
 	List_Free(list, seat_node_t);
 

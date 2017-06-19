@@ -129,8 +129,8 @@ int Ticket_Perst_SelectAll(ticket_list_t list) {
 	assert(NULL!=list);
 
 	//文件不存在
-	if (access(TICKET_DATA_FILE, 0))
-		return 0;
+	//if (access(TICKET_DATA_FILE, 0))
+	//	return 0;
 
 	List_Free(list, ticket_node_t);
 
@@ -164,10 +164,6 @@ int Ticket_Perst_SelectBySchID(ticket_list_t list, int schedule_id) {
 	int recCount = 0;
 
 	assert(NULL!=list);
-
-	//文件不存在
-	if (access(TICKET_DATA_FILE, 0))
-		return 0;
 
 	List_Free(list, ticket_node_t);
 

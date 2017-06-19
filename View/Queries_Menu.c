@@ -10,14 +10,14 @@ void Queries_Menu(void){
 	char choice;
 	do {
 		printf("\n==================================================================\n");
-		printf("************************信息查询*************************\n");
-		printf("[S]演出厅查询.\n");
-		printf("[P]剧目查询.\n");
-		printf("[T]票信息查询.\n");
-		printf("[C]演出计划查询\n");
-		printf("[R]返回.\n");
+		printf("************************淇℃伅鏌ヨ*************************\n");
+		printf("[S]婕斿嚭鍘呮煡璇�.\n");
+		printf("[P]鍓х洰鏌ヨ.\n");
+		printf("[T]绁ㄤ俊鎭煡璇�.\n");
+		printf("[C]婕斿嚭璁″垝鏌ヨ\n");
+		printf("[R]杩斿洖.\n");
 		printf("\n==================================================================\n");
-		printf("请输入功能选项:");
+		printf("璇疯緭鍏ュ姛鑳介�夐」:");
 		fflush(stdin);
 		choice = getchar();
 		switch (choice) {
@@ -26,7 +26,7 @@ void Queries_Menu(void){
 			break;
 		case 'P':
 		case 'p':
-			Play_UI_MgtEntry(1);
+			//Play_UI_MgtEntry(1);
 			break;
 		case 'T':
 		case 't': //Ticket_query;

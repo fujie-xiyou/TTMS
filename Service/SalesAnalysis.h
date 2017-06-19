@@ -32,7 +32,7 @@ typedef struct salesanalysis_node {
 
 
 //计算员工usrID在给定时间区间的销售额
-inline int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate);
+int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate);
 
 //统计销售数据
 int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list);

@@ -14,7 +14,7 @@ int QueryTicket(int id);
 void ListTickets(void);
 
 //状态转换为字符
-inline char Ticket_UI_Status2Char(ticket_status_t status);
+char Ticket_UI_Status2Char(ticket_status_t status);
 
 //根据票ID打印票
 void Ticket_UI_Print(int ID);

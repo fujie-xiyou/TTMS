@@ -30,7 +30,7 @@ static const char PLAY_DATA_TEMP_FILE[] = "PlayTmp.dat";//删除或更新时，暂时保存
 int Play_Perst_Insert(const play_t *data) {
     FILE *fp;
     int rtn=0;
-    if(fp=fopen(PLAY_DATA_FILE,"ab")==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"ab"))==NULL){
         fprintf(stderr,"%s打开失败!\n",PLAY_DATA_FILE);
         return rtn;
     }
@@ -51,8 +51,8 @@ int Play_Perst_Update(const play_t *data) {
     FILE *fp;
     int found=0;
     play_t buf;
-    if(fp=fopen(PLAY_DATA_FILE,"wb+")==NULL){
-        fprintf("stderr","%s打开失败!",PLAY_DATA_FILE);
+    if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
+        fprintf(stderr,"%s打开失败!",PLAY_DATA_FILE);
         return found;
     }
     while(!feof(fp)){//如果未到文件结尾,继续循环
@@ -85,8 +85,8 @@ int Play_Perst_DeleteByID(int ID) {
         return found;
     }
 
-    if(fp=fopen(PLAY_DATA_TEMP_FILE,"rb")==NULL || 
-       (fd=fopen(PLAY_DATA_FILE,"wb")==NULL)){
+    if(((fp=fopen(PLAY_DATA_TEMP_FILE,"rb"))==NULL) ||
+       ((fd=fopen(PLAY_DATA_FILE,"wb"))==NULL)){
         fprintf(stderr,"%s或%s打开失败!\n",PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE);
         return found;
     }
@@ -119,7 +119,7 @@ int Play_Perst_SelectByID(int ID, play_t *buf) {
     FILE *fp;
     int found=0;
     play_t data;
-    if(fp=fopen(PLAY_DATA_FILE,"wb+")==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
         printf("%s打开失败!\n",PLAY_DATA_FILE);
         return found;
     }
@@ -154,13 +154,13 @@ int Play_Perst_SelectAll(play_list_t list) {
     int recCount=0;
     play_t buf;
     play_list_t newNode;
-    if(fp=fopen(PLAY_DATA_FILE,"rb")==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"rb"))==NULL){
         printf("%s打开失败!\n",PLAY_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
-        if(newNode=(play_list_t)malloc(sizeof(play_node_t))==NULL){
+        if((newNode=(play_list_t)malloc(sizeof(play_node_t)))==NULL){
             printf("内存申请失败!\n");
             break;
         }
@@ -191,14 +191,14 @@ int Play_Perst_SelectByName(play_list_t list, char condt[]) {
     FILE *fp;
     play_t buf;
     play_list_t newNode;
-    if(fp=fopen(PLAY_DATA_FILE,"rb")==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"rb"))==NULL){
         printf("%s打开失败!",PLAY_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(strstr(buf.name,condt)){
-            if(newNode=(play_list_t)malloc(sizeof(play_node_t))){
+            if((newNode=(play_list_t)malloc(sizeof(play_node_t)))){
                 printf("内存申请失败!\n");
                 break;
             }

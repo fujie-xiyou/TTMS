@@ -34,7 +34,7 @@ int Schedule_Perst_Insert(const schedule_t *data)
 {
     FILE *fp;
     int rtn=0;
-    if(fp=fopen(SCHEDULE_DATA_FILE,"ab")==NULL){
+    if((fp=fopen(SCHEDULE_DATA_FILE,"ab"))==NULL){
         printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return rtn;
     }
@@ -56,7 +56,7 @@ int Schedule_Perst_Update(const schedule_t *data){
     schedule_t buf;
     int rtn=0;
     if(fp==NULL){//看看人家这么写也挺不错的嘻嘻
-        printf("%s打开失败!\n");
+        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
@@ -70,10 +70,10 @@ int Schedule_Perst_Update(const schedule_t *data){
                 rtn=1;
             }
             break;
+        }
     }
     fclose(fp);
     return rtn;
-    }
 }
 
 /*
@@ -124,7 +124,7 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
     int rtn=0;
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s打开失败!\n");
+        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return rtn;
     }
     schedule_t data;
@@ -160,7 +160,7 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
 
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s打开失败!\n");
+        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return recCount;
     }
     while(!feof(fp)){
