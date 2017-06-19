@@ -17,7 +17,7 @@
 #include "./View/Main_Menu.h"
 #include "./View/Account_UI.h"
 
-//¶¨ÒåÈ«¾Ö±äÁ¿£¬ÓÃÓÚ´æ´¢µÇÂ½ÓÃ»§ĞÅÏ¢
+//å®šä¹‰å…¨å±€å˜é‡ï¼Œç”¨äºå­˜å‚¨ç™»é™†ç”¨æˆ·ä¿¡æ¯
 account_t gl_CurUser={0, USR_ANOMY, "Anonymous",""};
 
 int main(void) {
@@ -25,7 +25,7 @@ int main(void) {
 
 
 	if(!SysLogin()) {
-		printf("\n¶Ô²»ÆğÄúÎŞÈ¨µÇÂ¼±¾ÏµÍ³Çë°´ÈÎÒâ¼üÍË³ö......\n");
+		printf("\nå¯¹ä¸èµ·æ‚¨æ— æƒç™»å½•æœ¬ç³»ç»Ÿè¯·æŒ‰ä»»æ„é”®é€€å‡º......\n");
 		getchar();
 		exit(0);
 	}
