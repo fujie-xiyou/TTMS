@@ -1,7 +1,7 @@
 /*
  * Common_Persist.c
  *
- *  Created on: 2015Äê5ÔÂ4ÈÕ
+ *  Created on: 2015å¹´5æœˆ4æ—¥
  *      Author: Administrator
  */
 #include "EntityKey_Persist.h"
@@ -13,13 +13,13 @@
 #include <assert.h>
 //#include <io.h>
 
-//¶¨Òå´æ´¢ËùÓĞÊµÌåÖ÷¼üµÄÎÄ¼şÃûÎªEntityKey.dat
+//å®šä¹‰å­˜å‚¨æ‰€æœ‰å®ä½“ä¸»é”®çš„æ–‡ä»¶åä¸ºEntityKey.dat
 static const char ENTITY_KEY_FILE[] = "EntityKey.dat";
 
 
 
-/*¸ù¾İ´«ÈëµÄÊµÌåÃûentName¼°ÊµÌå¸öÊıcount£¬ÎªÕâ¸öcount¸öĞÂÊµÌå·ÖÅäÒ»¸ö³¤¶ÈÎªcountµÄÖ÷¼üÖµÇø¼ä£¬
- * Ê¹µÃÃ¿¸öĞÂÊµÌåÔÚ¸ÃÇø¼äÄÚ¶¼¿ÉÒÔ·ÖÅäµ½ Î¨Ò»µÄ Ö÷¼ü¡£·µ»ØÖµÎª¸ÃÖ÷¼üÇø¼äµÄ×îĞ¡Öµ*/
+/*æ ¹æ®ä¼ å…¥çš„å®ä½“åentNameåŠå®ä½“ä¸ªæ•°countï¼Œä¸ºè¿™ä¸ªcountä¸ªæ–°å®ä½“åˆ†é…ä¸€ä¸ªé•¿åº¦ä¸ºcountçš„ä¸»é”®å€¼åŒºé—´ï¼Œ
+ * ä½¿å¾—æ¯ä¸ªæ–°å®ä½“åœ¨è¯¥åŒºé—´å†…éƒ½å¯ä»¥åˆ†é…åˆ° å”¯ä¸€çš„ ä¸»é”®ã€‚è¿”å›å€¼ä¸ºè¯¥ä¸»é”®åŒºé—´çš„æœ€å°å€¼*/
 long EntKey_Perst_GetNewKeys(char entName[], int count) {
 	entity_key_t ent;
 	FILE *fp;
@@ -30,7 +30,7 @@ long EntKey_Perst_GetNewKeys(char entName[], int count) {
 		printf("Entity count must be bigger than 0!\n");
 		return 0;
 	}
-		//ÒÔ¸üĞÂÄ£Ê½´ò¿ª
+		//ä»¥æ›´æ–°æ¨¡å¼æ‰“å¼€
 	fp = fopen(ENTITY_KEY_FILE, "rb+");
 	if (NULL == fp) {
 		fp = fopen(ENTITY_KEY_FILE, "wb+");
@@ -42,7 +42,7 @@ long EntKey_Perst_GetNewKeys(char entName[], int count) {
 
 	while (!feof(fp)) {
 		if (fread(&ent, sizeof(entity_key_t), 1, fp)) {
-			if (0 == strcmp(ent.entyName, entName)) {	//ÕÒµ½Ö÷¼ü¼ÇÂ¼
+			if (0 == strcmp(ent.entyName, entName)) {	//æ‰¾åˆ°ä¸»é”®è®°å½•
 				fseek(fp, -sizeof(entity_key_t), SEEK_CUR);
 				newEntKey = ent.key + 1;
 				ent.key += count;
@@ -53,7 +53,7 @@ long EntKey_Perst_GetNewKeys(char entName[], int count) {
 		}
 	}
 
-	//Î´ÕÒµ½ÊµÌåµÄÖ÷¼ü¼ÇÂ¼£¬ĞÂ¼ÓÖ÷¼ü¼ÇÂ¼µ½ÎÄ¼şÄ©Î²£¬
+	//æœªæ‰¾åˆ°å®ä½“çš„ä¸»é”®è®°å½•ï¼Œæ–°åŠ ä¸»é”®è®°å½•åˆ°æ–‡ä»¶æœ«å°¾ï¼Œ
 	if (!found) {
 		strcpy(ent.entyName, entName);
 		newEntKey = 1;

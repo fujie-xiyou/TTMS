@@ -1,7 +1,7 @@
 /*
  * salesanalysisPersist.c
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 
@@ -19,13 +19,13 @@
 static const char SALE_DATA_FILE[] = "sale.dat";
 static const char SALESANALYSIS_DATA_FILE[] = "salesanalysis.dat";
 
-//½«Ò»Ìõsalesanalysis¼ÇÂ¼£¨*data£©Ð´Èësalesanalysis.datÎÄ¼þ£»³É¹¦return 1£¬·ñÔòreturn 0
+//å°†ä¸€æ¡salesanalysisè®°å½•ï¼ˆ*dataï¼‰å†™å…¥salesanalysis.datæ–‡ä»¶ï¼›æˆåŠŸreturn 1ï¼Œå¦åˆ™return 0
 int Salesanalysis_Perst_Insert(const salesanalysis_t *data) {
 
     int rtn=0;
     FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALESANALYSIS_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALESANALYSIS_DATA_FILE);
         return rtn;
     }
     rtn=fwrite(data,sizeof(salesanalysis_t),1,fp);
@@ -35,7 +35,7 @@ int Salesanalysis_Perst_Insert(const salesanalysis_t *data) {
 
 }
 
-//±éÀú¶Ásalesanalysis.datÎÄ¼þ½¨Á¢ÏúÊÛ·ÖÎö£¨salesanalysis£©Á´±í
+//éåŽ†è¯»salesanalysis.datæ–‡ä»¶å»ºç«‹é”€å”®åˆ†æžï¼ˆsalesanalysisï¼‰é“¾è¡¨
 int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
 
     assert(NULL!=list);
@@ -43,7 +43,7 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
     List_Free(list,salesanalysis_node_t);
     FILE *fp=fopen(SALESANALYSIS_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü\n",SALESANALYSIS_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥\n",SALESANALYSIS_DATA_FILE);
         return rtn;
     }
     salesanalysis_t buf;
@@ -51,7 +51,7 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(!(newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t)))){
-            printf("ÄÚ´æÉêÇëÊ§°Ü\n");
+            printf("å†…å­˜ç”³è¯·å¤±è´¥\n");
             break;
         }
         newNode->data=buf;
@@ -64,7 +64,7 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
 
 }
 
-//±éÀú¶ÁSale.datÎÄ¼þ½¨Á¢list£¨sale_list_t£© Á´±í£¬·µ»ØÁ´±ílist³¤¶È
+//éåŽ†è¯»Sale.datæ–‡ä»¶å»ºç«‹listï¼ˆsale_list_tï¼‰ é“¾è¡¨ï¼Œè¿”å›žé“¾è¡¨listé•¿åº¦
 int Sale_Perst_SelectAll(sale_list_t list) {
 
     assert(NULL!=list);
@@ -73,14 +73,14 @@ int Sale_Perst_SelectAll(sale_list_t list) {
     sale_list_t newNode;
     FILE *fp=fopen(SALE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALE_DATA_FILE);
         return rtn;
     }
     sale_t buf;
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-            printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+            printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
             return rtn;
         }
         newNode->data=buf;

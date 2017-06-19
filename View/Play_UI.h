@@ -17,60 +17,60 @@
 	/*
 	 * Function:    Play_UI_Add
 	 * Function ID:	TTMS_SCU_Play_UI_Add
-	 * Description: Ìí¼ÓÒ»Ìõ¾çÄ¿ĞÅÏ¢
-	 * Input:       ÎŞ
-	 * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
-	 * Return:      Ìí¼ÓµÄ¼ÇÂ¼Êı
+	 * Description: æ·»åŠ ä¸€æ¡å‰§ç›®ä¿¡æ¯
+	 * Input:       æ— 
+	 * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+	 * Return:      æ·»åŠ çš„è®°å½•æ•°
 	 */
 	int Play_UI_Add(void);
 
 	/*
 	 * Function:    Play_UI_Modify
 	 * Function ID:	TTMS_SCU_Play_UI_Mod
-	 * Description: ¸üĞÂ¾çÄ¿ĞÅÏ¢
-	 * Input:       ´ı¸üĞÂµÄ¾çÄ¿IDºÅ
-	 * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
-	 * Return:      ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+	 * Description: æ›´æ–°å‰§ç›®ä¿¡æ¯
+	 * Input:       å¾…æ›´æ–°çš„å‰§ç›®IDå·
+	 * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+	 * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
 	 */
 	int Play_UI_Modify(int id);
 
 	/*
 	 * Function:    Play_UI_Delete
 	 * Function ID:	TTMS_SCU_Play_UI_Del
-	 * Description: °´ÕÕIDºÅÉ¾³ı¾çÄ¿ĞÅÏ¢
-	 * Input:       ´ıÉ¾³ıµÄ¾çÄ¿IDºÅ
-	 * Output:      ÌáÊ¾É¾³ıÊÇ·ñ³É¹¦
-	 * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+	 * Description: æŒ‰ç…§IDå·åˆ é™¤å‰§ç›®ä¿¡æ¯
+	 * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+	 * Output:      æç¤ºåˆ é™¤æ˜¯å¦æˆåŠŸ
+	 * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
 	 */
 	int Play_UI_Delete(int id);
 
 	/*
 	 * Function:    Play_UI_Query
 	 * Function ID:	TTMS_SCU_Play_UI_Qry
-	 * Description: °´ÕÕIDºÅ²éÑ¯¾çÄ¿ĞÅÏ¢
-	 * Input:       ´ı²éÕÒµÄ¾çÄ¿IDºÅ
-	 * Output:      ²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢
-	 * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+	 * Description: æŒ‰ç…§IDå·æŸ¥è¯¢å‰§ç›®ä¿¡æ¯
+	 * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·
+	 * Output:      æŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯
+	 * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
 	 */
 	int Play_UI_Query(int id);
 
 	/*
 	 * Function:    Play_UI_ShowList
 	 * Function ID:	TTMS_SCU_Play_UI_Show
-	 * Description: ÒÔÁĞ±íÄ£Ê½ÏÔÊ¾¾çÄ¿ĞÅÏ¢
-	 * Input:       list¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬paging·ÖÒ³ÉèÖÃ²ÎÊı
-	 * Output:      ËùÓĞ¾çÄ¿µÄĞÅÏ¢
-	 * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+	 * Description: ä»¥åˆ—è¡¨æ¨¡å¼æ˜¾ç¤ºå‰§ç›®ä¿¡æ¯
+	 * Input:       listå‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œpagingåˆ†é¡µè®¾ç½®å‚æ•°
+	 * Output:      æ‰€æœ‰å‰§ç›®çš„ä¿¡æ¯
+	 * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
 	 */
 	void Play_UI_ShowList(play_list_t list, Pagination_t paging);
 
 	/*
 	 * Function:    Play_UI_MgtEntry
 	 * Function ID:	TTMS_SCU_Play_UI_MgtEnt
-	 * Description: ¾çÄ¿ĞÅÏ¢¹ÜÀí½çÃæ
-	 * Input:       flagÎª0£¬½øÈë¹ÜÀíÒ³Ãæ£¬flagÎª1½øÈë²éÑ¯½çÃæ
-	 * Output:      ¾çÄ¿¹ÜÀí½çÃæ
-	 * Return:      ÎŞ
+	 * Description: å‰§ç›®ä¿¡æ¯ç®¡ç†ç•Œé¢
+	 * Input:       flagä¸º0ï¼Œè¿›å…¥ç®¡ç†é¡µé¢ï¼Œflagä¸º1è¿›å…¥æŸ¥è¯¢ç•Œé¢
+	 * Output:      å‰§ç›®ç®¡ç†ç•Œé¢
+	 * Return:      æ— 
 	 */
 	void Play_UI_MgtEntry(int flag);
 

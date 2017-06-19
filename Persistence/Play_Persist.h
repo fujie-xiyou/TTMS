@@ -14,60 +14,60 @@
 	/*
 	 * Function:    Play_Perst_Insert
 	 * Function ID:	TTMS_SCU_Play_Perst_Insert
-	 * Description: ÔÚ¾çÄ¿ĞÅÏ¢ÎÄ¼şÄ©Î²Ğ´ÈëÒ»Ìõ¾çÄ¿ĞÅÏ¢
-	 * Input:       ´ı¼ÓÈëÎÄ¼şµÄ¾çÄ¿ĞÅÏ¢Êı¾İ
-	 * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
-	 * Return:      Ğ´ÈëÎÄ¼şµÄ¼ÇÂ¼Êı
+	 * Description: åœ¨å‰§ç›®ä¿¡æ¯æ–‡ä»¶æœ«å°¾å†™å…¥ä¸€æ¡å‰§ç›®ä¿¡æ¯
+	 * Input:       å¾…åŠ å…¥æ–‡ä»¶çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+	 * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+	 * Return:      å†™å…¥æ–‡ä»¶çš„è®°å½•æ•°
 	 */
 	int Play_Perst_Insert(const play_t *data);
 
 	/*
 	 * Function:    Play_Perst_Update
 	 * Function ID:	TTMS_SCU_Play_Perst_Mod
-	 * Description: °´ÕÕ¾çÄ¿IDºÅ¸üĞÂÎÄ¼şÖĞµÄ¾çÄ¿ĞÅÏ¢
-	 * Input:       ´ıÔÚÎÄ¼şÖĞ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı¾İ
-	 * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
-	 * Return:      ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+	 * Description: æŒ‰ç…§å‰§ç›®IDå·æ›´æ–°æ–‡ä»¶ä¸­çš„å‰§ç›®ä¿¡æ¯
+	 * Input:       å¾…åœ¨æ–‡ä»¶ä¸­æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+	 * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+	 * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
 	 */
 	int Play_Perst_Update(const play_t *data);
 
 	/*
 	 * Function:    Play_Perst_DeleteByID
 	 * Function ID:	TTMS_SCU_Play_Perst_DelByID
-	 * Description: °´ÕÕ¾çÄ¿IDºÅÉ¾³ı¾çÄ¿µÄĞÅÏ¢
-	 * Input:       ´ıÉ¾³ıµÄ¾çÄ¿IDºÅ
-	 * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
-	 * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+	 * Description: æŒ‰ç…§å‰§ç›®IDå·åˆ é™¤å‰§ç›®çš„ä¿¡æ¯
+	 * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+	 * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+	 * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
 	 */
 	int Play_Perst_DeleteByID(int ID);
 
 	/*
 	 * Function:    Play_Perst_SelectByID
 	 * Function ID:	TTMS_SCU_Play_Perst_SelByID
-	 * Description: °´ÕÕ¾çÄ¿IDºÅ²éÕÒ¾çÄ¿µÄĞÅÏ¢
-	 * Input:       ´ı²éÕÒµÄ¾çÄ¿IDºÅ£¬±£´æ²éÕÒ½á¹ûµÄÄÚ´æµÄµØÖ·
-	 * Output:      ÎŞ
-	 * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+	 * Description: æŒ‰ç…§å‰§ç›®IDå·æŸ¥æ‰¾å‰§ç›®çš„ä¿¡æ¯
+	 * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·ï¼Œä¿å­˜æŸ¥æ‰¾ç»“æœçš„å†…å­˜çš„åœ°å€
+	 * Output:      æ— 
+	 * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
 	 */
 	int Play_Perst_SelectByID(int ID, play_t *buf);
 
 	/*
 	 * Function:    Play_Perst_SelectByName
 	 * Function ID:	TTMS_SCU_Play_Perst_SelByName
-	 * Description: °´ÕÕ¾çÄ¿Ãû³Æ²éÕÒ¾çÄ¿µÄĞÅÏ¢
-	 * Input:       listÎª²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬condtÎªÄ£ºı²éÑ¯µÄ¹Ø¼ü×Ö
-	 * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
-	 * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+	 * Description: æŒ‰ç…§å‰§ç›®åç§°æŸ¥æ‰¾å‰§ç›®çš„ä¿¡æ¯
+	 * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œcondtä¸ºæ¨¡ç³ŠæŸ¥è¯¢çš„å…³é”®å­—
+	 * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+	 * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
 	 */
 	int Play_Perst_SelectByName(play_list_t list, char condt[]);
 
 	/*
 	 * Function:    Play_Perst_SelectAll
 	 * Function ID:	TTMS_SCU_Play_Perst_SelAll
-	 * Description: ½«ËùÓĞ¾çÄ¿ĞÅÏ¢½¨Á¢³ÉÒ»ÌõÁ´±í
-	 * Input:       list¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë
-	 * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
-	 * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+	 * Description: å°†æ‰€æœ‰å‰§ç›®ä¿¡æ¯å»ºç«‹æˆä¸€æ¡é“¾è¡¨
+	 * Input:       listå‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+	 * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+	 * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
 	 */
 	int Play_Perst_SelectAll(play_list_t list);
 

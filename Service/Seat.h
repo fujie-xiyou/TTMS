@@ -1,48 +1,48 @@
 /*
  * Seat.h
  *
- * Created on: 2015Äê4ÔÂ27ÈÕ
- * Updated on: 2015Äê5ÔÂ23ÈÕ
+ * Created on: 2015å¹´4æœˆ27æ—¥
+ * Updated on: 2015å¹´5æœˆ23æ—¥
  * Author: lc
  */
 #ifndef SEAT_H_
 #define SEAT_H_
 
 typedef enum{
-	SEAT_NONE=0,			//¿ÕÎ»
-	SEAT_GOOD=1,			//ÓĞ×ùÎ»
-	SEAT_BROKEN=9			//Ëğ»µµÄ×ùÎ»
+	SEAT_NONE=0,			//ç©ºä½
+	SEAT_GOOD=1,			//æœ‰åº§ä½
+	SEAT_BROKEN=9			//æŸåçš„åº§ä½
 }seat_status_t;
 
 typedef struct {
-	int id;					//×ùÎ»id
-	int roomID;				//ËùÔÚÑİ³öÌüid
-	int row;           		//×ùÎ»ĞĞºÅ
-    int column;        		//×ùÎ»ÁĞºÅ
-    seat_status_t status;	//×ùÎ»ÔÚ¸ÃĞĞµÄ×´Ì¬£¬0±íÊ¾Ã»ÓĞ×ùÎ»£¬1±íÊ¾ÓĞ×ùÎ»¡£À©Õ¹2¿É±íÊ¾×ùÎ»»µÁË
+	int id;					//åº§ä½id
+	int roomID;				//æ‰€åœ¨æ¼”å‡ºå…id
+	int row;           		//åº§ä½è¡Œå·
+    int column;        		//åº§ä½åˆ—å·
+    seat_status_t status;	//åº§ä½åœ¨è¯¥è¡Œçš„çŠ¶æ€ï¼Œ0è¡¨ç¤ºæ²¡æœ‰åº§ä½ï¼Œ1è¡¨ç¤ºæœ‰åº§ä½ã€‚æ‰©å±•2å¯è¡¨ç¤ºåº§ä½åäº†
 } seat_t;
 
 
-//Ë«ÏòÁ´±í
+//åŒå‘é“¾è¡¨
 typedef struct seat_node {
 	seat_t data;
 	struct seat_node *next, *prev;
 } seat_node_t, *seat_list_t;
 
 
-//¸ù¾İĞĞ¡¢ÁĞÊı³õÊ¼»¯Ñİ³öÌüµÄ×ùÎ»
+//æ ¹æ®è¡Œã€åˆ—æ•°åˆå§‹åŒ–æ¼”å‡ºå…çš„åº§ä½
 int Seat_Srv_RoomInit(seat_list_t list, int roomID,int rowsCount,int colsCount);
 
-//¶Ô×ùÎ»Á´±ílist½øĞĞÅÅĞò
+//å¯¹åº§ä½é“¾è¡¨listè¿›è¡Œæ’åº
 void Seat_Srv_SortSeatList(seat_list_t list );
 
-//½«½áµãnode¼ÓÈëµ½ÒÑÅÅĞòÁ´±ílistÖĞ
+//å°†ç»“ç‚¹nodeåŠ å…¥åˆ°å·²æ’åºé“¾è¡¨listä¸­
 void Seat_Srv_AddToSoftedList(seat_list_t list , seat_node_t *node);
 
-/*µ¥¸öÌí¼Ó×ùÎ»*/
+/*å•ä¸ªæ·»åŠ åº§ä½*/
 int Seat_Srv_Add(const seat_t *data);
 
-/*ÅúÁ¿Ìí¼Ó×ùÎ»*/
+/*æ‰¹é‡æ·»åŠ åº§ä½*/
 int Seat_Srv_AddBatch(seat_list_t list);
 
 int Seat_Srv_Modify(const seat_t *data);
@@ -51,7 +51,7 @@ int Seat_Srv_DeleteByID(int ID);
 
 int Seat_Srv_DeleteAllByRoomID(int roomID);
 
-/*¸ù¾İ·ÅÓ³ÌüIDÌáÈ¡ÓĞĞ§µÄ×ùÎ»*/
+/*æ ¹æ®æ”¾æ˜ å…IDæå–æœ‰æ•ˆçš„åº§ä½*/
 int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID);
 
 int Seat_Srv_FetchByID(int ID, seat_t *buf);

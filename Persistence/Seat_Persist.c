@@ -1,7 +1,7 @@
 /*
  *  Seat_Persist.c
  *
- *  Created on: 2015Äê5ÔÂ23ÈÕ
+ *  Created on: 2015å¹´5æœˆ23æ—¥
  *  Author: lc
  */
 
@@ -81,10 +81,10 @@ int Seat_Perst_Update(const seat_t *seatdata) {
 }
 
 int Seat_Perst_DeleteByID(int ID) {
-	//½«Ô­Ê¼ÎÄ¼şÖØÃüÃû£¬È»ºó¶ÁÈ¡Êı¾İÖØĞÂĞ´Èëµ½Êı¾İÎÄ¼şÖĞ£¬²¢½«ÒªÉ¾³ıµÄÊµÌå¹ıÂËµô¡£
+	//å°†åŸå§‹æ–‡ä»¶é‡å‘½åï¼Œç„¶åè¯»å–æ•°æ®é‡æ–°å†™å…¥åˆ°æ•°æ®æ–‡ä»¶ä¸­ï¼Œå¹¶å°†è¦åˆ é™¤çš„å®ä½“è¿‡æ»¤æ‰ã€‚
 	FILE *fpSour, *fpTarg;
 
-	//¶ÔÔ­Ê¼Êı¾İÎÄ¼şÖØÃüÃû
+	//å¯¹åŸå§‹æ•°æ®æ–‡ä»¶é‡å‘½å
 	if (rename(SEAT_DATA_FILE, SEAT_DATA_TEMP_FILE) < 0) {
 		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
@@ -118,7 +118,7 @@ int Seat_Perst_DeleteByID(int ID) {
 	fclose(fpTarg);
 	fclose(fpSour);
 
-	//É¾³ıÁÙÊ±ÎÄ¼ş
+	//åˆ é™¤ä¸´æ—¶æ–‡ä»¶
 	remove(SEAT_DATA_TEMP_FILE);
 
 	return found;
@@ -126,10 +126,10 @@ int Seat_Perst_DeleteByID(int ID) {
 
 
 int Seat_Perst_DeleteAllByRoomID(int roomID) {
-	//½«Ô­Ê¼ÎÄ¼şÖØÃüÃû£¬È»ºó¶ÁÈ¡Êı¾İÖØĞÂĞ´Èëµ½Êı¾İÎÄ¼şÖĞ£¬²¢½«ÒªÉ¾³ıµÄÊµÌå¹ıÂËµô¡£
+	//å°†åŸå§‹æ–‡ä»¶é‡å‘½åï¼Œç„¶åè¯»å–æ•°æ®é‡æ–°å†™å…¥åˆ°æ•°æ®æ–‡ä»¶ä¸­ï¼Œå¹¶å°†è¦åˆ é™¤çš„å®ä½“è¿‡æ»¤æ‰ã€‚
 	FILE *fpSour, *fpTarg;
 
-	//¶ÔÔ­Ê¼Êı¾İÎÄ¼şÖØÃüÃû
+	//å¯¹åŸå§‹æ•°æ®æ–‡ä»¶é‡å‘½å
 	if (rename(SEAT_DATA_FILE, SEAT_DATA_TEMP_FILE) < 0) {
 		printf("Cannot open file %s!\n", SEAT_DATA_FILE);
 		return 0;
@@ -163,7 +163,7 @@ int Seat_Perst_DeleteAllByRoomID(int roomID) {
 	fclose(fpTarg);
 	fclose(fpSour);
 
-	//É¾³ıÁÙÊ±ÎÄ¼ş
+	//åˆ é™¤ä¸´æ—¶æ–‡ä»¶
 	remove(SEAT_DATA_TEMP_FILE);
 
 	return found;
@@ -201,14 +201,14 @@ int Seat_Perst_SelectAll(seat_list_t list) {
 
 	assert(NULL!=list);
 
-	//ÎÄ¼ş²»´æÔÚ
+	//æ–‡ä»¶ä¸å­˜åœ¨
 	//if (access(SEAT_DATA_FILE, 0))
 //		return 0;
 
 	List_Free(list, seat_node_t);
 
 	FILE *fp = fopen(SEAT_DATA_FILE, "rb");
-	if (NULL == fp) //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) //æ–‡ä»¶ä¸å­˜åœ¨
 			{
 		return 0;
 	}
@@ -240,13 +240,13 @@ int Seat_Perst_SelectByRoomID(seat_list_t list, int roomID) {
 	List_Free(list, seat_node_t);
 
 	FILE *fp = fopen(SEAT_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		return 0;
 	}
 
 	while (!feof(fp)) {
 		if (fread(&data, sizeof(seat_t), 1, fp))
-			if (data.roomID == roomID)  //Èô×ùÎ»ÊÇ±¾·ÅÓ³ÌüµÄ×ùÎ»£¬Ôò¶Á³ö
+			if (data.roomID == roomID)  //è‹¥åº§ä½æ˜¯æœ¬æ”¾æ˜ å…çš„åº§ä½ï¼Œåˆ™è¯»å‡º
 					{
 				newNode = (seat_node_t*) malloc(sizeof(seat_node_t));
 				if (!newNode) {

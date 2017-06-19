@@ -1,15 +1,15 @@
 /*
  * Common_Persist.h
  *
- *  Created on: 2015Äê5ÔÂ4ÈÕ
+ *  Created on: 2015å¹´5æœˆ4æ—¥
  *      Author: Administrator
  */
 
 #ifndef COMMON_PERSIST_H_
 #define COMMON_PERSIST_H_
 
-/*¸ù¾İ´«ÈëµÄÊµÌåÃûentName¼°ÊµÌå¸öÊıcount£¬ÎªÕâ¸öcount¸öĞÂÊµÌå·ÖÅäÒ»¸ö³¤¶ÈÎªcountµÄÖ÷¼üÖµÇø¼ä£¬
- * Ê¹µÃÃ¿¸öĞÂÊµÌåÔÚ¸ÃÇø¼äÄÚ¶¼¿ÉÒÔ·ÖÅäµ½ Î¨Ò»µÄ Ö÷¼ü¡£·µ»ØÖµÎª¸ÃÖ÷¼üÇø¼äµÄ×îĞ¡Öµ*/
+/*æ ¹æ®ä¼ å…¥çš„å®ä½“åentNameåŠå®ä½“ä¸ªæ•°countï¼Œä¸ºè¿™ä¸ªcountä¸ªæ–°å®ä½“åˆ†é…ä¸€ä¸ªé•¿åº¦ä¸ºcountçš„ä¸»é”®å€¼åŒºé—´ï¼Œ
+ * ä½¿å¾—æ¯ä¸ªæ–°å®ä½“åœ¨è¯¥åŒºé—´å†…éƒ½å¯ä»¥åˆ†é…åˆ° å”¯ä¸€çš„ ä¸»é”®ã€‚è¿”å›å€¼ä¸ºè¯¥ä¸»é”®åŒºé—´çš„æœ€å°å€¼*/
 long EntKey_Perst_GetNewKeys(char entName[], int count);
 
 #endif /* COMMON_PERSIST_H_ */

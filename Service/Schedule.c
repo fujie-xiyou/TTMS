@@ -16,10 +16,10 @@
 /*
  * Function:    Schedule_Srv_Add
  * Function ID:	TTMS_SCU_Schedule_Srv_Add
- * Description: Ìí¼ÓÒ»ÌõÑİ³ö¼Æ»®ĞÅÏ¢
- * Input:       ´ıÌí¼ÓµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı¾İ
- * Output:      ÎŞ
- * Return:      Ìí¼ÓµÄ¼ÇÂ¼Êı
+ * Description: æ·»åŠ ä¸€æ¡æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+ * Input:       å¾…æ·»åŠ çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°æ®
+ * Output:      æ— 
+ * Return:      æ·»åŠ çš„è®°å½•æ•°
  */
 inline int Schedule_Srv_Add(const schedule_t *data) {
     int rtn=0;
@@ -33,10 +33,10 @@ inline int Schedule_Srv_Add(const schedule_t *data) {
 /*
  * Function:    Schedule_Srv_Modify
  * Function ID:	TTMS_SCU_Schedule_ Srv _Mod
- * Description: ¸üĞÂÒ»ÌõÑİ³ö¼Æ»®ĞÅÏ¢
- * Input:       ´ı¸üĞÂµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı¾İ
- * Output:      ÎŞ
- * Return:      ¸üĞÂµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+ * Description: æ›´æ–°ä¸€æ¡æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+ * Input:       å¾…æ›´æ–°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°æ®
+ * Output:      æ— 
+ * Return:      æ›´æ–°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
  */
 inline int Schedule_Srv_Modify(const schedule_t *data) {
     int rtn=0;
@@ -50,10 +50,10 @@ inline int Schedule_Srv_Modify(const schedule_t *data) {
 /*
  * Function:    Schedule_Srv_DeleteByID
  * Function ID:	TTMS_SCU_Schedule_Srv_DelByID
- * Description: °´ÕÕIDºÅÉ¾³ıÑİ³ö¼Æ»®ĞÅÏ¢
- * Input:       ´ıÉ¾³ıµÄÑİ³ö¼Æ»®IDºÅ
- * Output:      ÎŞ
- * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+ * Description: æŒ‰ç…§IDå·åˆ é™¤æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+ * Input:       å¾…åˆ é™¤çš„æ¼”å‡ºè®¡åˆ’IDå·
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
  */
 inline int Schedule_Srv_DeleteByID(int ID) {
     int rtn=Schedule_Perst_DeleteByID(ID);
@@ -65,10 +65,10 @@ inline int Schedule_Srv_DeleteByID(int ID) {
 /*
  * Function:    Schedule_Srv_FetchByID
  * Function ID:	TTMS_SCU_Schedule_Srv_FetchByID
- * Description: °´ÕÕIDºÅ²éÕÒÒ»ÌõÑİ³ö¼Æ»®ĞÅÏ¢£¬´æÈëbufËùÖ¸µ¥Ôª
- * Input:       ´ı²éÕÒµÄÑİ³ö¼Æ»®IDºÅ£¬½«²éÕÒµ½µÄĞÅÏ¢±£´æµ½bufÖĞ
- * Output:      ÎŞ
- * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+ * Description: æŒ‰ç…§IDå·æŸ¥æ‰¾ä¸€æ¡æ¼”å‡ºè®¡åˆ’ä¿¡æ¯ï¼Œå­˜å…¥bufæ‰€æŒ‡å•å…ƒ
+ * Input:       å¾…æŸ¥æ‰¾çš„æ¼”å‡ºè®¡åˆ’IDå·ï¼Œå°†æŸ¥æ‰¾åˆ°çš„ä¿¡æ¯ä¿å­˜åˆ°bufä¸­
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
  */
 inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf) {
     return Schedule_Perst_SelectByID(ID,buf);
@@ -78,10 +78,10 @@ inline int Schedule_Srv_FetchByID(int ID, schedule_t *buf) {
 /*
  * Function:    Schedule_Srv_FetchAll
  * Function ID:	TTMS_SCU_Schedule_Srv_FetchAll
- * Description: È¡³öËùÓĞÑİ³ö¼Æ»®ĞÅÏ¢£¬´®³ÉÒ»ÌõÁ´±í
- * Input:       listÑİ³ö¼Æ»®ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë
- * Output:      ÎŞ
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: å–å‡ºæ‰€æœ‰æ¼”å‡ºè®¡åˆ’ä¿¡æ¯ï¼Œä¸²æˆä¸€æ¡é“¾è¡¨
+ * Input:       listæ¼”å‡ºè®¡åˆ’ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+ * Output:      æ— 
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 inline int Schedule_Srv_FetchAll(schedule_list_t list) {
 	return Schedule_Perst_SelectAll(list);
@@ -90,10 +90,10 @@ inline int Schedule_Srv_FetchAll(schedule_list_t list) {
 /*
  * Function:    Schedule_Srv_FetchByPlay
  * Function ID:	TTMS_SCU_Schedule_Srv_FetchByPlay
- * Description: °´ÕÕ¾çÄ¿IDºÅ£¬½«Ïà¹ØÑİ³ö¼Æ»®ĞÅÏ¢È¡³ö£¬´®³ÉÒ»ÌõÁ´±í
- * Input:       listÎª²éÕÒµ½µÄÑİ³ö¼Æ»®ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬play_idÎª¾çÄ¿µÄIDºÅ
- * Output:      ÎŞ
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: æŒ‰ç…§å‰§ç›®IDå·ï¼Œå°†ç›¸å…³æ¼”å‡ºè®¡åˆ’ä¿¡æ¯å–å‡ºï¼Œä¸²æˆä¸€æ¡é“¾è¡¨
+ * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œplay_idä¸ºå‰§ç›®çš„IDå·
+ * Output:      æ— 
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id) {
 	return Schedule_Perst_SelectByPlay(list,play_id);
@@ -102,18 +102,18 @@ inline int Schedule_Srv_FetchByPlay(schedule_list_t list,int play_id) {
 /*
  * Function:    Schedule_Srv_StatRevByPlay
  * Function ID:	TTMS_SCU_Schedule_Srv_StatByPlay
- * Description: ¸ù¾İ¾çÄ¿ID£¬Í³¼ÆÉÏ×ùÂÊ¼°Æ±·¿£¬·µ»ØÆ±·¿ÊıÊÕÈë
- * Input:       play_idÎª´ıÍ³¼Æ¾çÄ¿µÄIDºÅ£¬soldCountÎªÂô³öµÄÆ±Êı£¬totalCountÎª×ÜÆ±Êı
- * Output:      ÎŞ
- * Return:      ·µ»ØÆ±·¿ÊÕÈë
+ * Description: æ ¹æ®å‰§ç›®IDï¼Œç»Ÿè®¡ä¸Šåº§ç‡åŠç¥¨æˆ¿ï¼Œè¿”å›ç¥¨æˆ¿æ•°æ”¶å…¥
+ * Input:       play_idä¸ºå¾…ç»Ÿè®¡å‰§ç›®çš„IDå·ï¼ŒsoldCountä¸ºå–å‡ºçš„ç¥¨æ•°ï¼ŒtotalCountä¸ºæ€»ç¥¨æ•°
+ * Output:      æ— 
+ * Return:      è¿”å›ç¥¨æˆ¿æ”¶å…¥
  */
 inline int Schedule_Srv_StatRevByPlay(int play_id, int *soldCount, int *totalCount) {
     //int Allseat=0;
     *soldCount=0;
     *totalCount=0;
     int value=0;
-    int sold=0;//¼ÇÂ¼Õû¸ö¾çÂô³öµÄÆ±Êı
-    int total=0;//¼ÇÂ¼Õû¸ö¾çÂô³öµÄÆ±Êı°²ÅÅµÄÆ±Êı(×ùÎ»Êı)
+    int sold=0;//è®°å½•æ•´ä¸ªå‰§å–å‡ºçš„ç¥¨æ•°
+    int total=0;//è®°å½•æ•´ä¸ªå‰§å–å‡ºçš„ç¥¨æ•°å®‰æ’çš„ç¥¨æ•°(åº§ä½æ•°)
     schedule_list_t list;
     List_Init(list,schedule_node_t);
     Schedule_Perst_SelectByPlay(list,play_id);

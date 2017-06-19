@@ -1,25 +1,25 @@
 /*
  * studio.h
  *
- *  Created on: 2015Äê4ÔÂ21ÈÕ
+ *  Created on: 2015å¹´4æœˆ21æ—¥
  *      Author: Administrator
  */
 #ifndef STUDIO_H_
 #define STUDIO_H_
 
 typedef struct {
-	int id;			//·ÅÓ³ÌüID
-	char name[30];	//·ÅÓ³ÌüÃû³Æ
-	int rowsCount;	//×ùÎ»ĞĞÊı
-	int colsCount;	//×ùÎ»ÁĞÊı
+	int id;			//æ”¾æ˜ å…ID
+	char name[30];	//æ”¾æ˜ å…åç§°
+	int rowsCount;	//åº§ä½è¡Œæ•°
+	int colsCount;	//åº§ä½åˆ—æ•°
 	int seatsCount;
 } studio_t;
 
-//Ë«ÏòÁ´±í
+//åŒå‘é“¾è¡¨
 typedef struct studio_node {
-	studio_t data;				//ÊµÌåÊı¾İ
-	struct studio_node *next;	//ºóÏòÖ¸Õë
-	struct studio_node *prev;	//Ç°ÏòÖ¸Õë
+	studio_t data;				//å®ä½“æ•°æ®
+	struct studio_node *next;	//åå‘æŒ‡é’ˆ
+	struct studio_node *prev;	//å‰å‘æŒ‡é’ˆ
 } studio_node_t, *studio_list_t;
 
 int Studio_Srv_Add(const studio_t *data);
@@ -32,7 +32,7 @@ int Studio_Srv_FetchByID(int ID, studio_t *buf);
 
 int Studio_Srv_FetchAll(studio_list_t list);
 
-//Í¨¹ıIDÔÚlistÖĞ²éÕÒ¶ÔÓ¦·ÅÓ³Ìü½áµã
+//é€šè¿‡IDåœ¨listä¸­æŸ¥æ‰¾å¯¹åº”æ”¾æ˜ å…ç»“ç‚¹
 studio_node_t *Studio_Srv_FindByID(studio_list_t list, int ID);
 
 #endif //STUDIO_H_

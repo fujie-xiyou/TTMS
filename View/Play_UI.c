@@ -21,10 +21,10 @@
 	/*
 	 * Function:    Play_UI_ShowList
 	 * Function ID:	TTMS_SCU_Play_UI_Show
-	 * Description: ÒÔÁĞ±íÄ£Ê½ÏÔÊ¾¾çÄ¿ĞÅÏ¢
-	 * Input:       list¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬paging·ÖÒ³ÉèÖÃ²ÎÊı
-	 * Output:      ËùÓĞ¾çÄ¿µÄĞÅÏ¢
-	 * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+	 * Description: ä»¥åˆ—è¡¨æ¨¡å¼æ˜¾ç¤ºå‰§ç›®ä¿¡æ¯
+	 * Input:       listå‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œpagingåˆ†é¡µè®¾ç½®å‚æ•°
+	 * Output:      æ‰€æœ‰å‰§ç›®çš„ä¿¡æ¯
+	 * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
 	 */
 /*
 void Play_UI_ShowList(play_list_t list, Pagination_t paging) {
@@ -32,9 +32,9 @@ void Play_UI_ShowList(play_list_t list, Pagination_t paging) {
 	//play_list_t pos;
 
 	printf("\n============================================================\n");
-	printf("*********************** ¾çÄ¿ÁĞ±í **************************\n");
-	printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","±àºÅ","Ãû³Æ","ÀàĞÍ","µØÇø","¼¶±ğ","Ê±³¤",
-			"ÉÏÓ³ÈÕÆÚ","½áÊøÈÕÆÚ","Æ±¼Û");
+	printf("*********************** å‰§ç›®åˆ—è¡¨ **************************\n");
+	printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","ç¼–å·","åç§°","ç±»å‹","åœ°åŒº","çº§åˆ«","æ—¶é•¿",
+			"ä¸Šæ˜ æ—¥æœŸ","ç»“æŸæ—¥æœŸ","ç¥¨ä»·");
 	printf("--------------------------------------------------------\n");
 
 }
@@ -43,10 +43,10 @@ void Play_UI_ShowList(play_list_t list, Pagination_t paging) {
 /*
  * Function:    Play_UI_MgtEntry
  * Function ID:	TTMS_SCU_Play_UI_MgtEnt
- * Description: ¾çÄ¿ĞÅÏ¢¹ÜÀí½çÃæ
- * Input:       flagÎª0£¬½øÈë¹ÜÀíÒ³Ãæ£¬flagÎª1½øÈë²éÑ¯½çÃæ
- * Output:      ¾çÄ¿¹ÜÀí½çÃæ
- * Return:      ÎŞ
+ * Description: å‰§ç›®ä¿¡æ¯ç®¡ç†ç•Œé¢
+ * Input:       flagä¸º0ï¼Œè¿›å…¥ç®¡ç†é¡µé¢ï¼Œflagä¸º1è¿›å…¥æŸ¥è¯¢ç•Œé¢
+ * Output:      å‰§ç›®ç®¡ç†ç•Œé¢
+ * Return:      æ— 
  */
 void Play_UI_MgtEntry(int flag){
 	if(flag==1){
@@ -65,9 +65,9 @@ void Play_UI_MgtEntry(int flag){
 	do{
 		//system("cls");
 		printf("\n============================================================\n");
-		printf("*********************** ¾çÄ¿ÁĞ±í **************************\n");
-		printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s\n","±àºÅ","Ãû³Æ","ÀàĞÍ","µØÇø","¼¶±ğ","Ê±³¤",
-					"ÉÏÓ³ÈÕÆÚ","½áÊøÈÕÆÚ","Æ±¼Û");
+		printf("*********************** å‰§ç›®åˆ—è¡¨ **************************\n");
+		printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s\n","ç¼–å·","åç§°","ç±»å‹","åœ°åŒº","çº§åˆ«","æ—¶é•¿",
+					"ä¸Šæ˜ æ—¥æœŸ","ç»“æŸæ—¥æœŸ","ç¥¨ä»·");
 		printf("--------------------------------------------------------\n");
 		for(i=0,pos=(play_node_t*)(paging.curPos);pos!=head && i<paging.pageSize;i++){
 			printf("%2d  %10s  %4d  %6s  %4d  %3d  %2d-%2d  %2d-%2d  %2d",pos->data.id
@@ -76,20 +76,20 @@ void Play_UI_MgtEntry(int flag){
 					,pos->data.end_date.month,pos->data.end_date.day,pos->data.price);
 			pos = pos->next;
 		}
-		printf("------- È«²¿¼ÇÂ¼:%2d ----------------------- Ò³Êı %2d/%2d ----\n",
+		printf("------- å…¨éƒ¨è®°å½•:%2d ----------------------- é¡µæ•° %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf("******************************************************************\n");
-		printf("[P]ÉÏÒ»Ò³|[N]ÏÂÒ»Ò³ | [A]Ìí¼Ó|[D]É¾³ı|[U]ĞŞ¸Ä|[Q]²éÑ¯|[R]·µ»Ø");
+		printf("[P]ä¸Šä¸€é¡µ|[N]ä¸‹ä¸€é¡µ | [A]æ·»åŠ |[D]åˆ é™¤|[U]ä¿®æ”¹|[Q]æŸ¥è¯¢|[R]è¿”å›");
 		printf("\n==================================================================\n");
-		printf("¹¦ÄÜÑ¡Ôñ:");//Your Choice
+		printf("åŠŸèƒ½é€‰æ‹©:");//Your Choice
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
 		switch (choice) {
 				case 'a':
 				case 'A':
-					if (Play_UI_Add()) //ĞÂÌí¼Ó³É¹¦£¬Ìøµ½×îºóÒ»Ò³ÏÔÊ¾
+					if (Play_UI_Add()) //æ–°æ·»åŠ æˆåŠŸï¼Œè·³åˆ°æœ€åä¸€é¡µæ˜¾ç¤º
 					{
 						paging.totalRecords = Play_Srv_FetchAll(head);
 						Paging_Locate_LastPage(head, paging, play_node_t);
@@ -97,25 +97,25 @@ void Play_UI_MgtEntry(int flag){
 					break;
 				case 'd':
 				case 'D':
-					printf("ÊäÈëID:");
+					printf("è¾“å…¥ID:");
 					scanf("%d", &id);
-					if (Play_UI_Delete(id)) {	//´ÓĞÂÔØÈëÊı¾İ
+					if (Play_UI_Delete(id)) {	//ä»æ–°è½½å…¥æ•°æ®
 						paging.totalRecords = Play_Srv_FetchAll(head);
 						List_Paging(head, paging, play_node_t);
 					}
 					break;
 				case 'u':
 				case 'U':
-					printf("ÊäÈëID:");
+					printf("è¾“å…¥ID:");
 					scanf("%d", &id);
-					if (Play_UI_Modify(id)) {	//´ÓĞÂÔØÈëÊı¾İ
+					if (Play_UI_Modify(id)) {	//ä»æ–°è½½å…¥æ•°æ®
 						paging.totalRecords = Play_Srv_FetchAll(head);
 						List_Paging(head, paging, play_node_t);
 					}
 					break;
 				case 'q':
 				case 'Q':
-					printf("ÊäÈëID:");
+					printf("è¾“å…¥ID:");
 					scanf("%d", &id);
 					Play_UI_Query(id);
 					//paging.totalRecords = Play_Srv_FetchAll(head);
@@ -142,10 +142,10 @@ void Play_UI_MgtEntry(int flag){
 /*
  * Function:    Play_UI_Add
  * Function ID:	TTMS_SCU_Play_UI_Add
- * Description: Ìí¼ÓÒ»Ìõ¾çÄ¿ĞÅÏ¢
- * Input:       ÎŞ
- * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
- * Return:      Ìí¼ÓµÄ¼ÇÂ¼Êı
+ * Description: æ·»åŠ ä¸€æ¡å‰§ç›®ä¿¡æ¯
+ * Input:       æ— 
+ * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+ * Return:      æ·»åŠ çš„è®°å½•æ•°
  */
 int Play_UI_Add(void)
 {
@@ -156,34 +156,34 @@ int Play_UI_Add(void)
 	do {
 		/*system("cls");*/
 		printf("\n=======================================================\n");
-		printf("\t\t****************  Ìí¼ÓĞÂ¾çÄ¿ ***************\n");
+		printf("\t\t****************  æ·»åŠ æ–°å‰§ç›® ***************\n");
 		printf("-------------------------------------------------------\n");
-		printf("¾çÄ¿Ãû³Æ:");
+		printf("å‰§ç›®åç§°:");
 		fflush(stdin);
 		fgets(rec.name,30,stdin);
-		printf("¾çÄ¿ÀàĞÍ(1±íÊ¾µçÓ°,2¸è¾ç,3ÒôÀÖ»á):");
+		printf("å‰§ç›®ç±»å‹(1è¡¨ç¤ºç”µå½±,2æ­Œå‰§,3éŸ³ä¹ä¼š):");
 		scanf("%d", &(rec.type));
-		printf("À´Ô´µØÇø:");
+		printf("æ¥æºåœ°åŒº:");
 		fgets(rec.area,9,stdin);
-		printf("¾çÄ¿¼¶±ğ(1±íÊ¾¶ùÍ¯,2ÇàÉÙÄê,3ÒôÀÖ»á):");
+		printf("å‰§ç›®çº§åˆ«(1è¡¨ç¤ºå„¿ç«¥,2é’å°‘å¹´,3éŸ³ä¹ä¼š):");
 		scanf("%d", &(rec.rating));
-		printf("Ñİ³öÊ±³¤(·ÖÖÓ):");
+		printf("æ¼”å‡ºæ—¶é•¿(åˆ†é’Ÿ):");
 		scanf("%d", &(rec.duration));
-		printf("ÉÏÓ³ÈÕÆÚ:(yyyy/mm/dd):");
+		printf("ä¸Šæ˜ æ—¥æœŸ:(yyyy/mm/dd):");
 		scanf("%d/%d/%d",&rec.start_date.year,&rec.start_date.month,&rec.start_date.day);
-		printf("½áÊøÈÕÆÚ:(yyyy/mm/dd):");
+		printf("ç»“æŸæ—¥æœŸ:(yyyy/mm/dd):");
 		scanf("%d/%d/%d",&rec.end_date.year,&rec.end_date.month,&rec.end_date.day);
 		printf("=======================================================\n");
 
-		//»ñÈ¡Ö÷¼ü
+		//è·å–ä¸»é”®
 		rec.id = EntKey_Srv_CompNewKey("Play");
 		if (Play_Srv_Add(&rec)) {
 			newRecCount += 1;
-			printf("ĞÂ¾çÄ¿Ìí¼Ó³É¹¦!\n");
+			printf("æ–°å‰§ç›®æ·»åŠ æˆåŠŸ!\n");
 		} else
-			printf("ĞÂ¾çÄ¿Ìí¼ÓÊ§°Ü!\n");
+			printf("æ–°å‰§ç›®æ·»åŠ å¤±è´¥!\n");
 		printf("-------------------------------------------------------\n");
-		printf("[A]Ìí¼Ó¸ü¶à, [R]·µ»Ø:");
+		printf("[A]æ·»åŠ æ›´å¤š, [R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
@@ -193,10 +193,10 @@ int Play_UI_Add(void)
 /*
  * Function:    Play_UI_Modify
  * Function ID:	TTMS_SCU_Play_UI_Mod
- * Description: ¸üĞÂ¾çÄ¿ĞÅÏ¢
- * Input:       ´ı¸üĞÂµÄ¾çÄ¿IDºÅ
- * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
- * Return:      ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+ * Description: æ›´æ–°å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…æ›´æ–°çš„å‰§ç›®IDå·
+ * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+ * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
  */
 int Play_UI_Modify(int id){
 	play_t rec;
@@ -204,37 +204,37 @@ int Play_UI_Modify(int id){
 	/*Load record*/
 	//schedule__list_t sch;
 	if (!Play_Srv_FetchByID(id, &rec)) {
-		printf("¸Ã¾çÄ¿²»´æÔÚ!\n°´[Enter]¼ü·µ»Ø!\n");
+		printf("è¯¥å‰§ç›®ä¸å­˜åœ¨!\næŒ‰[Enter]é”®è¿”å›!\n");
 		getchar();
 		return 0;
 	}
 
 	printf("\n=======================================================\n");
-	printf("\t\t****************  ĞŞ¸Ä¾çÄ¿  ****************\n");
+	printf("\t\t****************  ä¿®æ”¹å‰§ç›®  ****************\n");
 	printf("-------------------------------------------------------\n");
-	printf("¾çÄ¿±àºÅ:%d\n", rec.id);
-	printf("¾çÄ¿Ãû³Æ:[%s]",rec.name);
+	printf("å‰§ç›®ç¼–å·:%d\n", rec.id);
+	printf("å‰§ç›®åç§°:[%s]",rec.name);
 	fflush(stdin);
 	fgets(rec.name,30,stdin);
-	printf("¾çÄ¿ÀàĞÍ(1±íÊ¾µçÓ°,2¸è¾ç,3ÒôÀÖ»á):[%d]",rec.type);
+	printf("å‰§ç›®ç±»å‹(1è¡¨ç¤ºç”µå½±,2æ­Œå‰§,3éŸ³ä¹ä¼š):[%d]",rec.type);
 	scanf("%d", &(rec.type));
-	printf("À´Ô´µØÇø:[%s]",rec.area);
+	printf("æ¥æºåœ°åŒº:[%s]",rec.area);
 	fgets(rec.area,9,stdin);
-	printf("¾çÄ¿¼¶±ğ(1±íÊ¾¶ùÍ¯,2ÇàÉÙÄê,3ÒôÀÖ»á)[%d]:",rec.rating);
+	printf("å‰§ç›®çº§åˆ«(1è¡¨ç¤ºå„¿ç«¥,2é’å°‘å¹´,3éŸ³ä¹ä¼š)[%d]:",rec.rating);
 	scanf("%d", &(rec.rating));
-	printf("Ñİ³öÊ±³¤(·ÖÖÓ):[%d]",rec.duration);
+	printf("æ¼”å‡ºæ—¶é•¿(åˆ†é’Ÿ):[%d]",rec.duration);
 	scanf("%d", &(rec.duration));
-	printf("ÉÏÓ³ÈÕÆÚ:(yyyy/mm/dd):[%4d/%2d/%2d]",rec.start_date.year,rec.start_date.month,rec.start_date.day);
+	printf("ä¸Šæ˜ æ—¥æœŸ:(yyyy/mm/dd):[%4d/%2d/%2d]",rec.start_date.year,rec.start_date.month,rec.start_date.day);
 	scanf("%d/%d/%d",&rec.start_date.year,&rec.start_date.month,&rec.start_date.day);
-	printf("½áÊøÈÕÆÚ:(yyyy/mm/dd)::[%4d/%2d/%2d]",rec.end_date.year,rec.end_date.month,rec.end_date.day);
+	printf("ç»“æŸæ—¥æœŸ:(yyyy/mm/dd)::[%4d/%2d/%2d]",rec.end_date.year,rec.end_date.month,rec.end_date.day);
 	scanf("%d/%d/%d",&rec.end_date.year,&rec.end_date.month,&rec.end_date.day);
 	printf("-------------------------------------------------------\n");
 
 	if (Play_Srv_Modify(&rec)) {
 		rtn = 1;
-		printf("¾çÄ¿Êı¾İĞŞ¸Ä³É¹¦!\n°´[Enter]·µ»Ø!\n");
+		printf("å‰§ç›®æ•°æ®ä¿®æ”¹æˆåŠŸ!\næŒ‰[Enter]è¿”å›!\n");
 	} else
-		printf("¾çÄ¿Êı¾İĞŞ¸ÄÊ§°Ü!\n°´[Enter]·µ»Ø\n");
+		printf("å‰§ç›®æ•°æ®ä¿®æ”¹å¤±è´¥!\næŒ‰[Enter]è¿”å›\n");
 	getchar();
 	return rtn;
 }
@@ -242,30 +242,30 @@ int Play_UI_Modify(int id){
 /*
  * Function:    Play_UI_Delete
  * Function ID:	TTMS_SCU_Play_UI_Del
- * Description: °´ÕÕIDºÅÉ¾³ı¾çÄ¿ĞÅÏ¢
- * Input:       ´ıÉ¾³ıµÄ¾çÄ¿IDºÅ
- * Output:      ÌáÊ¾É¾³ıÊÇ·ñ³É¹¦
- * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+ * Description: æŒ‰ç…§IDå·åˆ é™¤å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+ * Output:      æç¤ºåˆ é™¤æ˜¯å¦æˆåŠŸ
+ * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
  */
 int Play_UI_Delete(int id){
 	int rtn = 0;
 	if(Play_Srv_DeleteByID(id)){
-		printf("¾çÄ¿É¾³ı³É¹¦!\n");
+		printf("å‰§ç›®åˆ é™¤æˆåŠŸ!\n");
 		return 1;
 	}else{
-		printf("¾çÄ¿É¾³ıÊ§°Ü!\n");
+		printf("å‰§ç›®åˆ é™¤å¤±è´¥!\n");
 		return 0;
 	}
 
 	if (1) {
-		//ÔÚÉ¾³ı¾çÄ¿Ê±£¬Í¬Ê±É¾³ıÑİ³ö¼Æ»®
+		//åœ¨åˆ é™¤å‰§ç›®æ—¶ï¼ŒåŒæ—¶åˆ é™¤æ¼”å‡ºè®¡åˆ’
 
 		if(Schedule_Srv_DeleteByID(id))
-			printf("Ñİ³öÌü×ùÎ»É¾³ı³É¹¦!\n");//The seats of the room deleted successfully
-		printf(	"¸ÃÑİ³öÌüÉ¾³ı³É¹¦!\n°´[Enter]¼ü·µ»Ø!\n");//The room deleted successfully!\nPress [Enter] key to return
+			printf("æ¼”å‡ºå…åº§ä½åˆ é™¤æˆåŠŸ!\n");//The seats of the room deleted successfully
+		printf(	"è¯¥æ¼”å‡ºå…åˆ é™¤æˆåŠŸ!\næŒ‰[Enter]é”®è¿”å›!\n");//The room deleted successfully!\nPress [Enter] key to return
 		rtn = 1;
 	} else {
-		printf("¸ÃÑİ³öÌü²»´æÔÚ!\n°´[Enter]¼ü·µ»Ø!\n");//The room does not exist!\nPress [Enter] key to return
+		printf("è¯¥æ¼”å‡ºå…ä¸å­˜åœ¨!\næŒ‰[Enter]é”®è¿”å›!\n");//The room does not exist!\nPress [Enter] key to return
 	}
 
 	getchar();
@@ -275,24 +275,24 @@ int Play_UI_Delete(int id){
 /*
  * Function:    Play_UI_Query
  * Function ID:	TTMS_SCU_Play_UI_Qry
- * Description: °´ÕÕIDºÅ²éÑ¯¾çÄ¿ĞÅÏ¢
- * Input:       ´ı²éÕÒµÄ¾çÄ¿IDºÅ
- * Output:      ²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢
- * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+ * Description: æŒ‰ç…§IDå·æŸ¥è¯¢å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·
+ * Output:      æŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯
+ * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
  */
 int Play_UI_Query(int id){
     int rtn=0;
     play_t buf;
     rtn=Play_Srv_FetchByID(id,&buf);
 	printf("\n============================================================\n");
-	printf("*********************** ¾çÄ¿²éÑ¯ **************************\n");
-	printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","±àºÅ","Ãû³Æ","ÀàĞÍ","µØÇø","¼¶±ğ","Ê±³¤",
-				"ÉÏÓ³ÈÕÆÚ","½áÊøÈÕÆÚ","Æ±¼Û");
+	printf("*********************** å‰§ç›®æŸ¥è¯¢ **************************\n");
+	printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","ç¼–å·","åç§°","ç±»å‹","åœ°åŒº","çº§åˆ«","æ—¶é•¿",
+				"ä¸Šæ˜ æ—¥æœŸ","ç»“æŸæ—¥æœŸ","ç¥¨ä»·");
 	printf("%2d  %10s  %4d  %6s  %4d  %4d  %2d-%2d  %2d-%2d  %2d\n",buf.id
 						,buf.name,buf.type,buf.area,buf.rating
 						,buf.duration,buf.start_date.month,buf.start_date.day
 						,buf.end_date.month,buf.end_date.day,buf.price);
-	printf("²éÑ¯Íê³É,Çë°´[Enter]·µ»Ø\n");
+	printf("æŸ¥è¯¢å®Œæˆ,è¯·æŒ‰[Enter]è¿”å›\n");
 	getchar();
 	return rtn;
 }

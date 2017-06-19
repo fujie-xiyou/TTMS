@@ -1,7 +1,7 @@
 /*
  * studioPersist.c
  *
- *  Created on: 2015Äê4ÔÂ21ÈÕ
+ *  Created on: 2015å¹´4æœˆ21æ—¥
  *      Author: Administrator
  */
 
@@ -61,9 +61,9 @@ int Studio_Perst_Update(const studio_t * data) {
 
 int Studio_Perst_DeleteByID(int ID) {
 
-	//½«Ô­Ê¼ÎÄ¼şÖØÃüÃû£¬È»ºó¶ÁÈ¡Êı¾İÖØĞÂĞ´Èëµ½Êı¾İÎÄ¼şÖĞ£¬²¢½«ÒªÉ¾³ıµÄÊµÌå¹ıÂËµô¡£
+	//å°†åŸå§‹æ–‡ä»¶é‡å‘½åï¼Œç„¶åè¯»å–æ•°æ®é‡æ–°å†™å…¥åˆ°æ•°æ®æ–‡ä»¶ä¸­ï¼Œå¹¶å°†è¦åˆ é™¤çš„å®ä½“è¿‡æ»¤æ‰ã€‚
 
-	//¶ÔÔ­Ê¼Êı¾İÎÄ¼şÖØÃüÃû
+	//å¯¹åŸå§‹æ•°æ®æ–‡ä»¶é‡å‘½å
 	if(rename(STUDIO_DATA_FILE, STUDIO_DATA_TEMP_FILE)<0){
 		printf("Cannot open file %s!\n", STUDIO_DATA_FILE);
 		return 0;
@@ -99,7 +99,7 @@ int Studio_Perst_DeleteByID(int ID) {
 	fclose(fpTarg);
 	fclose(fpSour);
 
-	//É¾³ıÁÙÊ±ÎÄ¼ş
+	//åˆ é™¤ä¸´æ—¶æ–‡ä»¶
 	remove(STUDIO_DATA_TEMP_FILE);
 	return found;
 }
@@ -140,7 +140,7 @@ int Studio_Perst_SelectAll(studio_list_t list) {
 	List_Free(list, studio_node_t);
 
 	FILE *fp = fopen(STUDIO_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		return 0;
 	}
 

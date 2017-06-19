@@ -19,23 +19,23 @@
 #include <assert.h>
 
 
-static const char SCHEDULE_DATA_FILE[] = "Schedule.dat";//±£´æÑİ³ö¼Æ»®ĞÅÏ¢
-static const char SCHEDULE_DATA_TEMP_FILE[] = "ScheduleTmp.dat";////É¾³ı»ò¸üĞÂÊ±£¬ÔİÊ±±£´æÑİ³ö¼Æ»®ĞÅÏ¢
+static const char SCHEDULE_DATA_FILE[] = "Schedule.dat";//ä¿å­˜æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+static const char SCHEDULE_DATA_TEMP_FILE[] = "ScheduleTmp.dat";////åˆ é™¤æˆ–æ›´æ–°æ—¶ï¼Œæš‚æ—¶ä¿å­˜æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
 
 /*
  * Function:    Schedule_Perst_Insert
  * Function ID:	TTMS_SCU_Schedule_Perst_Insert
- * Description: ÔÚÑİ³ö¼Æ»®ĞÅÏ¢ÎÄ¼şÄ©Î²Ğ´ÈëÒ»ÌõÑİ³ö¼Æ»®ĞÅÏ¢
- * Input:       ´ı¼ÓÈëÎÄ¼şµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı¾İ
- * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
- * Return:      Ğ´ÈëÎÄ¼şµÄ¼ÇÂ¼Êı
+ * Description: åœ¨æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ–‡ä»¶æœ«å°¾å†™å…¥ä¸€æ¡æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+ * Input:       å¾…åŠ å…¥æ–‡ä»¶çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°æ®
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      å†™å…¥æ–‡ä»¶çš„è®°å½•æ•°
  */
 int Schedule_Perst_Insert(const schedule_t *data)
 {
     FILE *fp;
     int rtn=0;
     if((fp=fopen(SCHEDULE_DATA_FILE,"ab"))==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return rtn;
     }
     rtn=fwrite(data,sizeof(schedule_t),1,fp);
@@ -46,17 +46,17 @@ int Schedule_Perst_Insert(const schedule_t *data)
 /*
  * Function:    Schedule_Perst_Update
  * Function ID:	TTMS_SCU_Schedule_Perst_Mod
- * Description: °´ÕÕÑİ³ö¼Æ»®IDºÅ¸üĞÂÎÄ¼şÖĞµÄÑİ³ö¼Æ»®ĞÅÏ¢
- * Input:       ´ıÔÚÎÄ¼şÖĞ¸üĞÂµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı¾İ
- * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
- * Return:      ¸üĞÂµÄÑİ³ö¼Æ»®ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+ * Description: æŒ‰ç…§æ¼”å‡ºè®¡åˆ’IDå·æ›´æ–°æ–‡ä»¶ä¸­çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+ * Input:       å¾…åœ¨æ–‡ä»¶ä¸­æ›´æ–°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°æ®
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      æ›´æ–°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
  */
 int Schedule_Perst_Update(const schedule_t *data){
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"wb+");
     schedule_t buf;
     int rtn=0;
-    if(fp==NULL){//¿´¿´ÈË¼ÒÕâÃ´Ğ´Ò²Í¦²»´íµÄÎûÎû
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+    if(fp==NULL){//çœ‹çœ‹äººå®¶è¿™ä¹ˆå†™ä¹ŸæŒºä¸é”™çš„å˜»å˜»
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
@@ -64,7 +64,7 @@ int Schedule_Perst_Update(const schedule_t *data){
         if(buf.id==data->id){
             fseek(fp,-sizeof(buf),SEEK_CUR);
             if(!fwrite(data,sizeof(buf),1,fp)){
-                printf("%sĞ´ÈëÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+                printf("%så†™å…¥å¤±è´¥!\n",SCHEDULE_DATA_FILE);
             }
             else{
                 rtn=1;
@@ -79,10 +79,10 @@ int Schedule_Perst_Update(const schedule_t *data){
 /*
  * Function:    Schedule_Perst_DeleteByID
  * Function ID:	TTMS_SCU_Schedule_Perst_DelByID
- * Description: °´ÕÕÑİ³ö¼Æ»®IDºÅÉ¾³ıÑİ³ö¼Æ»®µÄĞÅÏ¢
- * Input:       ´ıÉ¾³ıµÄÑİ³ö¼Æ»®IDºÅ
- * Output:      ´ò¿ªÎÄ¼şÊ§°ÜµÄĞÅÏ¢
- * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+ * Description: æŒ‰ç…§æ¼”å‡ºè®¡åˆ’IDå·åˆ é™¤æ¼”å‡ºè®¡åˆ’çš„ä¿¡æ¯
+ * Input:       å¾…åˆ é™¤çš„æ¼”å‡ºè®¡åˆ’IDå·
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
  */
 int Schedule_Perst_DeleteByID(int ID){
 
@@ -91,12 +91,12 @@ int Schedule_Perst_DeleteByID(int ID){
     int rtn=0;
     FILE *fp=fopen(SCHEDULE_DATA_TEMP_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü\n",SCHEDULE_DATA_TEMP_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥\n",SCHEDULE_DATA_TEMP_FILE);
         return 0;
     }
     FILE *fd=fopen(SCHEDULE_DATA_FILE,"wb");
     if(fd==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
@@ -115,16 +115,16 @@ int Schedule_Perst_DeleteByID(int ID){
 /*
  * Function:    Schedule_Perst_SelectByID
  * Function ID:	TTMS_SCU_Schedule_Perst_SelByID
- * Description: °´ÕÕÑİ³ö¼Æ»®IDºÅÉ¾³ıÑİ³ö¼Æ»®µÄĞÅÏ¢
- * Input:       ´ı²éÕÒµÄÑİ³ö¼Æ»®IDºÅ£¬±£´æ²éÕÒ½á¹ûµÄÄÚ´æµÄµØÖ·
- * Output:      ÎŞ
- * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+ * Description: æŒ‰ç…§æ¼”å‡ºè®¡åˆ’IDå·åˆ é™¤æ¼”å‡ºè®¡åˆ’çš„ä¿¡æ¯
+ * Input:       å¾…æŸ¥æ‰¾çš„æ¼”å‡ºè®¡åˆ’IDå·ï¼Œä¿å­˜æŸ¥æ‰¾ç»“æœçš„å†…å­˜çš„åœ°å€
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
  */
 int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
     int rtn=0;
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return rtn;
     }
     schedule_t data;
@@ -143,10 +143,10 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
 /*
  * Function:    Schedule_Perst_SelectAll
  * Function ID:	TTMS_SCU_Schedule_Perst_SelAll
- * Description: ½«ËùÓĞÑİ³ö¼Æ»®ĞÅÏ¢½¨Á¢³ÉÒ»ÌõÁ´±í
- * Input:       listÎªÑİ³ö¼Æ»®ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë
- * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: å°†æ‰€æœ‰æ¼”å‡ºè®¡åˆ’ä¿¡æ¯å»ºç«‹æˆä¸€æ¡é“¾è¡¨
+ * Input:       listä¸ºæ¼”å‡ºè®¡åˆ’ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+ * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 int Schedule_Perst_SelectAll(schedule_list_t list){
 
@@ -160,14 +160,14 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
 
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return recCount;
     }
     while(!feof(fp)){
         fread(&data,sizeof(data),1,fp);
         newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
         if(newNode==NULL){
-            printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+            printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
             break;
         }
         newNode->data=data;
@@ -184,10 +184,10 @@ int Schedule_Perst_SelectAll(schedule_list_t list){
 /*
  * Function:    Schedule_Perst_SelectByPlay
  * Function ID:	TTMS_SCU_Schedule_Perst_SelByPlay
- * Description: ½«Í¬Òâ¾çÄ¿µÄÑİ³ö¼Æ»®ĞÅÏ¢ËÑË÷³öÀ´£¬½¨Á¢Ò»ÌõÁ´±í
- * Input:       listÎªÂú×ãÌõ¼şµÄÑİ³ö¼Æ»®ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬¾çÄ¿µÄIDºÅ
- * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: å°†åŒæ„å‰§ç›®çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯æœç´¢å‡ºæ¥ï¼Œå»ºç«‹ä¸€æ¡é“¾è¡¨
+ * Input:       listä¸ºæ»¡è¶³æ¡ä»¶çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œå‰§ç›®çš„IDå·
+ * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
 
@@ -198,7 +198,7 @@ int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
     List_Free(list,schedule_node_t);
     FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SCHEDULE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SCHEDULE_DATA_FILE);
         return recCount;
     }
     while(!feof(fp)){
@@ -206,7 +206,7 @@ int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
         if(data.id==play_id){
             newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
             if(newNode==NULL){
-                printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+                printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
                 break;
             }
             newNode->data=data;

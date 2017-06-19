@@ -1,29 +1,29 @@
 /*
  *account.h
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 #ifndef ACCOUNT_H_
 #define ACCOUNT_H_
 
-//¶¨ÒåÃ¶¾ÙÀàĞÍaccount_type_t£¬ÃèÊöÓÃ»§µÄ½ÇÉ«
+//å®šä¹‰æšä¸¾ç±»å‹account_type_tï¼Œæè¿°ç”¨æˆ·çš„è§’è‰²
 typedef enum {
-	USR_ANOMY = 0, //USR_ANOMY  ÄäÃûÓÃ»§
-	USR_CLERK =1, //USR_CLERK  ÊÛÆ±Ô±
-	USR_MANG = 2, //USR_MANG  ¾­Àí
-	USR_ADMIN = 9 //USR_ADMIN  ÏµÍ³¹ÜÀíÔ±
+	USR_ANOMY = 0, //USR_ANOMY  åŒ¿åç”¨æˆ·
+	USR_CLERK =1, //USR_CLERK  å”®ç¥¨å‘˜
+	USR_MANG = 2, //USR_MANG  ç»ç†
+	USR_ADMIN = 9 //USR_ADMIN  ç³»ç»Ÿç®¡ç†å‘˜
 } account_type_t;
 
-//¶¨ÒåÏµÍ³ÓÃ»§ÕËºÅÊı¾İÀàĞÍ£¬ÃèÊöÓÃ»§ÕËºÅĞÅÏ¢
+//å®šä¹‰ç³»ç»Ÿç”¨æˆ·è´¦å·æ•°æ®ç±»å‹ï¼Œæè¿°ç”¨æˆ·è´¦å·ä¿¡æ¯
 typedef struct {
-	int  id;//ÓÃ»§id
-	account_type_t type;//ÓÃ»§ÀàĞÍ
-	char username[30];//ÓÃ»§Ãû
-	char password[30];//ÓÃ»§ÃÜÂë
+	int  id;//ç”¨æˆ·id
+	account_type_t type;//ç”¨æˆ·ç±»å‹
+	char username[30];//ç”¨æˆ·å
+	char password[30];//ç”¨æˆ·å¯†ç 
 } account_t;
 
-//¶¨ÒåÏµÍ³ÓÃ»§ÕËºÅË«ÏòÁ´±í
+//å®šä¹‰ç³»ç»Ÿç”¨æˆ·è´¦å·åŒå‘é“¾è¡¨
 typedef struct account_node {
 	account_t data;
 	struct account_node *next, *prev;

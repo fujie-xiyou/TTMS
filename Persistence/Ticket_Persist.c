@@ -64,7 +64,7 @@ int Ticket_Perst_Delete(int schedule_id){
 	return found;
 
 }
-//ºóĞøº¯ÊıÁô¸øÍõĞ¡ÒøÊ¹ÓÃ
+//åç»­å‡½æ•°ç•™ç»™ç‹å°é“¶ä½¿ç”¨
 int Ticket_Perst_Update(const ticket_t * data) {
 	assert(NULL!=data);
 
@@ -128,14 +128,14 @@ int Ticket_Perst_SelectAll(ticket_list_t list) {
 
 	assert(NULL!=list);
 
-	//ÎÄ¼ş²»´æÔÚ
+	//æ–‡ä»¶ä¸å­˜åœ¨
 	//if (access(TICKET_DATA_FILE, 0))
 	//	return 0;
 
 	List_Free(list, ticket_node_t);
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
@@ -168,7 +168,7 @@ int Ticket_Perst_SelectBySchID(ticket_list_t list, int schedule_id) {
 	List_Free(list, ticket_node_t);
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}
@@ -190,7 +190,7 @@ int Ticket_Perst_SelectBySchID(ticket_list_t list, int schedule_id) {
 	return recCount;
 }
 
-//¸ù¾İÆ±Ö÷¼üÁĞ±íÔØÈëÆ±
+//æ ¹æ®ç¥¨ä¸»é”®åˆ—è¡¨è½½å…¥ç¥¨
 int Ticket_Perst_SelectByKeyList(ticket_list_t list, entkey_list_t keyList) {
 	ticket_node_t *newNode;
 	ticket_t data;
@@ -202,7 +202,7 @@ int Ticket_Perst_SelectByKeyList(ticket_list_t list, entkey_list_t keyList) {
 	List_Free(list, ticket_node_t);
 
 	FILE *fp = fopen(TICKET_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		printf("Cannot open file %s!\n", TICKET_DATA_FILE);
 		return 0;
 	}

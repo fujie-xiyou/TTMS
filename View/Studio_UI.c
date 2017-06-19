@@ -1,7 +1,7 @@
 /*
  * Studio_UI.c
  *
- *  Created on: 2015Äê4ÔÂ24ÈÕ
+ *  Created on: 2015å¹´4æœˆ24æ—¥
  *      Author: Administrator
  */
 #include "Studio_UI.h"
@@ -30,18 +30,18 @@ void Studio_UI_MgtEntry(void) {
 	paging.offset = 0;
 	paging.pageSize = ACCOUNT_PAGE_SIZE;
 
-	//ÔØÈëÊı¾İ
+	//è½½å…¥æ•°æ®
 	paging.totalRecords = Studio_Srv_FetchAll(head);
 	Paging_Locate_FirstPage(head, paging);
 
 	do {
 		/*system("cls");*/
 		printf("\n==================================================================\n");
-		printf("********************** Ñİ³öÌüÁĞ±í **********************\n");
-		printf("%5s  %18s  %10s  %10s  %10s\n", "±àºÅ", "Ñİ³öÌüÃû", "ĞĞÊı",
-				"ÁĞÊı", "×ùÎ»Êı");
+		printf("********************** æ¼”å‡ºå…åˆ—è¡¨ **********************\n");
+		printf("%5s  %18s  %10s  %10s  %10s\n", "ç¼–å·", "æ¼”å‡ºå…å", "è¡Œæ•°",
+				"åˆ—æ•°", "åº§ä½æ•°");
 		printf("------------------------------------------------------------------\n");
-		//ÏÔÊ¾Êı¾İ
+		//æ˜¾ç¤ºæ•°æ®
 		for (i = 0, pos = (studio_node_t *) (paging.curPos);
 				pos != head && i < paging.pageSize; i++) {
 			printf("%5d  %18s  %10d  %10d  %10d\n", pos->data.id,
@@ -49,16 +49,16 @@ void Studio_UI_MgtEntry(void) {
 					pos->data.seatsCount);
 			pos = pos->next;
 		}
-		printf("------- È«²¿¼ÇÂ¼:%2d ----------------------- Ò³Êı %2d/%2d ----\n",
+		printf("------- å…¨éƒ¨è®°å½•:%2d ----------------------- é¡µæ•° %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf(
 				"******************************************************************\n");
 		printf(
-				"[P]ÉÏÒ»Ò³|[N]ÏÂÒ»Ò³ | [A]Ìí¼Ó|[D]É¾³ı|[U]ĞŞ¸Ä | [S]×ùÎ» | [R]·µ»Ø");
+				"[P]ä¸Šä¸€é¡µ|[N]ä¸‹ä¸€é¡µ | [A]æ·»åŠ |[D]åˆ é™¤|[U]ä¿®æ”¹ | [S]åº§ä½ | [R]è¿”å›");
 		printf(
 				"\n==================================================================\n");
-		printf("¹¦ÄÜÑ¡Ôñ:");//Your Choice
+		printf("åŠŸèƒ½é€‰æ‹©:");//Your Choice
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -66,7 +66,7 @@ void Studio_UI_MgtEntry(void) {
 		switch (choice) {
 		case 'a':
 		case 'A':
-			if (Studio_UI_Add()) //ĞÂÌí¼Ó³É¹¦£¬Ìøµ½×îºóÒ»Ò³ÏÔÊ¾
+			if (Studio_UI_Add()) //æ–°æ·»åŠ æˆåŠŸï¼Œè·³åˆ°æœ€åä¸€é¡µæ˜¾ç¤º
 			{
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				Paging_Locate_LastPage(head, paging, studio_node_t);
@@ -74,25 +74,25 @@ void Studio_UI_MgtEntry(void) {
 			break;
 		case 'd':
 		case 'D':
-			printf("ÊäÈëID:");
+			printf("è¾“å…¥ID:");
 			scanf("%d", &id);
-			if (Studio_UI_Delete(id)) {	//´ÓĞÂÔØÈëÊı¾İ
+			if (Studio_UI_Delete(id)) {	//ä»æ–°è½½å…¥æ•°æ®
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				List_Paging(head, paging, studio_node_t);
 			}
 			break;
 		case 'u':
 		case 'U':
-			printf("ÊäÈëID:");
+			printf("è¾“å…¥ID:");
 			scanf("%d", &id);
-			if (Studio_UI_Modify(id)) {	//´ÓĞÂÔØÈëÊı¾İ
+			if (Studio_UI_Modify(id)) {	//ä»æ–°è½½å…¥æ•°æ®
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				List_Paging(head, paging, studio_node_t);
 			}
 			break;
 		case 's':
 		case 'S':
-			printf("ÊäÈëID:");
+			printf("è¾“å…¥ID:");
 			scanf("%d", &id);
 			Seat_UI_MgtEntry(id);
 			paging.totalRecords = Studio_Srv_FetchAll(head);
@@ -112,7 +112,7 @@ void Studio_UI_MgtEntry(void) {
 			break;
 		}
 	} while (choice != 'r' && choice != 'R');
-	//ÊÍ·ÅÁ´±í¿Õ¼ä
+	//é‡Šæ”¾é“¾è¡¨ç©ºé—´
 	List_Destroy(head, studio_node_t);
 }
 
@@ -124,28 +124,28 @@ int Studio_UI_Add(void) {
 	do {
 		/*system("cls");*/
 		printf("\n=======================================================\n");
-		printf("****************  Ìí¼ÓĞÂÑİ³öÌü ****************\n");// Add New Projection Room 
+		printf("****************  æ·»åŠ æ–°æ¼”å‡ºå… ****************\n");// Add New Projection Room 
 		printf("-------------------------------------------------------\n");
-		printf("Ñİ³öÌüÃû³Æ:");//Room Name
+		printf("æ¼”å‡ºå…åç§°:");//Room Name
 		fflush(stdin);
 		fgets(rec.name,30,stdin);
-		printf("×ùÎ»µÄÅÅÊı:");//Row Count of Seats
+		printf("åº§ä½çš„æ’æ•°:");//Row Count of Seats
 		scanf("%d", &(rec.rowsCount));
-		printf("×ùÎ»µÄÁĞÊı:");//Column Count of Seats
+		printf("åº§ä½çš„åˆ—æ•°:");//Column Count of Seats
 		scanf("%d", &(rec.colsCount));
 		rec.seatsCount = 0;
 		printf("=======================================================\n");
 
-		//»ñÈ¡Ö÷¼ü
+		//è·å–ä¸»é”®
 		rec.id = EntKey_Srv_CompNewKey("Studio");
 
 		if (Studio_Srv_Add(&rec)) {
 			newRecCount += 1;
-			printf("ĞÂÑİ³öÌüÌí¼Ó³É¹¦!\n");//The new room added successfully	
+			printf("æ–°æ¼”å‡ºå…æ·»åŠ æˆåŠŸ!\n");//The new room added successfully	
 		} else
-			printf("ĞÂÑİ³öÌüÌí¼ÓÊ§°Ü!\n");//The new room added failed!
+			printf("æ–°æ¼”å‡ºå…æ·»åŠ å¤±è´¥!\n");//The new room added failed!
 		printf("-------------------------------------------------------\n");
-		printf("[A]Ìí¼Ó¸ü¶à, [R]·µ»Ø:");
+		printf("[A]æ·»åŠ æ›´å¤š, [R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
@@ -161,27 +161,27 @@ int Studio_UI_Modify(int id) {
 
 	/*Load record*/
 	if (!Studio_Srv_FetchByID(id, &rec)) {
-		printf("¸ÃÑİ³öÌü²»´æÔÚ!\n°´[Enter]¼ü·µ»Ø!\n");
+		printf("è¯¥æ¼”å‡ºå…ä¸å­˜åœ¨!\næŒ‰[Enter]é”®è¿”å›!\n");
 		//The room does not exist!\nPress [Enter] key to return!\n
 		getchar();
 		return 0;
 	}
 
 	printf("\n=======================================================\n");
-	printf("****************  ¸üĞÂÑİ³öÌü  ****************\n");//Update Projection Room
+	printf("****************  æ›´æ–°æ¼”å‡ºå…  ****************\n");//Update Projection Room
 	printf("-------------------------------------------------------\n");
-	printf("Ñİ³öÌü±àºÅ:%d\n", rec.id);
-	printf("Ñİ³öÌüÃû[%s]:", rec.name);
+	printf("æ¼”å‡ºå…ç¼–å·:%d\n", rec.id);
+	printf("æ¼”å‡ºå…å[%s]:", rec.name);
 	fflush(stdin);
 	fgets(rec.name,30,stdin);
 
 	List_Init(list, seat_node_t);
 	seatcount = Seat_Srv_FetchByRoomID(list, rec.id);
 	if(seatcount){
-		do{			//Èç¹û×ùÎ»ÎÄ¼şÖĞÒÑÓĞ×ùÎ»ĞÅÏ¢£¬Ôò¸üĞÂµÄĞĞÁĞ±ØĞë±ÈÒÔÇ°´ó£¬·ñÔò²»ÔÊĞí¸ü¸Ä
-			printf("×ùÎ»µÄÅÅÊıÓ¦¸Ã >= [%d]:", rec.rowsCount);//Row Count of Seats should
+		do{			//å¦‚æœåº§ä½æ–‡ä»¶ä¸­å·²æœ‰åº§ä½ä¿¡æ¯ï¼Œåˆ™æ›´æ–°çš„è¡Œåˆ—å¿…é¡»æ¯”ä»¥å‰å¤§ï¼Œå¦åˆ™ä¸å…è®¸æ›´æ”¹
+			printf("åº§ä½çš„æ’æ•°åº”è¯¥ >= [%d]:", rec.rowsCount);//Row Count of Seats should
 			scanf("%d", &(newrow));
-			printf("×ùÎ»µÄÁĞÊıÓ¦¸Ã >= [%d]:", rec.colsCount);//Column Count of Seats should
+			printf("åº§ä½çš„åˆ—æ•°åº”è¯¥ >= [%d]:", rec.colsCount);//Column Count of Seats should
 			scanf("%d", &(newcolumn));
 		}while(	newrow<rec.rowsCount||newcolumn<rec.colsCount);
 		rec.rowsCount=newrow;
@@ -189,9 +189,9 @@ int Studio_UI_Modify(int id) {
 		rec.seatsCount=seatcount;
 	}
 	else{
-		printf("×ùÎ»µÄÅÅÊı:");//Row Count of Seats
+		printf("åº§ä½çš„æ’æ•°:");//Row Count of Seats
 		scanf("%d", &rec.rowsCount);
-		printf("×ùÎ»µÄÁĞÊı:");
+		printf("åº§ä½çš„åˆ—æ•°:");
 		scanf("%d", &rec.colsCount);
 		rec.seatsCount=0;
 	}
@@ -201,9 +201,9 @@ int Studio_UI_Modify(int id) {
 	if (Studio_Srv_Modify(&rec)) {
 		rtn = 1;
 		printf(
-				"Ñİ³öÌüÊı¾İ¸üĞÂ³É¹¦!\n°´[Enter]·µ»Ø!\n");//The room data updated successfully
+				"æ¼”å‡ºå…æ•°æ®æ›´æ–°æˆåŠŸ!\næŒ‰[Enter]è¿”å›!\n");//The room data updated successfully
 	} else
-		printf("Ñİ³öÌüÊı¾İ¸üĞÂÊ§°Ü!\n°´[Enter]·µ»Ø\n");//The room data updated failed
+		printf("æ¼”å‡ºå…æ•°æ®æ›´æ–°å¤±è´¥!\næŒ‰[Enter]è¿”å›\n");//The room data updated failed
 
 	getchar();
 	return rtn;
@@ -214,14 +214,14 @@ int Studio_UI_Delete(int id) {
 	int rtn = 0;
 
 	if (Studio_Srv_DeleteByID(id)) {
-		//ÔÚÉ¾³ı·ÅÓ³ÌüÊ±£¬Í¬Ê±¸ù¾İ·ÅÓ³ÌüidÉ¾³ı×ùÎ»ÎÄ¼şÖĞµÄ×ùÎ»
+		//åœ¨åˆ é™¤æ”¾æ˜ å…æ—¶ï¼ŒåŒæ—¶æ ¹æ®æ”¾æ˜ å…idåˆ é™¤åº§ä½æ–‡ä»¶ä¸­çš„åº§ä½
 		if(Seat_Srv_DeleteAllByRoomID(id))
-			printf("Ñİ³öÌü×ùÎ»É¾³ı³É¹¦!\n");//The seats of the room deleted successfully
+			printf("æ¼”å‡ºå…åº§ä½åˆ é™¤æˆåŠŸ!\n");//The seats of the room deleted successfully
 		printf(
-				"¸ÃÑİ³öÌüÉ¾³ı³É¹¦!\n°´[Enter]¼ü·µ»Ø!\n");//The room deleted successfully!\nPress [Enter] key to return
+				"è¯¥æ¼”å‡ºå…åˆ é™¤æˆåŠŸ!\næŒ‰[Enter]é”®è¿”å›!\n");//The room deleted successfully!\nPress [Enter] key to return
 		rtn = 1;
 	} else {
-		printf("¸ÃÑİ³öÌü²»´æÔÚ!\n°´[Enter]¼ü·µ»Ø!\n");//The room does not exist!\nPress [Enter] key to return
+		printf("è¯¥æ¼”å‡ºå…ä¸å­˜åœ¨!\næŒ‰[Enter]é”®è¿”å›!\n");//The room does not exist!\nPress [Enter] key to return
 	}
 
 	getchar();

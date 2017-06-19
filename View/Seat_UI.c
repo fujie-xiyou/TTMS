@@ -1,7 +1,7 @@
 /*
  *  Seat_UI.c
  *
- *  Created on: 2015Äê5ÔÂ23ÈÕ
+ *  Created on: 2015å¹´5æœˆ23æ—¥
  *  Author: lc
  */
 #include "Seat_UI.h"
@@ -10,17 +10,17 @@
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Common/List.h"
-#include <stdio.h>//ÕæµÄºº»¯ÁË¡£¡£
+#include <stdio.h>//çœŸçš„æ±‰åŒ–äº†ã€‚ã€‚
 
-//¸ù¾İ×´Ì¬·µ»Ø¶ÔÓ¦±íÊ¾×´Ì¬·ûºÅ
+//æ ¹æ®çŠ¶æ€è¿”å›å¯¹åº”è¡¨ç¤ºçŠ¶æ€ç¬¦å·
 inline char Seat_UI_Status2Char(seat_status_t status) {
 
 	char statusChar;
 	switch (status) {
-	case SEAT_GOOD:		//ÓĞ×ùÎ»
+	case SEAT_GOOD:		//æœ‰åº§ä½
 		statusChar = '#';
 		break;
-	case SEAT_BROKEN:	//Ëğ»µµÄ×ùÎ»
+	case SEAT_BROKEN:	//æŸåçš„åº§ä½
 		statusChar = '~';
 		break;
 	case SEAT_NONE:
@@ -31,14 +31,14 @@ inline char Seat_UI_Status2Char(seat_status_t status) {
 	return statusChar;
 }
 
-//¸ù¾İ×´Ì¬·ûºÅ·µ»Ø×ÀÎ»×´Ì¬
+//æ ¹æ®çŠ¶æ€ç¬¦å·è¿”å›æ¡Œä½çŠ¶æ€
 inline seat_status_t Seat_UI_Char2Status(char statusChar) {
 	seat_status_t status;
 	switch (statusChar) {
-	case '#':		//ÓĞ×ùÎ»
+	case '#':		//æœ‰åº§ä½
 		status = SEAT_GOOD;
 		break;
-	case '~':	//Ëğ»µµÄ×ùÎ»
+	case '~':	//æŸåçš„åº§ä½
 		status = SEAT_BROKEN;
 		break;
 	default:
@@ -55,8 +55,8 @@ void Seat_UI_MgtEntry(int roomID) {
 	int changedCount = 0;
 	studio_t studioRec;
 
-	if (!Studio_Srv_FetchByID(roomID, &studioRec)) {  //»ñµÃ¶ÔÓ¦id·ÅÓ³ÌüµÄĞÅÏ¢
-		printf("¸Ã·ÅÓ³Ìü²»´æÔÚ!\n°´[Enter]¼ü·µ»Ø!\n");//The room does not exist!\nPress [Enter] key to return
+	if (!Studio_Srv_FetchByID(roomID, &studioRec)) {  //è·å¾—å¯¹åº”idæ”¾æ˜ å…çš„ä¿¡æ¯
+		printf("è¯¥æ”¾æ˜ å…ä¸å­˜åœ¨!\næŒ‰[Enter]é”®è¿”å›!\n");//The room does not exist!\nPress [Enter] key to return
 		getchar();
 		return;
 	}
@@ -65,13 +65,13 @@ void Seat_UI_MgtEntry(int roomID) {
 	seat_node_t *p;
 
 	List_Init(list, seat_node_t);
-	//Ñ¡Ôñ·ÅÓ³ÌüµÄËùÓĞ×ùÎ»
+	//é€‰æ‹©æ”¾æ˜ å…çš„æ‰€æœ‰åº§ä½
 	seatCount = Seat_Srv_FetchByRoomID(list, roomID);
 
-	if (!seatCount) {		//Èô·ÅÓ³Ìü»¹Ã»ÓĞÉèÖÃ×ùÎ»£¬Ôò×Ô¶¯Éú³É×ùÎ»
+	if (!seatCount) {		//è‹¥æ”¾æ˜ å…è¿˜æ²¡æœ‰è®¾ç½®åº§ä½ï¼Œåˆ™è‡ªåŠ¨ç”Ÿæˆåº§ä½
 		seatCount = Seat_Srv_RoomInit(list, roomID, studioRec.rowsCount,
 				studioRec.colsCount);
-		//ĞŞ¸ÄÑİ³öÌüÀïµÄ×ùÎ»ÊıÁ¿
+		//ä¿®æ”¹æ¼”å‡ºå…é‡Œçš„åº§ä½æ•°é‡
 		studioRec.seatsCount = seatCount;
 		Studio_Srv_Modify(&studioRec);
 	}
@@ -79,7 +79,7 @@ void Seat_UI_MgtEntry(int roomID) {
 
 		//system("cls");
 		printf("\n==================================================================\n");
-		printf("********************  ·ÅÓ³Ìü %d ×ùÎ»ÁĞ±í  **************************\n",
+		printf("********************  æ”¾æ˜ å… %d åº§ä½åˆ—è¡¨  **************************\n",
 				roomID);//Room %d Seat List
 
 		printf("%5c", ' ');
@@ -88,10 +88,10 @@ void Seat_UI_MgtEntry(int roomID) {
 		}
 		printf(
 				"\n------------------------------------------------------------------\n");
-		//ÏÔÊ¾Êı¾İ
+		//æ˜¾ç¤ºæ•°æ®
 		for (i = 1; i <= studioRec.rowsCount; i++) {
 			j = 1;
-			printf("%dĞĞ:%c", i, ' ');
+			printf("%dè¡Œ:%c", i, ' ');
 
 			List_ForEach(list,p)
 			{
@@ -107,7 +107,7 @@ void Seat_UI_MgtEntry(int roomID) {
 			printf("\n");
 		}
 
-		printf("[A]Ìí¼Ó|[D]É¾³ı|[U]ĞŞ¸Ä|[R]·µ»Ø:");
+		printf("[A]æ·»åŠ |[D]åˆ é™¤|[U]ä¿®æ”¹|[R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -119,7 +119,7 @@ void Seat_UI_MgtEntry(int roomID) {
 					studioRec.colsCount);
 			if (changedCount > 0) {
 				seatCount += changedCount;
-				//ĞŞ¸ÄÑİ³öÌüÀïµÄ×ùÎ»ÊıÁ¿
+				//ä¿®æ”¹æ¼”å‡ºå…é‡Œçš„åº§ä½æ•°é‡
 				studioRec.seatsCount = seatCount;
 				Studio_Srv_Modify(&studioRec);
 			}
@@ -130,7 +130,7 @@ void Seat_UI_MgtEntry(int roomID) {
 					studioRec.colsCount);
 			if (changedCount > 0) {
 				seatCount -= changedCount;
-				//ĞŞ¸ÄÑİ³öÌüÀïµÄ×ùÎ»ÊıÁ¿
+				//ä¿®æ”¹æ¼”å‡ºå…é‡Œçš„åº§ä½æ•°é‡
 				studioRec.seatsCount = seatCount;
 				Studio_Srv_Modify(&studioRec);
 			}
@@ -142,11 +142,11 @@ void Seat_UI_MgtEntry(int roomID) {
 		}
 	} while (choice != 'r' && choice != 'R');
 
-	//ÊÍ·ÅÁ´±í¿Õ¼ä
+	//é‡Šæ”¾é“¾è¡¨ç©ºé—´
 	List_Destroy(list, seat_node_t);
 }
 
-int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //ÊäÈëÒ»¸ö×ùÎ»
+int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //è¾“å…¥ä¸€ä¸ªåº§ä½
 	seat_t rec;
 	seat_node_t *p;
 	int newRecCount = 0;
@@ -156,44 +156,44 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //ÊäÈëÒ»¸ö
 		printf(
 				"\n==================================================================\n");
 		printf(
-				"***********************  Ìí¼ÓĞÂ×ùÎ»  ***************************\n");//Add New Seat
+				"***********************  æ·»åŠ æ–°åº§ä½  ***************************\n");//Add New Seat
 		printf(
 				"------------------------------------------------------------------\n");
 
 		do {
 			printf(
-					"ÅÅÊı²»Ó¦³¬³ö %d ÁĞÊı²»Ó¦³¬³ö %d!\n",
+					"æ’æ•°ä¸åº”è¶…å‡º %d åˆ—æ•°ä¸åº”è¶…å‡º %d!\n",
 					row, column);//Row shouldn't great than %d and Column shouldn't great than
-			printf("×ùÎ»ÅÅÊı:");//Row of the Seat
+			printf("åº§ä½æ’æ•°:");//Row of the Seat
 			scanf("%d", &(rec.row));
-			printf("×ùÎ»ÁĞÊı:");//Column of the Seat
+			printf("åº§ä½åˆ—æ•°:");//Column of the Seat
 			scanf("%d", &(rec.column));
 			fflush(stdin);
 		} while (rec.row > row || rec.column > column);
 
 		p = Seat_Srv_FindByRowCol(list, rec.row, rec.column);
-		if (p) {						//ÈôÊäÈëµÄĞĞÁĞºÅËù¶ÔÓ¦µÄ×ùÎ»ÒÑ´æÔÚ£¬Ôò²»ÄÜ²åÈë
-			printf("¸Ã×ùÎ»ÒÑ´æÔÚ \n");//The seat is already exist!
+		if (p) {						//è‹¥è¾“å…¥çš„è¡Œåˆ—å·æ‰€å¯¹åº”çš„åº§ä½å·²å­˜åœ¨ï¼Œåˆ™ä¸èƒ½æ’å…¥
+			printf("è¯¥åº§ä½å·²å­˜åœ¨ \n");//The seat is already exist!
 			continue;
 		}
 
-		rec.id = EntKey_Srv_CompNewKey("Seat");		//ÉèÖÃ×ùÎ»id
+		rec.id = EntKey_Srv_CompNewKey("Seat");		//è®¾ç½®åº§ä½id
 		rec.roomID = roomID;
-		rec.status = SEAT_GOOD;    //²åÈëµÄĞÂ×ùÎ»µÄ×´Ì¬Ä¬ÈÏÎªºÃ×ùÎ»
+		rec.status = SEAT_GOOD;    //æ’å…¥çš„æ–°åº§ä½çš„çŠ¶æ€é»˜è®¤ä¸ºå¥½åº§ä½
 		printf(
 				"==================================================================\n");
 
 		if (Seat_Srv_Add(&rec)) {
 			newRecCount++;
-			printf("ĞÂ×ùÎ»Ìí¼Ó³É¹¦\n");//The new seat added successfully!
+			printf("æ–°åº§ä½æ·»åŠ æˆåŠŸ\n");//The new seat added successfully!
 			p = (seat_node_t*) malloc(sizeof(seat_node_t));
 			p->data = rec;
-			Seat_Srv_AddToSoftedList(list, p); //ÈôÔö¼ÓÁËĞÂ×ùÎ»£¬Ğè¸üĞÂlist
+			Seat_Srv_AddToSoftedList(list, p); //è‹¥å¢åŠ äº†æ–°åº§ä½ï¼Œéœ€æ›´æ–°list
 		} else
-			printf("ĞÂ×ùÎ»Ìí¼ÓÊ§°Ü!\n");//The new seat added failed!
+			printf("æ–°åº§ä½æ·»åŠ å¤±è´¥!\n");//The new seat added failed!
 		printf(
 				"------------------------------------------------------------------\n");
-		printf("[A]Ìí¼Ó¸ü¶à, [R]·µ»Ø:");
+		printf("[A]æ·»åŠ æ›´å¤š, [R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 	} while ('a' == choice || 'A' == choice);
@@ -209,24 +209,24 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 	printf(
 			"\n==================================================================\n");
 	printf(
-			"***************************  ĞŞ¸Ä×ùÎ» ************************\n");//Update Seat 
+			"***************************  ä¿®æ”¹åº§ä½ ************************\n");//Update Seat 
 	printf(
 			"------------------------------------------------------------------\n");
 
 	do {
-		do {				//¸üĞÂµÄ×ùÎ»ĞĞÁĞĞÅÏ¢²»ÄÜ³¬³ö·ÅÓ³ÌüµÄĞĞÁĞÊı
+		do {				//æ›´æ–°çš„åº§ä½è¡Œåˆ—ä¿¡æ¯ä¸èƒ½è¶…å‡ºæ”¾æ˜ å…çš„è¡Œåˆ—æ•°
 			printf(
-					"ÅÅÊı²»Ó¦³¬³ö %d ÁĞÊı²»Ó¦³¬³ö %d!\n",//Row shouldn't great than %d and Column shouldn't great than %d!\n
+					"æ’æ•°ä¸åº”è¶…å‡º %d åˆ—æ•°ä¸åº”è¶…å‡º %d!\n",//Row shouldn't great than %d and Column shouldn't great than %d!\n
 					row, column);
-			printf("×ùÎ»ÅÅÊı :");//Row of Seat
+			printf("åº§ä½æ’æ•° :");//Row of Seat
 			scanf("%d", &newrow);
-			printf("×ùÎ»ÁĞÊı :");//Column of Seat
+			printf("åº§ä½åˆ—æ•° :");//Column of Seat
 			scanf("%d", &newcolumn);
 		} while (newrow > row || newcolumn > column);
 
 		p = Seat_Srv_FindByRowCol(list, newrow, newcolumn);
 		if (p) {
-			printf("×ùÎ»Çé¿ö [%d,%d]: [%c]:", newrow, newcolumn,//State of Seat
+			printf("åº§ä½æƒ…å†µ [%d,%d]: [%c]:", newrow, newcolumn,//State of Seat
 					Seat_UI_Status2Char(p->data.status));
 			fflush(stdin);
 			p->data.status = Seat_UI_Char2Status(getchar());
@@ -234,14 +234,14 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 					"-------------------------------------------------------------------\n");
 			if (Seat_Srv_Modify(&(p->data))) {
 				rtn = 1;
-				printf("¸Ã×ùÎ»¸üĞÂ³É¹¦!\n");//The seat data updated successfully
+				printf("è¯¥åº§ä½æ›´æ–°æˆåŠŸ!\n");//The seat data updated successfully
 			} else
-				printf("¸Ã×ùÎ»¸üĞÂÊ§°Ü!\n");//The seat data updated failed
+				printf("è¯¥åº§ä½æ›´æ–°å¤±è´¥!\n");//The seat data updated failed
 		} else
 			printf("The seat is not exist!\n");
 		printf(
 				"-------------------------------------------------------------------\n");
-		printf("[U]ĞŞ¸Ä¸ü¶à, [R]·µ»Ø:");
+		printf("[U]ä¿®æ”¹æ›´å¤š, [R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -261,16 +261,16 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 		printf(
 				"\n==================================================================\n");
 		printf(
-				"**************************  É¾³ı×ùÎ»  ************************\n");//Delete  Seat
+				"**************************  åˆ é™¤åº§ä½  ************************\n");//Delete  Seat
 		printf(
 				"------------------------------------------------------------------\n");
 		do {
 			fflush(stdin);
-			printf("ÅÅÊı²»Ó¦³¬³ö %d ÁĞÊı²»Ó¦³¬³ö %d!\n",//Row shouldn't great than %d and Column shouldn't great than %d!\n
+			printf("æ’æ•°ä¸åº”è¶…å‡º %d åˆ—æ•°ä¸åº”è¶…å‡º %d!\n",//Row shouldn't great than %d and Column shouldn't great than %d!\n
 					row, column);
-			printf("×ùÎ»ÅÅÊı:");//Row of the Seat
+			printf("åº§ä½æ’æ•°:");//Row of the Seat
 			scanf("%d", &(newrow));
-			printf("×ùÎ»ÁĞÊı:");//Column of the Seat
+			printf("åº§ä½åˆ—æ•°:");//Column of the Seat
 			scanf("%d", &(newcolumn));
 			fflush(stdin);
 		} while (newrow > row || newcolumn > column);
@@ -280,19 +280,19 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 			printf(
 					"==================================================================\n");
 			if (Seat_Srv_DeleteByID(p->data.id)) {
-				printf("¸Ã×ùÎ»É¾³ı³É¹¦!\n");//The seat deleted successfully
+				printf("è¯¥åº§ä½åˆ é™¤æˆåŠŸ!\n");//The seat deleted successfully
 
 				delSeatCount++;
-				List_FreeNode(p);	//ÊÍ·Å½áµã×ùÎ»½áµãp
+				List_FreeNode(p);	//é‡Šæ”¾ç»“ç‚¹åº§ä½ç»“ç‚¹p
 			}
 		} else {
-			printf("¸Ã×ùÎ»²»´æÔÚ!\n");
+			printf("è¯¥åº§ä½ä¸å­˜åœ¨!\n");
 
 		}
 
 		printf(
 				"------------------------------------------------------------------\n");
-		printf("[D]É¾³ı¸ü¶à, [R]·µ»Ø:");
+		printf("[D]åˆ é™¤æ›´å¤š, [R]è¿”å›:");
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);

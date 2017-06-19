@@ -32,7 +32,7 @@ int Ticket_Srv_AddBatch(int schedule_id, int studio_id){
 		return 0;
 	}
 
-	//ÔØÈëÑİ³ö¼Æ»®¼°¾çÄ¿
+	//è½½å…¥æ¼”å‡ºè®¡åˆ’åŠå‰§ç›®
 	Schedule_Perst_SelectByID(schedule_id, &sch);
 	Play_Perst_SelectByID(sch.play_id, &play);
 
@@ -44,9 +44,9 @@ int Ticket_Srv_AddBatch(int schedule_id, int studio_id){
 	while(pos!=seat_head){
 			data.seat_id=pos->data.id;
 			data.schedule_id=schedule_id;
-			data.status= TICKET_AVL;	//±íÊ¾´ıÊÛ
+			data.status= TICKET_AVL;	//è¡¨ç¤ºå¾…å”®
 			data.id=id_seed++;
-			data.price=play.price;		//Ä¬ÈÏÍ³Ò»Æ±¼Û
+			data.price=play.price;		//é»˜è®¤ç»Ÿä¸€ç¥¨ä»·
 			newNode = (ticket_node_t*) malloc(sizeof(ticket_node_t));
 			if (!newNode) {
 				printf("Warning, Memory OverFlow!!!\n Cannot Load more Data into memmory!!!\n");
@@ -74,7 +74,7 @@ int Ticket_Srv_FetchByID(int ID, ticket_t *buf) {
 }
 
 
-//¸ù¾İ×ùÎ»IDÔÚlistÖĞÕÒ¶ÔÓ¦Æ±
+//æ ¹æ®åº§ä½IDåœ¨listä¸­æ‰¾å¯¹åº”ç¥¨
 inline ticket_node_t * Ticket_Srv_FindBySeatID(ticket_list_t list, int seat_id){
 	ticket_node_t *p;
 	List_ForEach(list, p){
@@ -85,15 +85,15 @@ inline ticket_node_t * Ticket_Srv_FindBySeatID(ticket_list_t list, int seat_id){
 }
 
 
-//¸ù¾İ¼Æ»®IDÌáÈ¡ËùÓĞÑİ³öÆ±
+//æ ¹æ®è®¡åˆ’IDæå–æ‰€æœ‰æ¼”å‡ºç¥¨
 int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id) {
 
 	int count=0;
 
-	//Çå³ıÔ­Ê¼Êı¾İ
+	//æ¸…é™¤åŸå§‹æ•°æ®
 	List_Free(list, ticket_node_t);
 
-	//ÌáÈ¡Ñİ³öÆ±
+	//æå–æ¼”å‡ºç¥¨
 	ticket_list_t tickList;
 	List_Init(tickList, ticket_node_t);
 
@@ -105,7 +105,7 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id) {
 	schedule_t sch;
 	Schedule_Srv_FetchByID(schedule_id, &sch);
 
-	//¶ÔÑİ³öÆ±°´×ùÎ»ºÅÅÅĞò
+	//å¯¹æ¼”å‡ºç¥¨æŒ‰åº§ä½å·æ’åº
 	seat_list_t seatList;
 	seat_node_t *pSeat;
 	List_Init(seatList, seat_node_t);
@@ -128,9 +128,9 @@ int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id) {
 	return count;
 }
 
-//¸ù¾İÑİ³ö¼Æ»®ID£¬Í³¼ÆÉÏ×ùÂÊ¼°Æ±·¿£¬·µ»ØÆ±·¿ÊÕÈë
+//æ ¹æ®æ¼”å‡ºè®¡åˆ’IDï¼Œç»Ÿè®¡ä¸Šåº§ç‡åŠç¥¨æˆ¿ï¼Œè¿”å›ç¥¨æˆ¿æ”¶å…¥
 int Ticket_Srv_StatRevBySchID(int schedule_id, int *soldCount, int *totalCount){
-	//¸ù¾İ¼Æ»®IDÌáÈ¡ËùÓĞÑİ³öÆ±
+	//æ ¹æ®è®¡åˆ’IDæå–æ‰€æœ‰æ¼”å‡ºç¥¨
 	int value=0;
 	ticket_list_t list, p;
 	List_Init(list, ticket_node_t);

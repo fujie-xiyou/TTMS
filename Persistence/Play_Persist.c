@@ -16,22 +16,22 @@
 #include <assert.h>
 #include <string.h>
 
-static const char PLAY_DATA_FILE[] = "Play.dat";//±£´æ¾çÄ¿ÐÅÏ¢
-static const char PLAY_DATA_TEMP_FILE[] = "PlayTmp.dat";//É¾³ý»ò¸üÐÂÊ±£¬ÔÝÊ±±£´æ¾çÄ¿ÐÅÏ¢
+static const char PLAY_DATA_FILE[] = "Play.dat";//ä¿å­˜å‰§ç›®ä¿¡æ¯
+static const char PLAY_DATA_TEMP_FILE[] = "PlayTmp.dat";//åˆ é™¤æˆ–æ›´æ–°æ—¶ï¼Œæš‚æ—¶ä¿å­˜å‰§ç›®ä¿¡æ¯
 
 /*
  * Function:    Play_Perst_Insert
  * Function ID:	TTMS_SCU_Play_Perst_Insert
- * Description: ÔÚ¾çÄ¿ÐÅÏ¢ÎÄ¼þÄ©Î²Ð´ÈëÒ»Ìõ¾çÄ¿ÐÅÏ¢
- * Input:       ´ý¼ÓÈëÎÄ¼þµÄ¾çÄ¿ÐÅÏ¢Êý¾Ý
- * Output:      ´ò¿ªÎÄ¼þÊ§°ÜµÄÐÅÏ¢
- * Return:      Ð´ÈëÎÄ¼þµÄ¼ÇÂ¼Êý
+ * Description: åœ¨å‰§ç›®ä¿¡æ¯æ–‡ä»¶æœ«å°¾å†™å…¥ä¸€æ¡å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…åŠ å…¥æ–‡ä»¶çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      å†™å…¥æ–‡ä»¶çš„è®°å½•æ•°
  */
 int Play_Perst_Insert(const play_t *data) {
     FILE *fp;
     int rtn=0;
     if((fp=fopen(PLAY_DATA_FILE,"ab"))==NULL){
-        fprintf(stderr,"%s´ò¿ªÊ§°Ü!\n",PLAY_DATA_FILE);
+        fprintf(stderr,"%sæ‰“å¼€å¤±è´¥!\n",PLAY_DATA_FILE);
         return rtn;
     }
     rtn=fwrite(data,sizeof(play_t),1,fp);
@@ -42,20 +42,20 @@ int Play_Perst_Insert(const play_t *data) {
 /*
  * Function:    Play_Perst_Update
  * Function ID:	TTMS_SCU_Play_Perst_Mod
- * Description: °´ÕÕ¾çÄ¿IDºÅ¸üÐÂÎÄ¼þÖÐµÄ¾çÄ¿ÐÅÏ¢
- * Input:       ´ýÔÚÎÄ¼þÖÐ¸üÐÂµÄ¾çÄ¿ÐÅÏ¢Êý¾Ý
- * Output:      ´ò¿ªÎÄ¼þÊ§°ÜµÄÐÅÏ¢
- * Return:      ¸üÐÂµÄ¾çÄ¿ÐÅÏ¢Êý£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üÐÂ
+ * Description: æŒ‰ç…§å‰§ç›®IDå·æ›´æ–°æ–‡ä»¶ä¸­çš„å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…åœ¨æ–‡ä»¶ä¸­æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
  */
 int Play_Perst_Update(const play_t *data) {
     FILE *fp;
     int found=0;
     play_t buf;
     if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
-        fprintf(stderr,"%s´ò¿ªÊ§°Ü!",PLAY_DATA_FILE);
+        fprintf(stderr,"%sæ‰“å¼€å¤±è´¥!",PLAY_DATA_FILE);
         return found;
     }
-    while(!feof(fp)){//Èç¹ûÎ´µ½ÎÄ¼þ½áÎ²,¼ÌÐøÑ­»·
+    while(!feof(fp)){//å¦‚æžœæœªåˆ°æ–‡ä»¶ç»“å°¾,ç»§ç»­å¾ªçŽ¯
         fread(&buf,sizeof(play_t),1,fp);
         if(buf.id==data->id){
             fseek(fp,-sizeof(buf),SEEK_CUR);
@@ -71,23 +71,23 @@ int Play_Perst_Update(const play_t *data) {
 /*
  * Function:    Play_Perst_DeleteByID
  * Function ID:	TTMS_SCU_Play_Perst_DelByID
- * Description: °´ÕÕ¾çÄ¿IDºÅÉ¾³ý¾çÄ¿µÄÐÅÏ¢
- * Input:       ´ýÉ¾³ýµÄ¾çÄ¿IDºÅ
- * Output:      ´ò¿ªÎÄ¼þÊ§°ÜµÄÐÅÏ¢
- * Return:      0±íÊ¾É¾³ýÊ§°Ü£¬1±íÊ¾É¾³ý³É¹¦
+ * Description: æŒ‰ç…§å‰§ç›®IDå·åˆ é™¤å‰§ç›®çš„ä¿¡æ¯
+ * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+ * Output:      æ‰“å¼€æ–‡ä»¶å¤±è´¥çš„ä¿¡æ¯
+ * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
  */
 int Play_Perst_DeleteByID(int ID) {
     FILE *fp,*fd;
     int found=0;
     play_t buf;
     if(rename(PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE)){
-        fprintf(stderr,"%sÖØÃüÃûÊ§°Ü!\n",PLAY_DATA_FILE);
+        fprintf(stderr,"%sé‡å‘½åå¤±è´¥!\n",PLAY_DATA_FILE);
         return found;
     }
 
     if(((fp=fopen(PLAY_DATA_TEMP_FILE,"rb"))==NULL) ||
        ((fd=fopen(PLAY_DATA_FILE,"wb"))==NULL)){
-        fprintf(stderr,"%s»ò%s´ò¿ªÊ§°Ü!\n",PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE);
+        fprintf(stderr,"%sæˆ–%sæ‰“å¼€å¤±è´¥!\n",PLAY_DATA_FILE,PLAY_DATA_TEMP_FILE);
         return found;
     }
     while(!feof(fp)) {
@@ -109,18 +109,18 @@ int Play_Perst_DeleteByID(int ID) {
 /*
  * Function:    Play_Perst_SelectByID
  * Function ID:	TTMS_SCU_Play_Perst_SelByID
- * Description: °´ÕÕ¾çÄ¿IDºÅ²éÕÒ¾çÄ¿µÄÐÅÏ¢
- * Input:       ´ý²éÕÒµÄ¾çÄ¿IDºÅ£¬±£´æ²éÕÒ½á¹ûµÄÄÚ´æµÄµØÖ·
- * Output:      ÎÞ
- * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
- * ×¢Òâ:        ÊµÌåbuf±ØÐëÒÑ¾­ÔÚÖ÷µ÷º¯ÊýÖÐ³õÊ¼»¯;
+ * Description: æŒ‰ç…§å‰§ç›®IDå·æŸ¥æ‰¾å‰§ç›®çš„ä¿¡æ¯
+ * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·ï¼Œä¿å­˜æŸ¥æ‰¾ç»“æžœçš„å†…å­˜çš„åœ°å€
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
+ * æ³¨æ„:        å®žä½“bufå¿…é¡»å·²ç»åœ¨ä¸»è°ƒå‡½æ•°ä¸­åˆå§‹åŒ–;
  */
 int Play_Perst_SelectByID(int ID, play_t *buf) {
     FILE *fp;
     int found=0;
     play_t data;
     if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",PLAY_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",PLAY_DATA_FILE);
         return found;
     }
     while(!feof(fp)){
@@ -139,11 +139,11 @@ int Play_Perst_SelectByID(int ID, play_t *buf) {
 /*
  * Function:    Play_Perst_SelectAll
  * Function ID:	TTMS_SCU_Play_Perst_SelAll
- * Description: ½«ËùÓÐ¾çÄ¿ÐÅÏ¢½¨Á¢³ÉÒ»ÌõÁ´±í
- * Input:       list¾çÄ¿ÐÅÏ¢Á´±íµÄÍ·Ö¸Õë
- * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊýÄ¿
- * ×¢Òâ:        listÎñ±ØÔÚÖ÷µ÷º¯ÊýÖÐ³õÊ¼»¯!!!
+ * Description: å°†æ‰€æœ‰å‰§ç›®ä¿¡æ¯å»ºç«‹æˆä¸€æ¡é“¾è¡¨
+ * Input:       listå‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+ * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+ * Return:      è¿”å›žæŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
+ * æ³¨æ„:        liståŠ¡å¿…åœ¨ä¸»è°ƒå‡½æ•°ä¸­åˆå§‹åŒ–!!!
  */
 int Play_Perst_SelectAll(play_list_t list) {
 
@@ -155,13 +155,13 @@ int Play_Perst_SelectAll(play_list_t list) {
     play_t buf;
     play_list_t newNode;
     if((fp=fopen(PLAY_DATA_FILE,"rb"))==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",PLAY_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",PLAY_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if((newNode=(play_list_t)malloc(sizeof(play_node_t)))==NULL){
-            printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+            printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
             break;
         }
         newNode->data=buf;
@@ -176,11 +176,11 @@ int Play_Perst_SelectAll(play_list_t list) {
 /*
  * Function:    Play_Perst_SelectByName
  * Function ID:	TTMS_SCU_Play_Perst_SelByName
- * Description: °´ÕÕ¾çÄ¿Ãû³Æ²éÕÒ¾çÄ¿µÄÐÅÏ¢
- * Input:       listÎª²éÕÒµ½µÄ¾çÄ¿ÐÅÏ¢Á´±í£¬condtÎªÄ£ºý²éÑ¯µÄ¹Ø¼ü×Ö
- * Output:      ÌáÊ¾½¨Á¢Á´±íÊ±£¬ÉêÇë¿Õ¼äÊ§°Ü
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊýÄ¿
- * ×¢Òâ:        listÎñ±ØÔÚÖ÷µ÷º¯ÊýÖÐ³õÊ¼»¯!!!
+ * Description: æŒ‰ç…§å‰§ç›®åç§°æŸ¥æ‰¾å‰§ç›®çš„ä¿¡æ¯
+ * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯é“¾è¡¨ï¼Œcondtä¸ºæ¨¡ç³ŠæŸ¥è¯¢çš„å…³é”®å­—
+ * Output:      æç¤ºå»ºç«‹é“¾è¡¨æ—¶ï¼Œç”³è¯·ç©ºé—´å¤±è´¥
+ * Return:      è¿”å›žæŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
+ * æ³¨æ„:        liståŠ¡å¿…åœ¨ä¸»è°ƒå‡½æ•°ä¸­åˆå§‹åŒ–!!!
  */
 int Play_Perst_SelectByName(play_list_t list, char condt[]) {
 
@@ -192,14 +192,14 @@ int Play_Perst_SelectByName(play_list_t list, char condt[]) {
     play_t buf;
     play_list_t newNode;
     if((fp=fopen(PLAY_DATA_FILE,"rb"))==NULL){
-        printf("%s´ò¿ªÊ§°Ü!",PLAY_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!",PLAY_DATA_FILE);
         return 0;
     }
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(strstr(buf.name,condt)){
             if((newNode=(play_list_t)malloc(sizeof(play_node_t)))){
-                printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+                printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
                 break;
             }
             newNode->data=buf;

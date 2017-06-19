@@ -1,7 +1,7 @@
 /*
  * Account_Persist.c
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 
@@ -17,7 +17,7 @@
 static const char ACCOUNT_DATA_FILE[] = "Account.dat";
 static const char ACCOUNT_DATA_TEMP_FILE[] = "AccountTmp.dat";
 
-//ÅÐ¶ÏÕËºÅÎÄ¼þÊÇ·ñ´æÔÚ£¬·µ»Ø1´æÔÚ£¬·µ»Ø0²»´æÔÚ
+//åˆ¤æ–­è´¦å·æ–‡ä»¶æ˜¯å¦å­˜åœ¨ï¼Œè¿”å›ž1å­˜åœ¨ï¼Œè¿”å›ž0ä¸å­˜åœ¨
 int Account_Perst_CheckAccFile() {
 
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"rb");
@@ -29,14 +29,14 @@ int Account_Perst_CheckAccFile() {
 	return 1;
 }
 
-//¸ù¾ÝÓÃ»§ÃûÔØÈëÕËºÅ,ÔØÈë³É¹¦ return 1£»·ñÔò return 0
+//æ ¹æ®ç”¨æˆ·åè½½å…¥è´¦å·,è½½å…¥æˆåŠŸ return 1ï¼›å¦åˆ™ return 0
 int Account_Perst_SelByName(char usrName[], account_t *buf) {
 
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"rb");
     account_t data;
     int rtn=0;
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",ACCOUNT_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     while(!feof(fp)){
@@ -53,13 +53,13 @@ int Account_Perst_SelByName(char usrName[], account_t *buf) {
 
 }
 
-//ÐÂÕËºÅÐ´ÈëÕËºÅÎÄ¼þÖÐ£¬·µ»ØÊµ¼ÊÐ´ÈëµÄÊý¾Ý¿éÊýÄ¿
+//æ–°è´¦å·å†™å…¥è´¦å·æ–‡ä»¶ä¸­ï¼Œè¿”å›žå®žé™…å†™å…¥çš„æ•°æ®å—æ•°ç›®
 int Account_Perst_Insert(const account_t *data) {
 
     int rtn=0;
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"ab");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",ACCOUNT_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     rtn=fwrite(data,sizeof(account_t),1,fp);
@@ -68,13 +68,13 @@ int Account_Perst_Insert(const account_t *data) {
 
 }
 
-//ÔÚÕËºÅÎÄ¼þÖÐ²éÕÒÓë²ÎÊýÕËºÅÆ¥ÅäµÄÕËºÅ£¬ÕÒµ½ return 1£»·ñÔò return 0£»²¢½øÐÐ¸²¸ÇÖØÐ´
+//åœ¨è´¦å·æ–‡ä»¶ä¸­æŸ¥æ‰¾ä¸Žå‚æ•°è´¦å·åŒ¹é…çš„è´¦å·ï¼Œæ‰¾åˆ° return 1ï¼›å¦åˆ™ return 0ï¼›å¹¶è¿›è¡Œè¦†ç›–é‡å†™
 int Account_Perst_Update(const account_t * data) {
 
     int rtn=0;
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"wb+");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",ACCOUNT_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     account_t buf;
@@ -90,22 +90,22 @@ int Account_Perst_Update(const account_t * data) {
 
 }
 
-//ÔÚÕËºÅÎÄ¼þÖÐÉ¾³ýÓë²ÎÊýidÆ¥ÅäµÄÕËºÅ£¬É¾³ý³É¹¦ return 1£»·ñÔò return 0£»
+//åœ¨è´¦å·æ–‡ä»¶ä¸­åˆ é™¤ä¸Žå‚æ•°idåŒ¹é…çš„è´¦å·ï¼Œåˆ é™¤æˆåŠŸ return 1ï¼›å¦åˆ™ return 0ï¼›
 int Account_Perst_DeleteByID(int id) {
 
     int rtn=0;
     if(!rename(ACCOUNT_DATA_FILE,ACCOUNT_DATA_TEMP_FILE)){
-        printf("%sÖØÃüÃûÊ§°Ü!",ACCOUNT_DATA_FILE);
+        printf("%sé‡å‘½åå¤±è´¥!",ACCOUNT_DATA_FILE);
         return rtn;
     }
     FILE *fp=fopen(ACCOUNT_DATA_TEMP_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",ACCOUNT_DATA_TEMP_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",ACCOUNT_DATA_TEMP_FILE);
         return rtn;
     }
     FILE *fd=fopen(ACCOUNT_DATA_FILE,"wb");
     if(fd==NULL){
-        printf("%s´ò¿ªÊ§°Ü\n",ACCOUNT_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥\n",ACCOUNT_DATA_FILE);
     }
     account_t buf;
     while(!feof(fp)){
@@ -124,13 +124,13 @@ int Account_Perst_DeleteByID(int id) {
 
 }
 
-//ÔÚÕËºÅÎÄ¼þÖÐ²éÕÒÓë²ÎÊýidÆ¥ÅäµÄÕËºÅ£¬²¢Í¨¹ýÖ¸Õëbuf´«³ö£»Æ¥Åä³É¹¦ return 1£»·ñÔò return 0£»
+//åœ¨è´¦å·æ–‡ä»¶ä¸­æŸ¥æ‰¾ä¸Žå‚æ•°idåŒ¹é…çš„è´¦å·ï¼Œå¹¶é€šè¿‡æŒ‡é’ˆbufä¼ å‡ºï¼›åŒ¹é…æˆåŠŸ return 1ï¼›å¦åˆ™ return 0ï¼›
 int Account_Perst_SelectByID(int id, account_t *buf) {
 
     int rtn=0;
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü\n",ACCOUNT_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     account_t data;
@@ -147,7 +147,7 @@ int Account_Perst_SelectByID(int id, account_t *buf) {
 
 }
 
-//±éÀú¶ÁACCOUNT_DATA_FILEÎÄ¼þ£¬¶¯Ì¬¹¹½¨ÓÃ»§ÕËºÅlistÁ´±í,list ÎªÁ´±íÍ·Ö¸Õë£¬·µ»Ølist³¤¶È
+//éåŽ†è¯»ACCOUNT_DATA_FILEæ–‡ä»¶ï¼ŒåŠ¨æ€æž„å»ºç”¨æˆ·è´¦å·listé“¾è¡¨,list ä¸ºé“¾è¡¨å¤´æŒ‡é’ˆï¼Œè¿”å›žlisté•¿åº¦
 int Account_Perst_SelectAll(account_list_t list) {
 
     assert(NULL!=list);
@@ -155,7 +155,7 @@ int Account_Perst_SelectAll(account_list_t list) {
     List_Free(list,account_node_t);
     FILE *fp=fopen(ACCOUNT_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("&s´ò¿ªÊ§°Ü!\n");
+        printf("&sæ‰“å¼€å¤±è´¥!\n");
         return rtn;
     }
     account_t buf;
@@ -163,7 +163,7 @@ int Account_Perst_SelectAll(account_list_t list) {
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(!(newNode=(account_list_t)malloc(sizeof(account_node_t)))){
-           printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+           printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
             return rtn;
         }
         newNode->data=buf;

@@ -1,7 +1,7 @@
 /*
  * StudioPersist.h
  *
- *  Created on: 2015Äê4ÔÂ24ÈÕ
+ *  Created on: 2015å¹´4æœˆ24æ—¥
  *      Author: Administrator
  */
 

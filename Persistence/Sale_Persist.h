@@ -8,18 +8,18 @@ int Sale_Perst_Insert(const sale_t *data);
 int Sale_Perst_DeleteByID(int saleID);
 
 
-//¸ù¾İÓÃ»§IDÔØÈë¸ø¶¨Ê±¼äÇø¼äÄÚµÄÏúÊÛ¼ÇÂ¼
+//æ ¹æ®ç”¨æˆ·IDè½½å…¥ç»™å®šæ—¶é—´åŒºé—´å†…çš„é”€å”®è®°å½•
 int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID,
 		user_date_t stDate, user_date_t endDate);
 
-//¸ù¾İÓÃ»§IDÔØÈë¸ø¶¨Ê±¼äÇø¼äÄÚµÄÏúÊÛ¼ÇÂ¼
+//æ ¹æ®ç”¨æˆ·IDè½½å…¥ç»™å®šæ—¶é—´åŒºé—´å†…çš„é”€å”®è®°å½•
 int Sale_Perst_SelectByDate(sale_list_t list,
 		user_date_t stDate, user_date_t endDate);
 
 /*
 int Sale_Infor_By_Time(char queryTime[][30], sale_list_t head);
 
-//¸ù¾İÆ±µÄid»ñµÃÆ±µÄ»ù±¾ĞÅÏ¢ Õâ¸öº¯Êı¿ÉÒÔÔÚticketÀïÃæµ÷ÓÃ£¬µ«ÊÇ¿ÉÄÜÄãÄÇ¸öÎÄ¼şÃû×Ö²»Ò»Ñù£¬ËùÒÔÖØĞÂĞ´ÁËÒ»·İ£¬ÄãÄÇ±ß¿ÉÒÔÖ±½Óµ÷ÓÃapi£¬Õâ¸öº¯ÊıÖ÷ÒªÊÇ»ñµÃÆ±Æ±µÄ¼Û¸ñ,
+//æ ¹æ®ç¥¨çš„idè·å¾—ç¥¨çš„åŸºæœ¬ä¿¡æ¯ è¿™ä¸ªå‡½æ•°å¯ä»¥åœ¨ticketé‡Œé¢è°ƒç”¨ï¼Œä½†æ˜¯å¯èƒ½ä½ é‚£ä¸ªæ–‡ä»¶åå­—ä¸ä¸€æ ·ï¼Œæ‰€ä»¥é‡æ–°å†™äº†ä¸€ä»½ï¼Œä½ é‚£è¾¹å¯ä»¥ç›´æ¥è°ƒç”¨apiï¼Œè¿™ä¸ªå‡½æ•°ä¸»è¦æ˜¯è·å¾—ç¥¨ç¥¨çš„ä»·æ ¼,
 int Select_Price_By_Playid(int id, ticket_t *buf);
 */
 #endif

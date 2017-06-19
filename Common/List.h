@@ -1,7 +1,7 @@
 /*
  * list.h
  *
- *  Created on: 2015Äê4ÔÂ22ÈÕ
+ *  Created on: 2015å¹´4æœˆ22æ—¥
  *      Author: Administrator
  */
 
@@ -20,14 +20,14 @@ typedef struct
 }Pagination_t;
 
 
-//Á´±íÎªË«ÏòÑ­»·Á´±í£¬Á´±í½áµã±ØÐë°üº¬next, prevÁ½¸öÖ¸ÕëÓò
-/*list ÎªÁ´±íÍ·Ö¸Õë*/
+//é“¾è¡¨ä¸ºåŒå‘å¾ªçŽ¯é“¾è¡¨ï¼Œé“¾è¡¨ç»“ç‚¹å¿…é¡»åŒ…å«next, prevä¸¤ä¸ªæŒ‡é’ˆåŸŸ
+/*list ä¸ºé“¾è¡¨å¤´æŒ‡é’ˆ*/
 #define List_Init(list, list_node_t) {					\
 		list=(list_node_t*)malloc(sizeof(list_node_t)); \
 		(list)->next=(list)->prev=list;					\
 	}
 
-//list ÎªÁ´±íÍ·Ö¸Õë£¬tmpPtrÎªÁ´±í½áµãÁÙÊ±Ö¸Õë±äÁ¿
+//list ä¸ºé“¾è¡¨å¤´æŒ‡é’ˆï¼ŒtmpPträ¸ºé“¾è¡¨ç»“ç‚¹ä¸´æ—¶æŒ‡é’ˆå˜é‡
 #define List_Free(list, list_node_t) {			\
 		assert(NULL!=list);						\
 		list_node_t *tmpPtr;					\
@@ -39,7 +39,7 @@ typedef struct
 		(list)->next=(list)->prev=list;			\
 	}
 
-//list ÎªÁ´±íÍ·Ö¸Õë£¬tmpPtrÎªÁ´±í½áµãÁÙÊ±Ö¸Õë±äÁ¿
+//list ä¸ºé“¾è¡¨å¤´æŒ‡é’ˆï¼ŒtmpPträ¸ºé“¾è¡¨ç»“ç‚¹ä¸´æ—¶æŒ‡é’ˆå˜é‡
 #define List_Destroy(list, list_node_t) {		\
 		assert(NULL!=list);						\
 		List_Free(list, list_node_t)			\
@@ -47,7 +47,7 @@ typedef struct
 		(list)=NULL;							\
 	}
 
-//Á´±íÍ·²å·¨£¬listÎªÍ·Ö¸Õë£¬newÎªÐÂ½Úµã
+//é“¾è¡¨å¤´æ’æ³•ï¼Œlistä¸ºå¤´æŒ‡é’ˆï¼Œnewä¸ºæ–°èŠ‚ç‚¹
 #define List_AddHead(list, newNode) {			\
 		(newNode)->next=(list)->next;		 	\
 		(list)->next->prev=newNode;			 	\
@@ -55,7 +55,7 @@ typedef struct
 		(list)->next=newNode;				 	\
 	}
 
-//Á´±íÎ²²å·¨£¬listÎªÍ·Ö¸Õë£¬newÎªÐÂ½Úµã
+//é“¾è¡¨å°¾æ’æ³•ï¼Œlistä¸ºå¤´æŒ‡é’ˆï¼Œnewä¸ºæ–°èŠ‚ç‚¹
 #define List_AddTail(list, newNode) {			\
 		(newNode)->prev=(list)->prev; 		 	\
 		(list)->prev->next=newNode;			 	\
@@ -63,7 +63,7 @@ typedef struct
 		(list)->prev=newNode;				 	\
 	}
 
-//½«ÐÂ½ÚµãnewNode¼ÓÈëµ½nodeÖ®Ç°
+//å°†æ–°èŠ‚ç‚¹newNodeåŠ å…¥åˆ°nodeä¹‹å‰
 #define List_InsertBefore(node, newNode) {		\
 		(newNode)->prev=(node)->prev; 		 	\
 		(node)->prev->next=newNode;			 	\
@@ -71,7 +71,7 @@ typedef struct
 		(newNode)->next=node;			 		\
 	}
 
-//½«ÐÂ½ÚµãnewNode¼ÓÈëµ½nodeÖ®ºó
+//å°†æ–°èŠ‚ç‚¹newNodeåŠ å…¥åˆ°nodeä¹‹åŽ
 #define List_InsertAfter(node, newNode) {		\
 		(newNode)->next=node->next;			 	\
 		(newNode)->prev=node; 				 	\
@@ -79,19 +79,19 @@ typedef struct
 		(node)->next=newNode;				 	\
 	}
 
-//ÅÐ¶ÏÁ´±íÊÇ·ñÎª¿Õ£¬listÎªÍ·Ö¸Õë
+//åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©ºï¼Œlistä¸ºå¤´æŒ‡é’ˆ
 #define List_IsEmpty(list)  (((list) != NULL)	\
 	&& ((list)->next == list)				\
 	&& ((list) == (list)->prev))
 
-//´ÓÉ¾³ýÁ´±í½áµãnode£¬
+//ä»Žåˆ é™¤é“¾è¡¨ç»“ç‚¹nodeï¼Œ
 #define List_DelNode(node) {\
 			assert(NULL!=node && node!=(node)->next && node!=(node)->prev);				\
 			(node)->prev->next=(node)->next; 	\
 			(node)->next->prev=(node)->prev;	\
 	}
 
-//´ÓÁ´±íÖÐÉ¾³ý²¢ÊÍ·Å½áµãnode
+//ä»Žé“¾è¡¨ä¸­åˆ é™¤å¹¶é‡Šæ”¾ç»“ç‚¹node
 #define List_FreeNode(node) {	\
 		List_DelNode(node);		\
 		free(node);				\

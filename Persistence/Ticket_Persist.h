@@ -5,7 +5,7 @@
 #include "../Service/EntityKey.h"
 
 
-int Ticket_Perst_Insert(ticket_list_t list);//Éú³ÉÑİ³ö¼Æ»®Ê±£¬ÅúÁ¿Éú³ÉÆ±
+int Ticket_Perst_Insert(ticket_list_t list);//ç”Ÿæˆæ¼”å‡ºè®¡åˆ’æ—¶ï¼Œæ‰¹é‡ç”Ÿæˆç¥¨
 
 int Ticket_Perst_Delete(int schedule_id);
 
@@ -17,7 +17,7 @@ int Ticket_Perst_SelectAll(ticket_list_t list) ;
 
 int Ticket_Perst_SelectBySchID(ticket_list_t list, int schedule_id);
 
-//¸ù¾İÆ±Ö÷¼üÁĞ±íÔØÈëÆ±
+//æ ¹æ®ç¥¨ä¸»é”®åˆ—è¡¨è½½å…¥ç¥¨
 int Ticket_Perst_SelectByKeyList(ticket_list_t list, entkey_list_t keyList);
 
 

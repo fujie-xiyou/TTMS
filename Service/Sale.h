@@ -4,33 +4,33 @@
 #include "Account.h"
 #include "Ticket.h"
 
-//½»Ò×ÀàĞÍ£¬ÎªÊÛÆ±»òÍËÆ±
+//äº¤æ˜“ç±»å‹ï¼Œä¸ºå”®ç¥¨æˆ–é€€ç¥¨
 typedef enum{
-	SALE_SELL=1,	//ÂòÆ±
-	SALE_RETURN=-1	//ÍËÆ±
+	SALE_SELL=1,	//ä¹°ç¥¨
+	SALE_RETURN=-1	//é€€ç¥¨
 }sale_type_t;
 
-// ÓÃÀ´Í³¼ÆµÄĞÅÏ¢ £¬ ÏÔÊ¾ÊÛÆ±Çé¿öµÄ¡£ ÈçÔÚÄ³¸öÊ±¼ä¶ÎÄÚÊÛ³ö¶àÉÙÆ± £¬ »òÕßÄ³¸öticket_id , Õâ¸öÒª²åµ½ÎÒµÄÄ£¿éÖĞÈ¥ £¬ ÔÚÂòÆ±µÄÊ±ºò½øĞĞ¼ÇÂ¼ ¡£
+// ç”¨æ¥ç»Ÿè®¡çš„ä¿¡æ¯ ï¼Œ æ˜¾ç¤ºå”®ç¥¨æƒ…å†µçš„ã€‚ å¦‚åœ¨æŸä¸ªæ—¶é—´æ®µå†…å”®å‡ºå¤šå°‘ç¥¨ ï¼Œ æˆ–è€…æŸä¸ªticket_id , è¿™ä¸ªè¦æ’åˆ°æˆ‘çš„æ¨¡å—ä¸­å» ï¼Œ åœ¨ä¹°ç¥¨çš„æ—¶å€™è¿›è¡Œè®°å½• ã€‚
 typedef struct {
-	long id;      		//ÏúÊÛ¼ÇÂ¼ID
-	int user_id;		//ÊÛÆ±Ô±ID
-	int ticket_id;		//Æ±ID
-	user_date_t date ;	//´¦ÀíÈÕÆÚ
-	user_time_t time;	//´¦ÀíÊ±¼ä
-	int value;			//Æ±¼Û
-	sale_type_t type; //½»Ò×ÀàĞÍ
+	long id;      		//é”€å”®è®°å½•ID
+	int user_id;		//å”®ç¥¨å‘˜ID
+	int ticket_id;		//ç¥¨ID
+	user_date_t date ;	//å¤„ç†æ—¥æœŸ
+	user_time_t time;	//å¤„ç†æ—¶é—´
+	int value;			//ç¥¨ä»·
+	sale_type_t type; //äº¤æ˜“ç±»å‹
 }sale_t;
 
-//Ë«ÏòÁ´±í
+//åŒå‘é“¾è¡¨
 typedef struct sale_node {
 	sale_t data;
 	struct sale_node *next, *prev;
 } sale_node_t, *sale_list_t;
 
-//¸ù¾İÆ±µÄĞÅÏ¢²åÈëµ½¶©µ¥µÄĞÅÏ¢
+//æ ¹æ®ç¥¨çš„ä¿¡æ¯æ’å…¥åˆ°è®¢å•çš„ä¿¡æ¯
 int Sale_Srv_Add(const sale_t *data);
 
-//É¾³ı¶©µ¥µÄĞÅÏ¢
+//åˆ é™¤è®¢å•çš„ä¿¡æ¯
 int Sale_Srv_DeleteByID(int saleID);
 
 int Sale_Srv_selectByTime(char querytime[][30], sale_list_t head);

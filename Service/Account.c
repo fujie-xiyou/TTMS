@@ -1,7 +1,7 @@
 /*
  * account.c
  *
- *  Created on: 2015Äê6ÔÂ12ÈÕ
+ *  Created on: 2015å¹´6æœˆ12æ—¥
  *      Author: Administrator
  */
 #include "Account.h"
@@ -13,7 +13,7 @@
 
 extern account_t gl_CurUser;
 
-//´´½¨ÏµÍ³³õÊ¼»¯ÕËºÅadmin
+//åˆ›å»ºç³»ç»Ÿåˆå§‹åŒ–è´¦å·admin
 void Account_Srv_InitSys(){
     if(Account_Perst_CheckAccFile("Account.dat")) return;
     account_t data_admin;
@@ -24,7 +24,7 @@ void Account_Srv_InitSys(){
     Account_Srv_Add(&data_admin);
 }
 
-//ÑéÖ¤µÇÂ¼ÕËºÅÊÇ·ñÒÑ´æÔÚ£¬´æÔÚ£¬±£´æµÇÂ¼ÓÃ»§ĞÅÏ¢µ½È«¾Ö±äÁ¿gl_CurUser£¬return 1£»·ñÔòreturn 0
+//éªŒè¯ç™»å½•è´¦å·æ˜¯å¦å·²å­˜åœ¨ï¼Œå­˜åœ¨ï¼Œä¿å­˜ç™»å½•ç”¨æˆ·ä¿¡æ¯åˆ°å…¨å±€å˜é‡gl_CurUserï¼Œreturn 1ï¼›å¦åˆ™return 0
 inline int Account_Srv_Verify(char usrName[], char pwd[]){
     account_t usr;
     if(!Account_Perst_SelByName(usrName,&usr)){
@@ -39,7 +39,7 @@ inline int Account_Srv_Verify(char usrName[], char pwd[]){
 }
 
 
-//ÑéÖ¤ÓÃ»§ÃûÊÇ·ñ´æÔÚ£¬±éÀúlist£¬Èô´æÔÚ£¬·µ»Ø¶ÔÓ¦½áµãÖ¸Õë£»·ñÔò£¬·µ»Ønull
+//éªŒè¯ç”¨æˆ·åæ˜¯å¦å­˜åœ¨ï¼Œéå†listï¼Œè‹¥å­˜åœ¨ï¼Œè¿”å›å¯¹åº”ç»“ç‚¹æŒ‡é’ˆï¼›å¦åˆ™ï¼Œè¿”å›null
 account_node_t * Account_Srv_FindByUsrName(account_list_t list, char usrName[]) {
     account_list_t pos;
     List_ForEach(list,pos){
@@ -50,33 +50,33 @@ account_node_t * Account_Srv_FindByUsrName(account_list_t list, char usrName[]) 
 	return NULL ;
 }
 
-//Ìí¼ÓÒ»¸öÓÃ»§ÕËºÅ£¬Í¨¹ıµ÷ÓÃAccount_Perst_Insert(data)º¯ÊıÊµÏÖ
+//æ·»åŠ ä¸€ä¸ªç”¨æˆ·è´¦å·ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_Insert(data)å‡½æ•°å®ç°
 inline int Account_Srv_Add(const account_t *data){
 
 	return Account_Perst_Insert(data);
 }
 
-//ĞŞ¸ÄÒ»¸öÓÃ»§ÕËºÅ£¬Í¨¹ıµ÷ÓÃAccount_Perst_Update(data)º¯ÊıÊµÏÖ
+//ä¿®æ”¹ä¸€ä¸ªç”¨æˆ·è´¦å·ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_Update(data)å‡½æ•°å®ç°
 inline int Account_Srv_Modify(const account_t *data){
 	return Account_Perst_Update(data);
 }
 
-//É¾³ıÒ»¸öÓÃ»§ÕËºÅ£¬Í¨¹ıµ÷ÓÃAccount_Perst_DeleteByID(usrID)º¯ÊıÊµÏÖ
+//åˆ é™¤ä¸€ä¸ªç”¨æˆ·è´¦å·ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_DeleteByID(usrID)å‡½æ•°å®ç°
 inline int Account_Srv_DeleteByID(int usrID){
 	return Account_Perst_DeleteByID(usrID);
 }
 
-//ÌáÈ¡usrID¶ÔÓ¦µÄÓÃ»§ÕËºÅĞÅÏ¢£¬Í¨¹ıµ÷ÓÃAccount_Perst_SelectByID(usrID, buf)º¯ÊıÊµÏÖ
+//æå–usrIDå¯¹åº”çš„ç”¨æˆ·è´¦å·ä¿¡æ¯ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_SelectByID(usrID, buf)å‡½æ•°å®ç°
 inline int Account_Srv_FetchByID(int usrID, account_t *buf){
 	return Account_Perst_SelectByID(usrID,buf);
 }
 
-//ÌáÈ¡usrName¶ÔÓ¦µÄÓÃ»§ÕËºÅĞÅÏ¢£¬Í¨¹ıµ÷ÓÃAccount_Perst_SelByName(usrName, buf)º¯ÊıÊµÏÖ
+//æå–usrNameå¯¹åº”çš„ç”¨æˆ·è´¦å·ä¿¡æ¯ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_SelByName(usrName, buf)å‡½æ•°å®ç°
 inline int Account_Srv_FetchByName(char usrName[], account_t *buf){
 	return Account_Perst_SelByName(usrName,buf);
 }
 
-//ÌáÈ¡ËùÓĞÓÃ»§ÕËºÅĞÅÏ¢£¬±£´æµ½listÁ´±íÖĞ£¬Í¨¹ıµ÷ÓÃAccount_Perst_SelectAll(list)º¯ÊıÊµÏÖ
+//æå–æ‰€æœ‰ç”¨æˆ·è´¦å·ä¿¡æ¯ï¼Œä¿å­˜åˆ°listé“¾è¡¨ä¸­ï¼Œé€šè¿‡è°ƒç”¨Account_Perst_SelectAll(list)å‡½æ•°å®ç°
 inline int Account_Srv_FetchAll(account_list_t list){
 	return Account_Perst_SelectAll(list);
 }

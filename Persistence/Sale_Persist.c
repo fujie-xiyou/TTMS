@@ -15,7 +15,7 @@ int Sale_Perst_Insert(const sale_t *data) {
     FILE *fp=fopen(SALE_DATA_FILE,"ab");
     int rtn=0;
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALE_DATA_FILE);
         return rtn;
     }
     rtn=fwrite(data,sizeof(sale_t),1,fp);
@@ -26,18 +26,18 @@ int Sale_Perst_Insert(const sale_t *data) {
 int Sale_Perst_DeleteByID(int saleID) {
     int rtn=0;
     if(!rename(SALE_DATA_FILE,SALE_DATA_TEMP_FILE)){
-        printf("%sÖØÃüÃûÊ§°Ü!\n",SALE_DATA_FILE);
+        printf("%sé‡å‘½åå¤±è´¥!\n",SALE_DATA_FILE);
         return rtn;
     }
 
     FILE *fp=fopen(SALE_DATA_FILE,"wb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü£¡\n",SALE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥ï¼\n",SALE_DATA_FILE);
         return rtn;
     }
     FILE *fd=fopen(SALE_DATA_TEMP_FILE,"rb");
     if(fd==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALE_DATA_TEMP_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALE_DATA_TEMP_FILE);
         return rtn;
     }
     sale_t buf;
@@ -56,7 +56,7 @@ int Sale_Perst_DeleteByID(int saleID) {
 
 }
 
-//¸ù¾İÓÃ»§IDÔØÈë¸ø¶¨Ê±¼äÇø¼äÄÚµÄÏúÊÛ¼ÇÂ¼
+//æ ¹æ®ç”¨æˆ·IDè½½å…¥ç»™å®šæ—¶é—´åŒºé—´å†…çš„é”€å”®è®°å½•
 int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
 
 	    user_date_t endDate) {
@@ -67,7 +67,7 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
     List_Free(list,sale_node_t);
     FILE *fp=fopen(SALE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALE_DATA_FILE);
         return rtn;
     }
     while(!feof(fp)){
@@ -75,7 +75,7 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
         if(buf.user_id==usrID && DateCmp(buf.date,stDate)!=-1 &&
            DateCmp(buf.date,endDate)!=1 ){
                if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-                   printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+                   printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
                    return rtn;
                }
                newNode->data=buf;
@@ -90,7 +90,7 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
 }
 
 
-//¸ù¾İ¸ø¶¨Ê±¼äÇø¼äÄÚµÄÏúÊÛ¼ÇÂ¼
+//æ ¹æ®ç»™å®šæ—¶é—´åŒºé—´å†…çš„é”€å”®è®°å½•
 int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
 		user_date_t endDate) {
 
@@ -101,14 +101,14 @@ int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
     sale_list_t newNode;
 	FILE *fp=fopen(SALE_DATA_FILE,"rb");
     if(fp==NULL){
-        printf("%s´ò¿ªÊ§°Ü!\n",SALE_DATA_FILE);
+        printf("%sæ‰“å¼€å¤±è´¥!\n",SALE_DATA_FILE);
         return rtn;
     }
     while(!feof(fp)){
         fread(&buf,sizeof(buf),1,fp);
         if(DateCmp(buf.date,stDate)!=-1 && DateCmp(buf.date,endDate)!=1 ){
             if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-                printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+                printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
                 return rtn;
             }
             newNode->data=buf;
@@ -140,7 +140,7 @@ int Sale_Infor_By_Time(char  queryTime[][30], Sale_list_t head)
 	return 0;
 }
 
-//¸ù¾İÆ±µÄid»ñµÃÆ±µÄ»ù±¾ĞÅÏ¢ 
+//æ ¹æ®ç¥¨çš„idè·å¾—ç¥¨çš„åŸºæœ¬ä¿¡æ¯ 
 int Select_Price_By_Playid(int id, ticket_t *buf)
 {
 	

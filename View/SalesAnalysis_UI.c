@@ -1,7 +1,7 @@
 /*
  * SalesAnalysis_UI.c
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 #include "SalesAnalysis_UI.h"
@@ -14,13 +14,13 @@
 #include <assert.h>
 #include <string.h>
 
-//Íâ²¿±äÁ¿gl_CurUser ÓÃÓÚ´æ´¢µÇÂ¼ÓÃ»§ĞÅÏ¢
+//å¤–éƒ¨å˜é‡gl_CurUser ç”¨äºå­˜å‚¨ç™»å½•ç”¨æˆ·ä¿¡æ¯
 extern account_t gl_CurUser;
 
-//¶¨Òå·ÖÒ³»úÖÆÖĞÒ³Ãæ´óĞ¡Îª5
+//å®šä¹‰åˆ†é¡µæœºåˆ¶ä¸­é¡µé¢å¤§å°ä¸º5
 static const int SALESANALYSIS_PAGE_SIZE = 5;
 
-//¾çÔºÏúÊÛÅÅĞĞ°ñº¯Êı,½µĞòÏÔÊ¾½ØÖ¹Ä¿Ç°¾çÔºµçÓ°Æ±·¿ÅÅĞĞ°ñ
+//å‰§é™¢é”€å”®æ’è¡Œæ¦œå‡½æ•°,é™åºæ˜¾ç¤ºæˆªæ­¢ç›®å‰å‰§é™¢ç”µå½±ç¥¨æˆ¿æ’è¡Œæ¦œ
 void SalesAnalysis_UI_BoxOffice() {
 	salesanalysis_list_t head,pos;
 	Pagination_t paging;
@@ -33,21 +33,21 @@ void SalesAnalysis_UI_BoxOffice() {
 	Paging_Locate_FirstPage(head,paging);
 	do{
 		printf("\n==================================================================\n");
-		printf("********************** Æ±·¿ÅÅĞĞ°ñ **********************\n");
+		printf("********************** ç¥¨æˆ¿æ’è¡Œæ¦œ **********************\n");
 		printf("--------------------------------------------------------\n");
-		printf("%2s %10s %4s %4s %4s %4s","±àºÅ","Ãû³Æ","ÇøÓò","ÏúÁ¿","Æ±¼Û","Æ±·¿");
+		printf("%2s %10s %4s %4s %4s %4s","ç¼–å·","åç§°","åŒºåŸŸ","é”€é‡","ç¥¨ä»·","ç¥¨æˆ¿");
 		for(i=0,pos=(salesanalysis_list_t)paging.curPos;pos!=head && i<paging.pageSize;i++){
 			printf("%2d %10s %4s %4ld %4d %4ld",pos->data.play_id,pos->data.name,pos->data.area,pos->data.totaltickets
 					,pos->data.price,pos->data.sales);
 			pos=pos->next;
 		}
-		printf("------- È«²¿¼ÇÂ¼:%2d ----------------------- Ò³Êı %2d/%2d ----\n",
+		printf("------- å…¨éƒ¨è®°å½•:%2d ----------------------- é¡µæ•° %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf("******************************************************************\n");
-		printf("[P]ÉÏÒ»Ò³|[N]ÏÂÒ»Ò³|[R]·µ»Ø");
+		printf("[P]ä¸Šä¸€é¡µ|[N]ä¸‹ä¸€é¡µ|[R]è¿”å›");
 		printf("\n==================================================================\n");
-		printf("¹¦ÄÜÑ¡Ôñ:");//Your Choice
+		printf("åŠŸèƒ½é€‰æ‹©:");//Your Choice
 		fflush(stdin);
 		scanf("%c", &choice);
 		fflush(stdin);
@@ -69,26 +69,26 @@ void SalesAnalysis_UI_BoxOffice() {
 	List_Destroy(head,salesanalysis_node_t);
 }
 
-//ÏÔÊ¾ÊÛÆ±Ô±ÔÚ¸ø¶¨ÈÕÆÚÇø¼äµÄÊÛÆ±Çé¿ö
+//æ˜¾ç¤ºå”®ç¥¨å‘˜åœ¨ç»™å®šæ—¥æœŸåŒºé—´çš„å”®ç¥¨æƒ…å†µ
 void SalesAanalysis_UI_StatSale(int usrID, user_date_t stDate, user_date_t endDate){
 	account_t user;
 	int amount=0;
 	amount=Salesanalysis_Srv_CompSaleVal(usrID,stDate,endDate);
 	Account_Srv_FetchByID(usrID,&user);
-	printf("ÊÛÆ±Ô±:%s ÔÚ %4d/%2d/%2d µ½ %4d/%2d/%2d ¼äÏúÊÛ¶îÎª%d\n",user.username,stDate.year
+	printf("å”®ç¥¨å‘˜:%s åœ¨ %4d/%2d/%2d åˆ° %4d/%2d/%2d é—´é”€å”®é¢ä¸º%d\n",user.username,stDate.year
 			,stDate.month,stDate.day,endDate.year,endDate.month,endDate.day,amount);
 	printf("-------------------------------------------------------------\n");
 }
 
-//ÏúÊÛ·ÖÎöÈë¿Úº¯Êı£¬ÏÔÊ¾²Ëµ¥£¬²Ëµ¥°üº¬"½µĞòÏÔÊ¾½ØÖ¹Ä¿Ç°¾çÔºµçÓ°Æ±·¿ÅÅĞĞ°ñ"£¬¡°ÏÔÊ¾»ò²éÑ¯µ±ÈÕÊÛÆ±Ô±ÊÛÆ±Çé¿ö¡±£¬
-//¡°²éÑ¯¸ø¶¨ÈÕÆÚÇø¼äÄ³ÊÛÆ±Ô±ÊÛÆ±Çé¿ö¡±
+//é”€å”®åˆ†æå…¥å£å‡½æ•°ï¼Œæ˜¾ç¤ºèœå•ï¼Œèœå•åŒ…å«"é™åºæ˜¾ç¤ºæˆªæ­¢ç›®å‰å‰§é™¢ç”µå½±ç¥¨æˆ¿æ’è¡Œæ¦œ"ï¼Œâ€œæ˜¾ç¤ºæˆ–æŸ¥è¯¢å½“æ—¥å”®ç¥¨å‘˜å”®ç¥¨æƒ…å†µâ€ï¼Œ
+//â€œæŸ¥è¯¢ç»™å®šæ—¥æœŸåŒºé—´æŸå”®ç¥¨å‘˜å”®ç¥¨æƒ…å†µâ€
 void SalesAanalysis_UI_MgtEntry() {
 	char choice;
 	user_date_t stDate,endDate;
 	account_t user;
 	do{
-	printf("[B]ä¯ÀÀÅÅĞĞ°ñ|[D]²éÑ¯ÊÛÆ±Ô±µÄÏúÊÛÇé¿ö|[S]ÅĞ¶Ïµ±Ç°ÓÃ»§ÊÇ·ñ²»ÊÇ¾­Àí|[R]½áÊø\n");
-	printf("ÊäÈëÄãµÄÑ¡Ôñ:");
+	printf("[B]æµè§ˆæ’è¡Œæ¦œ|[D]æŸ¥è¯¢å”®ç¥¨å‘˜çš„é”€å”®æƒ…å†µ|[S]åˆ¤æ–­å½“å‰ç”¨æˆ·æ˜¯å¦ä¸æ˜¯ç»ç†|[R]ç»“æŸ\n");
+	printf("è¾“å…¥ä½ çš„é€‰æ‹©:");
 	scanf("%c",&choice);
 	switch(choice)
 	{
@@ -97,13 +97,13 @@ void SalesAanalysis_UI_MgtEntry() {
 			if(gl_CurUser.type==USR_MANG){
 				SalesAnalysis_UI_BoxOffice();
 			}else{
-				printf("Äú²»ÊÇ¾­Àí,ÎŞÈ¨²é¿´´Ë½çÃæ\n");
+				printf("æ‚¨ä¸æ˜¯ç»ç†,æ— æƒæŸ¥çœ‹æ­¤ç•Œé¢\n");
 			}
 		    break;
 		case 'd':
 		case 'D':
 			printf("\n==============================================================\n");
-			printf("*******************²éÑ¯ÊÛÆ±Ô±µ±ÌìÊ±¼äÏúÁ¿********************\n");
+			printf("*******************æŸ¥è¯¢å”®ç¥¨å‘˜å½“å¤©æ—¶é—´é”€é‡********************\n");
 			stDate=endDate=DateNow();
 			if(gl_CurUser.type==USR_CLERK){
 				SalesAanalysis_UI_StatSale(gl_CurUser.id,stDate,endDate);
@@ -117,21 +117,21 @@ void SalesAanalysis_UI_MgtEntry() {
 		case 's':
 		case 'S':
 			if(gl_CurUser.type!=USR_MANG){
-				printf("Äú²»ÊÇ¾­Àí,ÎŞÈ¨²é¿´´ËÒ³Ãæ!\n");
+				printf("æ‚¨ä¸æ˜¯ç»ç†,æ— æƒæŸ¥çœ‹æ­¤é¡µé¢!\n");
 				break;
 			}
 			printf("\n==============================================================\n");
-			printf("*******************²éÑ¯ÊÛÆ±Ô±ÔÚ¸ø¶¨Ê±¼äÏúÁ¿********************\n");
-			printf("ÇëÊäÈëÊÛÆ±Ô±Ãû×Ö:");
+			printf("*******************æŸ¥è¯¢å”®ç¥¨å‘˜åœ¨ç»™å®šæ—¶é—´é”€é‡********************\n");
+			printf("è¯·è¾“å…¥å”®ç¥¨å‘˜åå­—:");
 			fgets(user.username,30,stdin);
 			if(Account_Srv_FetchByName(user.username,&user)){
-				printf("ÇëÊäÈë¿ªÊ¼Ê±¼ä:(yyyy/mm/dd)\n");
+				printf("è¯·è¾“å…¥å¼€å§‹æ—¶é—´:(yyyy/mm/dd)\n");
 				scanf("%d/%d/%d",&stDate.year,&stDate.month,&stDate.day);
-				printf("ÇëÊäÈë½áÊøÊ±¼ä:(yyyy/mm/dd)\n");
+				printf("è¯·è¾“å…¥ç»“æŸæ—¶é—´:(yyyy/mm/dd)\n");
 				scanf("%d/%d/%d",&endDate.year,&endDate.month,&endDate.day);
 				SalesAanalysis_UI_StatSale(user.id,stDate,endDate);
 			}else{
-				printf("ÊäÈëµÄÓÃ»§Ãû²»´æÔÚ");
+				printf("è¾“å…¥çš„ç”¨æˆ·åä¸å­˜åœ¨");
 			}
 			break;
 		}

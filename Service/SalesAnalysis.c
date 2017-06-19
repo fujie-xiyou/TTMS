@@ -1,7 +1,7 @@
 /*
  * salesanalysis.c
  *
- *  Created on: 2015Äê6ÔÂ12ÈÕ
+ *  Created on: 2015å¹´6æœˆ12æ—¥
  *      Author: Administrator
  */
 #include <string.h>
@@ -15,7 +15,7 @@
 #include "Schedule.h"
 #include "../Common/List.h"
 
-//¼ÆËãÔ±¹¤usrIDÔÚ¸ø¶¨Ê±¼äÇø¼äµÄÏúÊÛ¶î£¬·µ»ØÏúÊÛ¶î
+//è®¡ç®—å‘˜å·¥usrIDåœ¨ç»™å®šæ—¶é—´åŒºé—´çš„é”€å”®é¢ï¼Œè¿”å›é”€å”®é¢
 inline int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate){
     int amount=0;
     sale_list_t saleList;
@@ -28,7 +28,7 @@ inline int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_dat
 	return amount;
 }
 
-//½áºÏ¾çÄ¿Play.dat,Í³¼ÆÏúÊÛÊı¾İ£¬¹¹½¨ÏúÊÛ·ÖÎösalesanalysis_list_t listÁ´±í£¬·µ»ØlistÁ´±í³¤¶È
+//ç»“åˆå‰§ç›®Play.dat,ç»Ÿè®¡é”€å”®æ•°æ®ï¼Œæ„å»ºé”€å”®åˆ†æsalesanalysis_list_t listé“¾è¡¨ï¼Œè¿”å›listé“¾è¡¨é•¿åº¦
 int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list) {
     assert(NULL!=list);
     play_list_t playlist;
@@ -42,7 +42,7 @@ int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list) {
     Play_Srv_FetchAll(playlist);
     List_ForEach(playlist,pos){
         if(!(newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t)))){
-            printf("ÄÚ´æÉêÇëÊ§°Ü!\n");
+            printf("å†…å­˜ç”³è¯·å¤±è´¥!\n");
             return rtn;
         }
         newNode->data.play_id=pos->data.id;
@@ -62,7 +62,7 @@ int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list) {
 	return rtn;
 }
 
-//¶Ô¾çÔºµçÓ°Æ±·¿ÅÅĞò
+//å¯¹å‰§é™¢ç”µå½±ç¥¨æˆ¿æ’åº
 void SalesAnalysis_Srv_SortBySale(salesanalysis_list_t list){
     if(List_IsEmpty(list))
         return;

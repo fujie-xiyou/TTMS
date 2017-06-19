@@ -1,7 +1,7 @@
 /*
  *  Seat_UI.h
  *
- *  Created on: 2015Äê5ÔÂ23ÈÕ
+ *  Created on: 2015å¹´5æœˆ23æ—¥
  *  Author: lc
  */
 
@@ -13,10 +13,10 @@
 void Seat_UI_MgtEntry(int roomID);
 
 
-//¸ù¾İ×´Ì¬·µ»Ø¶ÔÓ¦±íÊ¾×´Ì¬·ûºÅ
+//æ ¹æ®çŠ¶æ€è¿”å›å¯¹åº”è¡¨ç¤ºçŠ¶æ€ç¬¦å·
 char Seat_UI_Status2Char(seat_status_t status);
 
-//¸ù¾İ×´Ì¬·ûºÅ·µ»Ø×ÀÎ»×´Ì¬
+//æ ¹æ®çŠ¶æ€ç¬¦å·è¿”å›æ¡Œä½çŠ¶æ€
 seat_status_t Seat_UI_Char2Status(char statusChar);
 
 

@@ -13,13 +13,13 @@ int QueryTicket(int id);
 
 void ListTickets(void);
 
-//×´Ì¬×ª»»Îª×Ö·û
+//çŠ¶æ€è½¬æ¢ä¸ºå­—ç¬¦
 char Ticket_UI_Status2Char(ticket_status_t status);
 
-//¸ù¾İÆ±ID´òÓ¡Æ±
+//æ ¹æ®ç¥¨IDæ‰“å°ç¥¨
 void Ticket_UI_Print(int ID);
 
-//¸ù¾İ¼Æ»®IDÏÔÊ¾ËùÓĞÆ±
+//æ ¹æ®è®¡åˆ’IDæ˜¾ç¤ºæ‰€æœ‰ç¥¨
 void Ticket_UI_ListBySch(const schedule_t *sch,	ticket_list_t tickList, seat_list_t seatList);
 
 #endif /* TICKET_UI_H_ */

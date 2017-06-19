@@ -1,7 +1,7 @@
 /*
  *  Seat.c
  *
- *  Created on: 2015Äê6ÔÂ12ÈÕ
+ *  Created on: 2015å¹´6æœˆ12æ—¥
  *  Author: lc
  */
 #include <stdlib.h>
@@ -34,25 +34,25 @@ inline int Seat_Srv_DeleteAllByRoomID(int roomID){
 	return Seat_Perst_DeleteAllByRoomID(roomID);
 }
 
-//¸ù¾İÑİ³öÌüIDÔØÈë×ùÎ»
+//æ ¹æ®æ¼”å‡ºå…IDè½½å…¥åº§ä½
 int Seat_Srv_FetchByRoomID(seat_list_t list, int roomID){
 
-	//¸ù¾İÑİ³öÌüIDÔØÈë×ùÎ»
+	//æ ¹æ®æ¼”å‡ºå…IDè½½å…¥åº§ä½
 	int SeatCount=Seat_Perst_SelectByRoomID(list, roomID);
 
-	//¶Ô×ùÎ»Á´±íÅÅĞò
+	//å¯¹åº§ä½é“¾è¡¨æ’åº
 	Seat_Srv_SortSeatList(list);
 	return SeatCount;
 }
 
-/*¸ù¾İ·ÅÓ³ÌüIDÌáÈ¡ÓĞĞ§µÄ×ùÎ»*/
+/*æ ¹æ®æ”¾æ˜ å…IDæå–æœ‰æ•ˆçš„åº§ä½*/
 int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID)
 {
-	//¸ù¾İÑİ³öÌüIDÔØÈë×ùÎ»
+	//æ ¹æ®æ¼”å‡ºå…IDè½½å…¥åº§ä½
 	int SeatCount=Seat_Perst_SelectByRoomID(list, roomID);
 
 	seat_node_t *p;
-	//È¥³ıÎŞĞ§×ùÎ»
+	//å»é™¤æ— æ•ˆåº§ä½
 	List_ForEach(list, p){
 		if(p->data.status!=SEAT_GOOD){
 			List_FreeNode(p);
@@ -60,23 +60,23 @@ int Seat_Srv_FetchValidByRoomID(seat_list_t list, int roomID)
 		}
 	}
 
-	//¶Ô×ùÎ»Á´±íÅÅĞò
+	//å¯¹åº§ä½é“¾è¡¨æ’åº
 	Seat_Srv_SortSeatList(list);
 	return SeatCount;
 }
 
 
-//¸ù¾İĞĞ¡¢ÁĞÊı³õÊ¼»¯Ñİ³öÌüµÄ×ùÎ»
+//æ ¹æ®è¡Œã€åˆ—æ•°åˆå§‹åŒ–æ¼”å‡ºå…çš„åº§ä½
 int Seat_Srv_RoomInit(seat_list_t list, int roomID, int rowsCount,
 		int colsCount) {
 	int i, j;
 
 	seat_node_t *p;
 
-	//ÅúÁ¿»ñÈ¡Ö÷¼ü
+	//æ‰¹é‡è·å–ä¸»é”®
 	long seatID=EntKey_Srv_CompNewKeys("Seat", rowsCount*colsCount);
 
-	//ÏÈ°´ĞĞÁĞÊıÉú³ÉÄ¬ÈÏ×ùÎ»£¬ĞÎ³ÉÁ´±í
+	//å…ˆæŒ‰è¡Œåˆ—æ•°ç”Ÿæˆé»˜è®¤åº§ä½ï¼Œå½¢æˆé“¾è¡¨
 	for (i = 1; i <= rowsCount; i++){
 		for (j = 1; j <= colsCount; j++) {
 			p = (seat_node_t *) malloc(sizeof(seat_node_t));
@@ -93,7 +93,7 @@ int Seat_Srv_RoomInit(seat_list_t list, int roomID, int rowsCount,
 	return Seat_Perst_InsertBatch(list);
 }
 
-//¶Ô×ùÎ»Á´±ílist½øĞĞ°´×ùÎ»ĞĞºÅºÍÁĞºÅÅÅĞò
+//å¯¹åº§ä½é“¾è¡¨listè¿›è¡ŒæŒ‰åº§ä½è¡Œå·å’Œåˆ—å·æ’åº
 void Seat_Srv_SortSeatList(seat_list_t list) {
 	seat_node_t *p, *listLeft;
 	assert(list!=NULL);
@@ -101,26 +101,26 @@ void Seat_Srv_SortSeatList(seat_list_t list) {
 	if(List_IsEmpty(list))
 		return ;
 
-	//½«nextÖ¸Õë¹¹³ÉµÄÑ­»·Á´±í´Ó×îºóÒ»¸ö½áµã¶Ï¿ª
+	//å°†nextæŒ‡é’ˆæ„æˆçš„å¾ªç¯é“¾è¡¨ä»æœ€åä¸€ä¸ªç»“ç‚¹æ–­å¼€
 	list->prev->next = NULL;
 
-	//listLeftÖ¸ÏòµÚÒ»¸öÊı¾İ½Úµã
+	//listLeftæŒ‡å‘ç¬¬ä¸€ä¸ªæ•°æ®èŠ‚ç‚¹
 	listLeft = list->next;
 
-	//½«listÁ´±íÖÃÎª¿Õ
+	//å°†listé“¾è¡¨ç½®ä¸ºç©º
 	list->next = list->prev = list;
 
 	while (listLeft != NULL ) {
-		//È¡³öµÚÒ»¸ö½áµã
+		//å–å‡ºç¬¬ä¸€ä¸ªç»“ç‚¹
 		p = listLeft;
 		listLeft = listLeft->next;
 
-		//½«½áµãp¼ÓÈëµ½ÒÑÅÅĞòÁ´±ílistÖĞ
+		//å°†ç»“ç‚¹påŠ å…¥åˆ°å·²æ’åºé“¾è¡¨listä¸­
 		Seat_Srv_AddToSoftedList(list, p);
 	}
 }
 
-//½«½áµãnode¼ÓÈëµ½ÒÑÅÅĞòÁ´±ílistÖĞ
+//å°†ç»“ç‚¹nodeåŠ å…¥åˆ°å·²æ’åºé“¾è¡¨listä¸­
 void Seat_Srv_AddToSoftedList(seat_list_t list, seat_node_t *node) {
 
 	seat_node_t *p;
@@ -130,7 +130,7 @@ void Seat_Srv_AddToSoftedList(seat_list_t list, seat_node_t *node) {
 	if(List_IsEmpty(list))	{
 		List_AddTail(list, node);
 	}else{
-		//Ñ°ÕÒ²åÈëÎ»ÖÃ
+		//å¯»æ‰¾æ’å…¥ä½ç½®
 		p=list->next;
 
 		while(p!=list && (p->data.row<node->data.row ||
@@ -138,7 +138,7 @@ void Seat_Srv_AddToSoftedList(seat_list_t list, seat_node_t *node) {
 			p=p->next;
 		}
 
-		//½«½áµãnode¼ÓÈëµ½pÖ®Ç°
+		//å°†ç»“ç‚¹nodeåŠ å…¥åˆ°pä¹‹å‰
 		List_InsertBefore(p, node);
 	}
 }

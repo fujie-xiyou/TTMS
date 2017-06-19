@@ -13,10 +13,10 @@ void 	DisplayStudioSeatInfoBy_Schedule (int 	**seat_info , int row , int col) ;
 void 	DisplayTicketMenu(account_t *acco_p) ;
 void 	ReturnBackTicketMenu ()  ;
 
-//¸ù¾İ¾çÄ¿IDÏÔÊ¾Ñİ³ö¼Æ»®
+//æ ¹æ®å‰§ç›®IDæ˜¾ç¤ºæ¼”å‡ºè®¡åˆ’
 void Sale_UI_ShowScheduler(int playID);
 
-//¸ù¾İ¼Æ»®ID£¬ÏÔÊ¾Ñİ³öÆ±
+//æ ¹æ®è®¡åˆ’IDï¼Œæ˜¾ç¤ºæ¼”å‡ºç¥¨
 void Sale_UI_ShowTicket(int schID);
 
 
@@ -24,7 +24,7 @@ int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList);
 
 void Sale_UI_MgtEntry();
 
-//ÍËÆ±
+//é€€ç¥¨
 void Sale_UI_ReturnTicket();
 
 #endif

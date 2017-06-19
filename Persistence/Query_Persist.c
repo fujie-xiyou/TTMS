@@ -83,7 +83,7 @@ void Query_Studio_By_Schedule(int id, studio_t *studio)
 		}
 	fclose(fp);
 }
-//ÒÑ¾­ÊÛ³öµÄÆ±
+//å·²ç»å”®å‡ºçš„ç¥¨
 int Sold_Ticket_Count(int id)
 {
 	int count = 0;
@@ -111,7 +111,7 @@ int Seat_Number_Count(int studio_id)
 	int recCount = 0;
 
 	FILE *fp = fopen(SEAT_DATA_FILE, "rb");
-	if (NULL == fp) { //ÎÄ¼ş²»´æÔÚ
+	if (NULL == fp) { //æ–‡ä»¶ä¸å­˜åœ¨
 		return 0;
 	}
 

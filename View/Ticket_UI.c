@@ -9,15 +9,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//¸ù¾İ×´Ì¬·µ»Ø¶ÔÓ¦±íÊ¾×´Ì¬·ûºÅ
+//æ ¹æ®çŠ¶æ€è¿”å›å¯¹åº”è¡¨ç¤ºçŠ¶æ€ç¬¦å·
 inline char Ticket_UI_Status2Char(ticket_status_t status) {
 
 	char statusChar;
 	switch (status) {
-	case TICKET_AVL:		//ÓĞ×ùÎ»
+	case TICKET_AVL:		//æœ‰åº§ä½
 		statusChar = '#';
 		break;
-	case TICKET_SOLD:	//Ëğ»µµÄ×ùÎ»
+	case TICKET_SOLD:	//æŸåçš„åº§ä½
 		statusChar = '@';
 		break;
 	case TICKET_RESV:
@@ -29,37 +29,37 @@ inline char Ticket_UI_Status2Char(ticket_status_t status) {
 }
 
 void Ticket_UI_Print(int ID){
-	//¸ù¾İIDÔØÈëÆ±
+	//æ ¹æ®IDè½½å…¥ç¥¨
 	ticket_t ticket;
 	if(!Ticket_Srv_FetchByID(ID, &ticket)){
-		printf("±àºÅÎª:%dµÄÆ±²»´æÔÚ! \n °´ÏÂ[Enter]·µ»Ø!\n ", ID);
+		printf("ç¼–å·ä¸º:%dçš„ç¥¨ä¸å­˜åœ¨! \n æŒ‰ä¸‹[Enter]è¿”å›!\n ", ID);
 		return ;
 	}
 
-	//ÔØÈëÑİ¼¼¼Æ»®¼°¾çÄ¿
+	//è½½å…¥æ¼”æŠ€è®¡åˆ’åŠå‰§ç›®
 	schedule_t sch;
 	play_t play;
 	Schedule_Srv_FetchByID(ticket.schedule_id, &sch);
 	Play_Srv_FetchByID(sch.play_id, &play);
 
-	//ÔØÈë×ùÎ»¼°Ñİ³öÌü
+	//è½½å…¥åº§ä½åŠæ¼”å‡ºå…
 	seat_t seat;
 	studio_t room;
 	Seat_Srv_FetchByID(ticket.seat_id, &seat);
 	Studio_Srv_FetchByID(seat.roomID, &room);
 
-	//ÏÔÊ¾Æ±ĞÅÏ¢
+	//æ˜¾ç¤ºç¥¨ä¿¡æ¯
 	printf("\n--------------------------------------------------\n");
-	printf("|%9s%-10d%15s%-5d%5s%-4d|\n", "±àºÅ:", ticket.id,
-			"ĞĞ:", seat.row, "ÁĞ:", seat.column );
-	printf("|%9s%-39s|\n", "¾çÄ¿Ãû³Æ:", play.name);
-	printf("|%9s%-11d %16d-%2d-%2d %2d:%2d|\n", "Æ±¼Û:", play.price,
+	printf("|%9s%-10d%15s%-5d%5s%-4d|\n", "ç¼–å·:", ticket.id,
+			"è¡Œ:", seat.row, "åˆ—:", seat.column );
+	printf("|%9s%-39s|\n", "å‰§ç›®åç§°:", play.name);
+	printf("|%9s%-11d %16d-%2d-%2d %2d:%2d|\n", "ç¥¨ä»·:", play.price,
 				sch.date.year, sch.date.month, sch.date.day,
 				sch.time.hour, sch.time.minute);
 	printf("--------------------------------------------------\n");
 }
 
-//¸ù¾İ¼Æ»®IDÏÔÊ¾ËùÓĞÆ±
+//æ ¹æ®è®¡åˆ’IDæ˜¾ç¤ºæ‰€æœ‰ç¥¨
 void Ticket_UI_ListBySch(const schedule_t *sch,	ticket_list_t tickList, seat_list_t seatList) {
 	assert(NULL!=sch && NULL!=tickList && NULL!=seatList);
 	int i, j;
@@ -69,26 +69,26 @@ void Ticket_UI_ListBySch(const schedule_t *sch,	ticket_list_t tickList, seat_lis
 	ticket_node_t *pTicket;
 	seat_node_t *pSeat;
 
-	if (!Studio_Srv_FetchByID(sch->studio_id, &studioRec)) {  //»ñµÃ¶ÔÓ¦id·ÅÓ³ÌüµÄĞÅÏ¢
-		printf("´Ë·ÅÓ³Ìü²»´æÔÚ!\n°´ÏÂ[Enter]·µ»Ø!\n");
+	if (!Studio_Srv_FetchByID(sch->studio_id, &studioRec)) {  //è·å¾—å¯¹åº”idæ”¾æ˜ å…çš„ä¿¡æ¯
+		printf("æ­¤æ”¾æ˜ å…ä¸å­˜åœ¨!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 		getchar();
 		return;
 	}
 
-	if (!Play_Srv_FetchByID(sch->play_id, &playRec)) {  //»ñµÃ¶ÔÓ¦id¾çÄ¿µÄĞÅÏ¢
-		printf("´Ë¾çÄ¿²»´æÔÚ!\n°´ÏÂ[Enter]·µ»Ø!\n");
+	if (!Play_Srv_FetchByID(sch->play_id, &playRec)) {  //è·å¾—å¯¹åº”idå‰§ç›®çš„ä¿¡æ¯
+		printf("æ­¤å‰§ç›®ä¸å­˜åœ¨!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 		getchar();
 		return;
 	}
 
-	printf( "********************** %s µÄÆ±ÁĞ±í***********************\n", playRec.name);
+	printf( "********************** %s çš„ç¥¨åˆ—è¡¨***********************\n", playRec.name);
 	printf("%5c", ' ');
 	for (i = 1; i <= studioRec.colsCount; i++) {
 		printf("%3d", i);
 	}
 
 	printf("\n------------------------------------------------------------------\n");
-	//ÏÔÊ¾Êı¾İ
+	//æ˜¾ç¤ºæ•°æ®
 	for (i = 1; i <= studioRec.rowsCount; i++) {
 		j = 1;
 		printf("%2d:%c", i, '|');
@@ -123,22 +123,22 @@ void ListTickets(void){
 	paging.offset = 0;
 	paging.pageSize = TICKET_PAGE_SIZE;
 
-	printf("ÇëÊäÈëÑİ³ö¼Æ»®±àºÅÒÔÏÔÊ¾Æ±ÁĞ±í!\n");
+	printf("è¯·è¾“å…¥æ¼”å‡ºè®¡åˆ’ç¼–å·ä»¥æ˜¾ç¤ºç¥¨åˆ—è¡¨!\n");
 	scanf("%d",&schedule_id);
 
-	//ÔØÈëÊı¾İ
+	//è½½å…¥æ•°æ®
 	paging.totalRecords = Ticket_Srv_FetchBySchID(head,schedule_id);
 	Paging_Locate_FirstPage(head, paging);
-	//ĞèÒªÔö¼Ó²éÕÒ×ùÎ»ĞÅÏ¢
+	//éœ€è¦å¢åŠ æŸ¥æ‰¾åº§ä½ä¿¡æ¯
 
 	Schedule_Srv_FetchByID(schedule_id,&schedule_rec);
 	Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
 	do {
 		printf("\n=======================================================\n");
-		printf("****************  Æ±ÁĞ±í  ****************\n");
-		printf("±àºÅ\t\t¾çÃû\t\t×ùÎ»ĞĞ\t×ùÎ»ÁĞ\t ÈÕÆÚ\tÊ±¼ä\t\t¼Û¸ñ\t×´Ì¬\n");
+		printf("****************  ç¥¨åˆ—è¡¨  ****************\n");
+		printf("ç¼–å·\t\tå‰§å\t\tåº§ä½è¡Œ\tåº§ä½åˆ—\t æ—¥æœŸ\tæ—¶é—´\t\tä»·æ ¼\tçŠ¶æ€\n");
 		printf("-------------------------------------------------------\n");
-		//ÏÔÊ¾Êı¾İ
+		//æ˜¾ç¤ºæ•°æ®
 		for (i = 0, pos = (ticket_node_t *) (paging.curPos);
 				pos != head && i < paging.pageSize; i++) {
 			printf("%d\t%s\t%d-%d-%d\t%d:%d\t%d\t%s\n"/*t%d\t%d*/, pos->data.id, play_rec.name,
@@ -146,22 +146,22 @@ void ListTickets(void){
 					schedule_rec.date.year,schedule_rec.date.month,
 					schedule_rec.date.day,schedule_rec.time.hour,
 					schedule_rec.time.minute,pos->data.price,
-					pos->data.status==0?"´ıÊÛ":"ÒÑÊÛ");
+					pos->data.status==0?"å¾…å”®":"å·²å”®");
 			pos = pos->next;
 		}
 		printf(
-				"== ×Ü¼Æ¼ÇÂ¼:%dÌõ =========================== Ò³ %d/%d ==\n",
+				"== æ€»è®¡è®°å½•:%dæ¡ =========================== é¡µ %d/%d ==\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
-		printf("[P]ÉÏÒ»Ò³|[N]ÏÂÒ»Ò³ | [U]ĞŞ¸Ä | [R]·µ»Ø ");
+		printf("[P]ä¸Šä¸€é¡µ|[N]ä¸‹ä¸€é¡µ | [U]ä¿®æ”¹ | [R]è¿”å› ");
 		fflush(stdin);
 		scanf("%c", &choice);
 		switch (choice) {
 		case 'u':
 		case 'U':
-			printf("ÊäÈëÆ±±àºÅ:");
+			printf("è¾“å…¥ç¥¨ç¼–å·:");
 			scanf("%d", &id);
-			if (UpdateTicket(id)) {	//ÖØĞÂÔØÈëÊı¾İ
+			if (UpdateTicket(id)) {	//é‡æ–°è½½å…¥æ•°æ®
 				paging.totalRecords = Ticket_Srv_FetchBySchID(head,schedule_rec.id);
 				List_Paging(head, paging, ticket_node_t);
 			}
@@ -180,7 +180,7 @@ void ListTickets(void){
 			break;
 		}
 	} while (choice != 'r' && choice != 'R');
-	//ÊÍ·ÅÁ´±í¿Õ¼ä
+	//é‡Šæ”¾é“¾è¡¨ç©ºé—´
 	List_Destroy(head, ticket_node_t);
 	}
 
@@ -194,35 +194,35 @@ int UpdateTicket(int id){
 
 	/*Load record*/
 	if (!Ticket_Srv_FetchByID(id, &rec)) {
-		printf("´ËÆ±²»´æÔÚ!\n°´ÏÂ[Enter]·µ»Ø!\n");
+		printf("æ­¤ç¥¨ä¸å­˜åœ¨!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 		getchar();
 		return 0;
 	}
 	Schedule_Srv_FetchByID(rec.schedule_id,&schedule_rec);
 	Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
-	//ĞèÒªÔö¼Ó²éÕÒ×ùÎ»ĞÅÏ¢
+	//éœ€è¦å¢åŠ æŸ¥æ‰¾åº§ä½ä¿¡æ¯
 
 	printf("\n=======================================================\n");
-	printf("****************  ĞŞ¸ÄÆ±ĞÅÏ¢  ****************\n");
+	printf("****************  ä¿®æ”¹ç¥¨ä¿¡æ¯  ****************\n");
 	printf("-------------------------------------------------------\n");
-	printf("Æ±±àºÅ:%d\n", rec.id);
-	printf("¾çÃû[%s]:", play_rec.name);
-	//ĞèÒªÊä³ö×ùÎ»µÄĞĞÁĞºÅ
-	printf("Ñİ³öÈÕÆÚ(yyyy-mm-dd)[%d-%d-%d]:",schedule_rec.date.year,
+	printf("ç¥¨ç¼–å·:%d\n", rec.id);
+	printf("å‰§å[%s]:", play_rec.name);
+	//éœ€è¦è¾“å‡ºåº§ä½çš„è¡Œåˆ—å·
+	printf("æ¼”å‡ºæ—¥æœŸ(yyyy-mm-dd)[%d-%d-%d]:",schedule_rec.date.year,
 			schedule_rec.date.month,schedule_rec.date.day);
-	printf("Ñİ³öÊ±¼ä[%d:%d]:",schedule_rec.time.hour,schedule_rec.time.minute);
-	printf("Æ±¼Û[%d]:",rec.price);
+	printf("æ¼”å‡ºæ—¶é—´[%d:%d]:",schedule_rec.time.hour,schedule_rec.time.minute);
+	printf("ç¥¨ä»·[%d]:",rec.price);
 	scanf("%d",&(rec.price));
-	printf("Æ±×´Ì¬[%s](0.to sell,1.sold):",rec.status==1?"´ıÊÛ":"ÒÑÊÛ");
+	printf("ç¥¨çŠ¶æ€[%s](0.to sell,1.sold):",rec.status==1?"å¾…å”®":"å·²å”®");
 	scanf("%d",&rec.status);
 	printf("-------------------------------------------------------\n");
 
 	if (Ticket_Srv_Modify(&rec)) {
 		rtn = 1;
 		printf(
-				"´ËÆ±ĞÅÏ¢ĞŞ¸Ä³É¹¦!\n°´ÏÂ[Enter]·µ»Ø!\n");
+				"æ­¤ç¥¨ä¿¡æ¯ä¿®æ”¹æˆåŠŸ!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 	} else
-		printf("´ËÆ±ĞÅÏ¢ĞŞ¸ÄÊ§°Ü!\n°´ÏÂ[Enter]·µ»Ø!\n");
+		printf("æ­¤ç¥¨ä¿¡æ¯ä¿®æ”¹å¤±è´¥!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 
 	getchar();
 	return rtn;
@@ -237,12 +237,12 @@ int QueryTicket(int id){
 	ticket_t rec;
 	if (Ticket_Srv_FetchByID(id,&rec)) {
 		printf("\n=======================================================\n");
-		printf("*******************  Æ±ĞÅÏ¢  *******************\n");
-		printf("±àºÅ\t\t¾çÃû\t\t×ùÎ»ĞĞ\t×ùÎ»ÁĞ\t ÈÕÆÚ\tÊ±¼ä\t\t¼Û¸ñ\t×´Ì¬\n");
+		printf("*******************  ç¥¨ä¿¡æ¯  *******************\n");
+		printf("ç¼–å·\t\tå‰§å\t\tåº§ä½è¡Œ\tåº§ä½åˆ—\t æ—¥æœŸ\tæ—¶é—´\t\tä»·æ ¼\tçŠ¶æ€\n");
 		printf("-------------------------------------------------------\n");
 		Schedule_Srv_FetchByID(id,&schedule_rec);
 		Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
-		//Ìí¼Ó²éÕÒ×ùÎ»ĞĞÁĞĞÅÏ¢µÄº¯Êı
+		//æ·»åŠ æŸ¥æ‰¾åº§ä½è¡Œåˆ—ä¿¡æ¯çš„å‡½æ•°
 		printf("%d\t%s\\t%d-%d-%d\t%d:%d\t%d\t%d\n"/*t%d\t%d*/, rec.id, play_rec.name,
 //					seat_rec.row, seat_rec.column,
 				schedule_rec.date.year,schedule_rec.date.month,
@@ -252,7 +252,7 @@ int QueryTicket(int id){
 	}
 	else
 	{
-		printf("´ËÆ±²»´æÔÚ!\n°´ÏÂ[Enter]·µ»Ø!\n");
+		printf("æ­¤ç¥¨ä¸å­˜åœ¨!\næŒ‰ä¸‹[Enter]è¿”å›!\n");
 	}
 	printf("-------------------------------------------------------\n");
 

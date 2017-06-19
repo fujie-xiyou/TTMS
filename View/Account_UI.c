@@ -1,7 +1,7 @@
 /*
   * Account_UI.c
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 
@@ -16,32 +16,32 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-//µÇÂ¼º¯Êı£¬ÌáÊ¾ÓÃ»§ÊäÈëÓÃ»§ÃûºÍÃÜÂë£¬µÇÂ¼³É¹¦return 1£¬·ñÔòÌáÊ¾ÖØĞÂµÇÂ¼£¬³¬¹ı3´Î£¬µÇÂ¼Ê§°Ü
+//ç™»å½•å‡½æ•°ï¼Œæç¤ºç”¨æˆ·è¾“å…¥ç”¨æˆ·åå’Œå¯†ç ï¼Œç™»å½•æˆåŠŸreturn 1ï¼Œå¦åˆ™æç¤ºé‡æ–°ç™»å½•ï¼Œè¶…è¿‡3æ¬¡ï¼Œç™»å½•å¤±è´¥
 int SysLogin() {
     Account_Srv_InitSys();
     int i=0;
-    printf("==========»¶Ó­Ê¹ÓÃHLW¾çÔºÆ±Îñ¹ÜÀíÏµÍ³!==========\n\n\n\t\tÇëÄúÏÈµÇÂ¼!");
+    printf("==========æ¬¢è¿ä½¿ç”¨HLWå‰§é™¢ç¥¨åŠ¡ç®¡ç†ç³»ç»Ÿ!==========\n\n\n\t\tè¯·æ‚¨å…ˆç™»å½•!");
     char usrName[30];
     char passwd[30];
     while(i<3){
-        printf("ÇëÊäÈëÕËºÅ:");
+        printf("è¯·è¾“å…¥è´¦å·:");
         scanf("%s",usrName);
-        printf("ÇëÊäÈëÃÜÂë:");
+        printf("è¯·è¾“å…¥å¯†ç :");
         scanf("%s",passwd);
         if(Account_Srv_Verify(usrName,passwd)){
             return 1;
         }
-        printf("ÕËºÅ»òÃÜÂë´íÎó!ÇëÖØĞÂÊäÈë\n");
+        printf("è´¦å·æˆ–å¯†ç é”™è¯¯!è¯·é‡æ–°è¾“å…¥\n");
 
     }
-    printf("ÃÜÂë´íÎó³¬¹ı3´Î!\n");
+    printf("å¯†ç é”™è¯¯è¶…è¿‡3æ¬¡!\n");
 
 
 	return 0;
 
 }
 
-//¹ÜÀíÏµÍ³ÓÃ»§¹¦ÄÜÈë¿Úº¯Êı£¬ÏÔÊ¾ÓÃ»§ÕËºÅ¹ÜÀí²Ëµ¥
+//ç®¡ç†ç³»ç»Ÿç”¨æˆ·åŠŸèƒ½å…¥å£å‡½æ•°ï¼Œæ˜¾ç¤ºç”¨æˆ·è´¦å·ç®¡ç†èœå•
 void Account_UI_MgtEntry() {
     account_list_t head;
     account_list_t pos;
@@ -56,15 +56,15 @@ void Account_UI_MgtEntry() {
     do{
         //system("cls");
         printf("\n========================================================\n");
-        printf("************************ÓÃ»§ÁĞ±í************************\n");
-        printf("%5s  %10s  %10s  %10s\n","±àºÅ","ÓÃ»§Ãû","ÃÜÂë","Ö°Î»");
+        printf("************************ç”¨æˆ·åˆ—è¡¨************************\n");
+        printf("%5s  %10s  %10s  %10s\n","ç¼–å·","ç”¨æˆ·å","å¯†ç ","èŒä½");
         printf("--------------------------------------------------------\n");
         for(i=0,pos=(account_node_t*)(paging.curPos);pos!=head && i<paging.pageSize;i++){
             printf("%5d  %10s  %10s  %10d\n",pos->data.id,pos->data.username,pos->data.password,pos->data.type);
         }
 	printf("--------------------------------------------------------\n");
-        printf("\n[A]ĞÂÔö|[M]ĞŞ¸Ä|[D]É¾³ı|[Q]²éÑ¯|[P]ÉÏÒ»Ò³|[N]ÏÂÒ»Ò³|[R]·µ»Ø\n");
-        printf("ÇëÊäÈë¹¦ÄÜÑ¡Ïî:");
+        printf("\n[A]æ–°å¢|[M]ä¿®æ”¹|[D]åˆ é™¤|[Q]æŸ¥è¯¢|[P]ä¸Šä¸€é¡µ|[N]ä¸‹ä¸€é¡µ|[R]è¿”å›\n");
+        printf("è¯·è¾“å…¥åŠŸèƒ½é€‰é¡¹:");
         scanf("%c",&choice);
         switch(choice){
             case 'A':
@@ -73,19 +73,19 @@ void Account_UI_MgtEntry() {
                 break;
             case 'M':
             case 'm':
-                printf("ÇëÊäÈëÒªĞŞ¸ÄÃÜÂëµÄÓÃ»§Ãû:");
+                printf("è¯·è¾“å…¥è¦ä¿®æ”¹å¯†ç çš„ç”¨æˆ·å:");
                 fgets(name,30,stdin);
                 Account_UI_Modify(head,name);
                 break;
             case 'D':
             case 'd':
-                printf("ÇëÊäÈëÒªÉ¾³ıµÄÓÃ»§Ãû:");
+                printf("è¯·è¾“å…¥è¦åˆ é™¤çš„ç”¨æˆ·å:");
                 fgets(name,30,stdin);
                 Account_UI_Delete(head,name);
                 break;
             case 'Q':
             case 'q':
-                printf("ÇëÊäÈëÒª²éÑ¯µÄÓÃ»§Ãû:");
+                printf("è¯·è¾“å…¥è¦æŸ¥è¯¢çš„ç”¨æˆ·å:");
                 fgets(name,30,stdin);
                 Account_UI_Query(head,name);
                 break;
@@ -110,28 +110,28 @@ void Account_UI_MgtEntry() {
 }
 
 
-//Ìí¼ÓÒ»¸öÓÃ»§ÕËºÅĞÅÏ¢£¬Èç¹ûÕËºÅÃû´æÔÚ£¬ÌáÊ¾³ö´íĞÅÏ¢
+//æ·»åŠ ä¸€ä¸ªç”¨æˆ·è´¦å·ä¿¡æ¯ï¼Œå¦‚æœè´¦å·åå­˜åœ¨ï¼Œæç¤ºå‡ºé”™ä¿¡æ¯
 int Account_UI_Add(account_list_t list ) {
     account_t newUser;
-    printf("\n===================Ìí¼ÓĞÂÓÃ»§=====================\n");
+    printf("\n===================æ·»åŠ æ–°ç”¨æˆ·=====================\n");
     printf("---------------------------------------------------\n");
-    printf("ÇëÊäÈëÒªÌí¼ÓµÄÓÃ»§Ãû:");
+    printf("è¯·è¾“å…¥è¦æ·»åŠ çš„ç”¨æˆ·å:");
     fgets(newUser.username,30,stdin);
     if(Account_Srv_FindByUsrName(list,newUser.username)){
-        printf("¸ÃÓÃ»§ÒÑ´æÔÚ!!!\n");
+        printf("è¯¥ç”¨æˆ·å·²å­˜åœ¨!!!\n");
         return 0;
     }
     newUser.id=EntKey_Srv_CompNewKey("Account");
-    printf("ÇëÊäÈëĞÂÓÃ»§µÄÃÜÂë:");
+    printf("è¯·è¾“å…¥æ–°ç”¨æˆ·çš„å¯†ç :");
     fgets(newUser.password,30,stdin);
-    printf("ÇëÊäÈëĞÂÓÃ»§½ÇÉ«(0±íÊ¾ÄäÃû,1Æ±Ô±,2¾­Àí,9ÏµÍ³¹ÜÀíÔ±):");
+    printf("è¯·è¾“å…¥æ–°ç”¨æˆ·è§’è‰²(0è¡¨ç¤ºåŒ¿å,1ç¥¨å‘˜,2ç»ç†,9ç³»ç»Ÿç®¡ç†å‘˜):");
     scanf("%d",&newUser.type);
     if(Account_Srv_Add(&newUser)){
-        printf("ĞÂÓÃ»§Ìí¼Ó³É¹¦!\n");
+        printf("æ–°ç”¨æˆ·æ·»åŠ æˆåŠŸ!\n");
         return 1;
     }
     else{
-        printf("ĞÂÓÃ»§Ìí¼ÓÊ§°Ü!\n");
+        printf("æ–°ç”¨æˆ·æ·»åŠ å¤±è´¥!\n");
         return 0;
     }
 	return 0;
@@ -139,14 +139,14 @@ int Account_UI_Add(account_list_t list ) {
 }
 
 
-//¸ù¾İÓÃ»§ÕËºÅÃûĞŞ¸ÄÓÃ»§ÕËºÅÃÜÂë£¬²»´æÔÚÕâ¸öÓÃ»§ÕËºÅÃû£¬ÌáÊ¾³ö´íĞÅÏ¢
+//æ ¹æ®ç”¨æˆ·è´¦å·åä¿®æ”¹ç”¨æˆ·è´¦å·å¯†ç ï¼Œä¸å­˜åœ¨è¿™ä¸ªç”¨æˆ·è´¦å·åï¼Œæç¤ºå‡ºé”™ä¿¡æ¯
 int Account_UI_Modify(account_list_t list ,char usrName[]) {
 	account_list_t  user;
     if(!(user=Account_Srv_FindByUsrName(list,usrName))){
-        printf("ÊäÈëµÄÓÃ»§Ãû²»´æÔÚ!\n");
+        printf("è¾“å…¥çš„ç”¨æˆ·åä¸å­˜åœ¨!\n");
         return 0;
     }
-    printf("ÇëÊäÈëĞÂµÄÃÜÂë:");
+    printf("è¯·è¾“å…¥æ–°çš„å¯†ç :");
     fgets(user->data.password,30,stdin);
     if(Account_Srv_Modify(&user->data)){
     	return 1;
@@ -154,32 +154,32 @@ int Account_UI_Modify(account_list_t list ,char usrName[]) {
     return 0;
 }
 
-//¸ù¾İÓÃ»§ÕËºÅÃûÉ¾³ıÒ»¸öÒÑ¾­´æÔÚµÄÓÃ»§ÕËºÅĞÅÏ¢£¬Èç¹û²»´æÔÚÕâ¸öÓÃ»§ÕËºÅÃû£¬ÌáÊ¾³ö´íĞÅÏ¢
+//æ ¹æ®ç”¨æˆ·è´¦å·ååˆ é™¤ä¸€ä¸ªå·²ç»å­˜åœ¨çš„ç”¨æˆ·è´¦å·ä¿¡æ¯ï¼Œå¦‚æœä¸å­˜åœ¨è¿™ä¸ªç”¨æˆ·è´¦å·åï¼Œæç¤ºå‡ºé”™ä¿¡æ¯
 int Account_UI_Delete(account_list_t list ,char usrName[]) {
 	account_list_t user;
 	if(!(user=Account_Srv_FindByUsrName(list,usrName))){
-		printf("ÊäÈëµÄÓÃ»§Ãû²»´æÔÚ!\n");
+		printf("è¾“å…¥çš„ç”¨æˆ·åä¸å­˜åœ¨!\n");
 		return 0;
 	}
 	if(Account_Srv_DeleteByID(user->data.id)){
-		printf("É¾³ı³É¹¦!\n");
+		printf("åˆ é™¤æˆåŠŸ!\n");
 		return 0;
 	}else{
-		printf("É¾³ıÊ§°Ü!\n");
+		printf("åˆ é™¤å¤±è´¥!\n");
 		return 1;
 	}
 }
 
-//¸ù¾İÓÃ»§ÕËºÅÃû²éÕÒ¸ÃÓÃ»§ÕËºÅÊÇ·ñ´æÔÚ£¬´æÔÚ·µ»Ø1£¬·ñÔò·µ»Ø0£¬²¢ÌáÊ¾´íÎóĞÅÏ¢
+//æ ¹æ®ç”¨æˆ·è´¦å·åæŸ¥æ‰¾è¯¥ç”¨æˆ·è´¦å·æ˜¯å¦å­˜åœ¨ï¼Œå­˜åœ¨è¿”å›1ï¼Œå¦åˆ™è¿”å›0ï¼Œå¹¶æç¤ºé”™è¯¯ä¿¡æ¯
 int Account_UI_Query(account_list_t  list ,char usrName[]) {
 	account_list_t user;
-	printf("\n===============²éÑ¯ÓÃ»§ĞÅÏ¢================\n");
+	printf("\n===============æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯================\n");
 	if((!(user=Account_Srv_FindByUsrName(list,usrName)))){
-		printf("ÓÃ»§Ãû²»´æÔÚ!\n");
+		printf("ç”¨æˆ·åä¸å­˜åœ¨!\n");
 		return 0;
 	}else{
-		printf("************************ÓÃ»§ĞÅÏ¢************************\n");
-		printf("%5s  %10s  %10s  %10s\n","±àºÅ","ÓÃ»§Ãû","ÃÜÂë","Ö°Î»");
+		printf("************************ç”¨æˆ·ä¿¡æ¯************************\n");
+		printf("%5s  %10s  %10s  %10s\n","ç¼–å·","ç”¨æˆ·å","å¯†ç ","èŒä½");
 		printf("--------------------------------------------------------\n");
 		printf("%5d  %10s  %10s  %10d\n",user->data.id,user->data.username,user->data.password,user->data.type);
 

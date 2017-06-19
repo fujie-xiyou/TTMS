@@ -1,7 +1,7 @@
 /*
  *salesanalysis.h
  *
- *  Created on: 2015Äê5ÔÂ8ÈÕ
+ *  Created on: 2015å¹´5æœˆ8æ—¥
  *      Author: Administrator
  */
 #ifndef SALESANALYSIS_H_
@@ -12,18 +12,18 @@
 #include "../Service/Sale.h"
 
 typedef struct {
-	int play_id; 	//¾çÄ¿±àºÅ
-	char name[31]; 	//¾çÄ¿Ãû³Æ
-	char area[9]; 	//¾çÄ¿ÇøÓò
-	int duration; 	//ÒÔ·ÖÖÓÎªµ¥Î»
-	long totaltickets; //¾çÄ¿Æ±ÏúÊÛÊıÁ¿
-	long sales; 	//µçÓ°Æ±·¿
-	int price; 		//¾çÄ¿Æ±¼Û
-	user_date_t start_date; 	//¾çÄ¿ÉÏÓ³ÈÕÆÚ
-	user_date_t end_date; 	//¾çÄ¿ÏÂÓ³ÈÕÆÚ
+	int play_id; 	//å‰§ç›®ç¼–å·
+	char name[31]; 	//å‰§ç›®åç§°
+	char area[9]; 	//å‰§ç›®åŒºåŸŸ
+	int duration; 	//ä»¥åˆ†é’Ÿä¸ºå•ä½
+	long totaltickets; //å‰§ç›®ç¥¨é”€å”®æ•°é‡
+	long sales; 	//ç”µå½±ç¥¨æˆ¿
+	int price; 		//å‰§ç›®ç¥¨ä»·
+	user_date_t start_date; 	//å‰§ç›®ä¸Šæ˜ æ—¥æœŸ
+	user_date_t end_date; 	//å‰§ç›®ä¸‹æ˜ æ—¥æœŸ
 } salesanalysis_t;
 
-//Ë«ÏòÁ´±í
+//åŒå‘é“¾è¡¨
 typedef struct salesanalysis_node {
 	salesanalysis_t data;
 	struct salesanalysis_node *next, *prev;
@@ -31,13 +31,13 @@ typedef struct salesanalysis_node {
 
 
 
-//¼ÆËãÔ±¹¤usrIDÔÚ¸ø¶¨Ê±¼äÇø¼äµÄÏúÊÛ¶î
+//è®¡ç®—å‘˜å·¥usrIDåœ¨ç»™å®šæ—¶é—´åŒºé—´çš„é”€å”®é¢
 int Salesanalysis_Srv_CompSaleVal(int usrID, user_date_t stDate, user_date_t endDate);
 
-//Í³¼ÆÏúÊÛÊı¾İ
+//ç»Ÿè®¡é”€å”®æ•°æ®
 int Salesanalysis_Srv_StaticSale(salesanalysis_list_t list);
 
-//¸ù¾İÆ±·¿ÅÅĞò
+//æ ¹æ®ç¥¨æˆ¿æ’åº
 void SalesAnalysis_Srv_SortBySale(salesanalysis_list_t list);
 
 

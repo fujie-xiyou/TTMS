@@ -14,10 +14,10 @@
 /*
  * Function:    Play_Srv_Add
  * Function ID:	TTMS_SCU_Play_Srv_Add
- * Description: Ìí¼ÓÒ»Ìõ¾çÄ¿ĞÅÏ¢
- * Input:       ´ıÌí¼ÓµÄ¾çÄ¿ĞÅÏ¢Êı¾İ
- * Output:      ÎŞ
- * Return:      Ìí¼ÓµÄ¼ÇÂ¼Êı
+ * Description: æ·»åŠ ä¸€æ¡å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…æ·»åŠ çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+ * Output:      æ— 
+ * Return:      æ·»åŠ çš„è®°å½•æ•°
  */
 inline int Play_Srv_Add(const play_t *data) {
     return Play_Perst_Insert(data);
@@ -26,10 +26,10 @@ inline int Play_Srv_Add(const play_t *data) {
 /*
  * Function:    Play_Srv_Modify
  * Function ID:	TTMS_SCU_Play_ Srv _Mod
- * Description: ¸üĞÂÒ»Ìõ¾çÄ¿ĞÅÏ¢
- * Input:       ´ı¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı¾İ
- * Output:      ÎŞ
- * Return:      ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+ * Description: æ›´æ–°ä¸€æ¡å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°æ®
+ * Output:      æ— 
+ * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
  */
 inline int Play_Srv_Modify(const play_t *data) {
     return Play_Perst_Update(data);
@@ -38,10 +38,10 @@ inline int Play_Srv_Modify(const play_t *data) {
 /*
  * Function:    Play_Srv_DeleteByID
  * Function ID:	TTMS_SCU_Play_Srv_DelByID
- * Description: °´ÕÕIDºÅÉ¾³ı¾çÄ¿ĞÅÏ¢
- * Input:       ´ıÉ¾³ıµÄ¾çÄ¿IDºÅ
- * Output:      ÎŞ
- * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+ * Description: æŒ‰ç…§IDå·åˆ é™¤å‰§ç›®ä¿¡æ¯
+ * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
  */
 inline int Play_Srv_DeleteByID(int ID) {
 	return Play_Perst_DeleteByID(ID);
@@ -50,10 +50,10 @@ inline int Play_Srv_DeleteByID(int ID) {
 /*
  * Function:    Play_Srv_FetchByID
  * Function ID:	TTMS_SCU_Play_Srv_FetchByID
- * Description: °´ÕÕIDºÅ²éÕÒÒ»Ìõ¾çÄ¿ĞÅÏ¢£¬´æÈëbufËùÖ¸µ¥Ôª
- * Input:       ´ı²éÕÒµÄ¾çÄ¿IDºÅ£¬½«²éÕÒµ½µÄĞÅÏ¢±£´æµ½bufÖĞ
- * Output:      ÎŞ
- * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+ * Description: æŒ‰ç…§IDå·æŸ¥æ‰¾ä¸€æ¡å‰§ç›®ä¿¡æ¯ï¼Œå­˜å…¥bufæ‰€æŒ‡å•å…ƒ
+ * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·ï¼Œå°†æŸ¥æ‰¾åˆ°çš„ä¿¡æ¯ä¿å­˜åˆ°bufä¸­
+ * Output:      æ— 
+ * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
  */
 inline int Play_Srv_FetchByID(int ID, play_t *buf) {
 	return Play_Perst_SelectByID(ID,buf);
@@ -62,10 +62,10 @@ inline int Play_Srv_FetchByID(int ID, play_t *buf) {
 /*
  * Function:    Play_Srv_FetchAll
  * Function ID:	TTMS_SCU_Play_Srv_FetchAll
- * Description: ½«ËùÓĞ¾çÄ¿ĞÅÏ¢½¨Á¢³ÉÒ»ÌõÁ´±í
- * Input:       list¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë
- * Output:      ÎŞ
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: å°†æ‰€æœ‰å‰§ç›®ä¿¡æ¯å»ºç«‹æˆä¸€æ¡é“¾è¡¨
+ * Input:       listå‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆ
+ * Output:      æ— 
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 inline int Play_Srv_FetchAll(play_list_t list) {
 	return Play_Perst_SelectAll(list);
@@ -74,10 +74,10 @@ inline int Play_Srv_FetchAll(play_list_t list) {
 /*
  * Function:    Play_Srv_FetchByName
  * Function ID:	TTMS_SCU_Play_Srv_FetchByName
- * Description: ¸ù¾İ¾çÄ¿Ãû³Æ²éÕÒ¾çÄ¿£¬·µ»ØÔØÈëµÄ¾çÄ¿ÊıÁ¿
- * Input:       listÎª²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬condtÎªÄ£ºı²éÑ¯µÄ¹Ø¼ü×Ö
- * Output:      ÎŞ
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: æ ¹æ®å‰§ç›®åç§°æŸ¥æ‰¾å‰§ç›®ï¼Œè¿”å›è½½å…¥çš„å‰§ç›®æ•°é‡
+ * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œcondtä¸ºæ¨¡ç³ŠæŸ¥è¯¢çš„å…³é”®å­—
+ * Output:      æ— 
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 int Play_Srv_FetchByName(play_list_t list, char condt[]){
 	return Play_Perst_SelectByName(list,condt);
@@ -88,10 +88,10 @@ int Play_Srv_FetchByName(play_list_t list, char condt[]){
 /*
  * Function:    Play_Srv_FilterByName
  * Function ID:	TTMS_SCU_Play_Srv_FilterByName
- * Description: ¸ù¾İ¾çÄ¿Ãû³Æ²éÕÒ¾çÄ¿£¬·µ»ØÔØÈëµÄ¾çÄ¿ÊıÁ¿
- * Input:       listÎª²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬filterÎª¹ıÂË´Ê
- * Output:      ÎŞ
- * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+ * Description: æ ¹æ®å‰§ç›®åç§°æŸ¥æ‰¾å‰§ç›®ï¼Œè¿”å›è½½å…¥çš„å‰§ç›®æ•°é‡
+ * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œfilterä¸ºè¿‡æ»¤è¯
+ * Output:      æ— 
+ * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
  */
 int Play_Srv_FilterByName(play_list_t list, char filter[]){
     int rtn=0;

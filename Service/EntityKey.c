@@ -6,13 +6,13 @@
 #include "../Common/List.h"
 #include "../Persistence/EntityKey_Persist.h"
 
-/*¸ù¾İ´«ÈëµÄÊµÌåÃûentName£¬ÎªĞÂÊµÌå·ÖÅäÒ»¸öÎ¨Ò»µÄÖ÷¼ü¡£º¯Êı·µ»ØÖµÎªÈ¡ĞÂÊµÌåµÄÖ÷¼üÖµ*/
+/*æ ¹æ®ä¼ å…¥çš„å®ä½“åentNameï¼Œä¸ºæ–°å®ä½“åˆ†é…ä¸€ä¸ªå”¯ä¸€çš„ä¸»é”®ã€‚å‡½æ•°è¿”å›å€¼ä¸ºå–æ–°å®ä½“çš„ä¸»é”®å€¼*/
 inline long EntKey_Srv_CompNewKey(char entName[]) {
 	return EntKey_Srv_CompNewKeys(entName, 1);
 }
 
-/*¸ù¾İ´«ÈëµÄÊµÌåÃûentName¼°ÊµÌå¸öÊıcount£¬ÎªÕâ¸öcount¸öĞÂÊµÌå·ÖÅäÒ»¸ö³¤¶ÈÎªcountµÄÖ÷¼üÖµÇø¼ä£¬
- * Ê¹µÃÃ¿¸öĞÂÊµÌåÔÚ¸ÃÇø¼äÄÚ¶¼¿ÉÒÔ·ÖÅäµ½ Î¨Ò»µÄ Ö÷¼ü¡£·µ»ØÖµÎª¸ÃÖ÷¼üÇø¼äµÄ×îĞ¡Öµ*/
+/*æ ¹æ®ä¼ å…¥çš„å®ä½“åentNameåŠå®ä½“ä¸ªæ•°countï¼Œä¸ºè¿™ä¸ªcountä¸ªæ–°å®ä½“åˆ†é…ä¸€ä¸ªé•¿åº¦ä¸ºcountçš„ä¸»é”®å€¼åŒºé—´ï¼Œ
+ * ä½¿å¾—æ¯ä¸ªæ–°å®ä½“åœ¨è¯¥åŒºé—´å†…éƒ½å¯ä»¥åˆ†é…åˆ° å”¯ä¸€çš„ ä¸»é”®ã€‚è¿”å›å€¼ä¸ºè¯¥ä¸»é”®åŒºé—´çš„æœ€å°å€¼*/
 inline long EntKey_Srv_CompNewKeys(char entName[], int count) {
 	char entUpperName[41];
 
@@ -30,14 +30,14 @@ inline long EntKey_Srv_CompNewKeys(char entName[], int count) {
 	memcpy(entUpperName, entName, nameLen);
 	entUpperName[nameLen] = '\0';
 
-	/*×ª»»Îª´óĞ´*/
+	/*è½¬æ¢ä¸ºå¤§å†™*/
 	Str2Upper(entUpperName);
 
 	return EntKey_Perst_GetNewKeys(entUpperName, count);
 }
 
 
-//½«Ö÷¼ükey±£´æµ½Ö÷¼üÁ´±íkeyListÖĞ
+//å°†ä¸»é”®keyä¿å­˜åˆ°ä¸»é”®é“¾è¡¨keyListä¸­
 inline void EntKey_Srv_Add2List(entkey_list_t keyList, long key) {
 	assert(NULL != keyList);
 	if (!EntKey_Srv_CheckExist(keyList, key)) {
@@ -54,7 +54,7 @@ inline void EntKey_Srv_Add2List(entkey_list_t keyList, long key) {
 	}
 }
 
-//ÔÚÖ÷¼üÁ´±íkeyListÖĞ¼ì²ékeyÊÇ·ñ´æÔÚ£¬·µ»Ø1´æÔÚ£¬·ñÔò0
+//åœ¨ä¸»é”®é“¾è¡¨keyListä¸­æ£€æŸ¥keyæ˜¯å¦å­˜åœ¨ï¼Œè¿”å›1å­˜åœ¨ï¼Œå¦åˆ™0
 inline int EntKey_Srv_CheckExist(entkey_list_t keyList, long key){
 	assert(NULL!=keyList);
 	entkey_node_t *p;

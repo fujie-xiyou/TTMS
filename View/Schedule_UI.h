@@ -18,70 +18,70 @@
 	/*
 	 * Function:    Schedule_UI_Add
 	 * Function ID:	TTMS_SCU_Schedule_UI_Add
-	 * Description: Ìí¼ÓÒ»ÌõÑİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       Ïà¹Ø¾çÄ¿µÄIDºÅ
-	 * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
-	 * Return:      Ìí¼ÓµÄ¼ÇÂ¼Êı
+	 * Description: æ·»åŠ ä¸€æ¡æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       ç›¸å…³å‰§ç›®çš„IDå·
+	 * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+	 * Return:      æ·»åŠ çš„è®°å½•æ•°
 	 */
 	int Schedule_UI_Add(int play_id);
 
 	/*
 	 * Function:    Schedule_UI_Modify
 	 * Function ID:	TTMS_SCU_Schedule_UI_Mod
-	 * Description: °´ÕÕIDºÅ¸üĞÂÑİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       ´ı¸üĞÂµÄ¾çÄ¿IDºÅ
-	 * Output:      ÊäÈëĞÅÏ¢Ê±µÄ¸÷ÖÖÌáÊ¾
-	 * Return:      ¸üĞÂµÄ¾çÄ¿ĞÅÏ¢Êı£¬0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½²¢¸üĞÂ
+	 * Description: æŒ‰ç…§IDå·æ›´æ–°æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       å¾…æ›´æ–°çš„å‰§ç›®IDå·
+	 * Output:      è¾“å…¥ä¿¡æ¯æ—¶çš„å„ç§æç¤º
+	 * Return:      æ›´æ–°çš„å‰§ç›®ä¿¡æ¯æ•°ï¼Œ0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°å¹¶æ›´æ–°
 	 */
 	int Schedule_UI_Modify(int id);
 
 	/*
 	 * Function:    Schedule_UI_Delete
 	 * Function ID:	TTMS_SCU_Schedule_UI_Del
-	 * Description: °´ÕÕIDºÅÉ¾³ıÑİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       ´ıÉ¾³ıµÄ¾çÄ¿IDºÅ
-	 * Output:      ÌáÊ¾É¾³ıÊÇ·ñ³É¹¦
-	 * Return:      0±íÊ¾É¾³ıÊ§°Ü£¬1±íÊ¾É¾³ı³É¹¦
+	 * Description: æŒ‰ç…§IDå·åˆ é™¤æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       å¾…åˆ é™¤çš„å‰§ç›®IDå·
+	 * Output:      æç¤ºåˆ é™¤æ˜¯å¦æˆåŠŸ
+	 * Return:      0è¡¨ç¤ºåˆ é™¤å¤±è´¥ï¼Œ1è¡¨ç¤ºåˆ é™¤æˆåŠŸ
 	 */
 	int Schedule_UI_Delete(int id);
 
 	/*
 	 * Function:    Schedule_UI_Query
 	 * Function ID:	TTMS_SCU_Schedule_UI_Qry
-	 * Description: °´ÕÕIDºÅ²éÑ¯Ñİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       ´ı²éÕÒµÄ¾çÄ¿IDºÅ
-	 * Output:      ²éÕÒµ½µÄ¾çÄ¿ĞÅÏ¢
-	 * Return:      0±íÊ¾Î´ÕÒµ½£¬1±íÊ¾ÕÒµ½ÁË
+	 * Description: æŒ‰ç…§IDå·æŸ¥è¯¢æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       å¾…æŸ¥æ‰¾çš„å‰§ç›®IDå·
+	 * Output:      æŸ¥æ‰¾åˆ°çš„å‰§ç›®ä¿¡æ¯
+	 * Return:      0è¡¨ç¤ºæœªæ‰¾åˆ°ï¼Œ1è¡¨ç¤ºæ‰¾åˆ°äº†
 	 */
 	int Schedule_UI_Query(int id);
 
 	/*
 	 * Function:    Schedule_UI_MgtEntry
 	 * Function ID:	TTMS_SCU_Schedule_UI_MgtEnt
-	 * Description: Ñİ³ö¼Æ»®¹ÜÀí½çÃæ£¬Ñİ³ö¼Æ»®°´ÕÕ¾çÄ¿½øĞĞ¹ÜÀí£¬ÒÔ¾çÄ¿IDºÅÎªÊäÈë
-	 * Input:       Ïà¹Ø¾çÄ¿IDºÅ
-	 * Output:      Ñİ³ö¼Æ»®ĞÅÏ¢
-	 * Return:      ÎŞ
+	 * Description: æ¼”å‡ºè®¡åˆ’ç®¡ç†ç•Œé¢ï¼Œæ¼”å‡ºè®¡åˆ’æŒ‰ç…§å‰§ç›®è¿›è¡Œç®¡ç†ï¼Œä»¥å‰§ç›®IDå·ä¸ºè¾“å…¥
+	 * Input:       ç›¸å…³å‰§ç›®IDå·
+	 * Output:      æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Return:      æ— 
 	 */
 	void Schedule_UI_MgtEntry(int play_id);
 
 	/*
 	 * Function:    Schedule_UI_ListByPlay
 	 * Function ID:	TTMS_SCU_Schedule_UI_ListByPlay
-	 * Description: ÒÔÁĞ±íÄ£Ê½ÏÔÊ¾¸ø¶¨¾çÄ¿µÄÑİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       listÎª²éÕÒµ½µÄÑİ³ö¼Æ»®ĞÅÏ¢Á´±íµÄÍ·Ö¸Õë£¬playÎª¾çÄ¿ĞÅÏ¢£¬pagingÎªÏÔÊ¾·ÖÒ³ÉèÖÃ²ÎÊı
-	 * Output:      ÎŞ
-	 * Return:      ·µ»Ø²éÕÒµ½µÄ¼ÇÂ¼ÊıÄ¿
+	 * Description: ä»¥åˆ—è¡¨æ¨¡å¼æ˜¾ç¤ºç»™å®šå‰§ç›®çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       listä¸ºæŸ¥æ‰¾åˆ°çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯é“¾è¡¨çš„å¤´æŒ‡é’ˆï¼Œplayä¸ºå‰§ç›®ä¿¡æ¯ï¼Œpagingä¸ºæ˜¾ç¤ºåˆ†é¡µè®¾ç½®å‚æ•°
+	 * Output:      æ— 
+	 * Return:      è¿”å›æŸ¥æ‰¾åˆ°çš„è®°å½•æ•°ç›®
 	 */
 	void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination_t paging);
 
 	/*
 	 * Function:    Schedule_UI_ListAll
 	 * Function ID:	TTMS_SCU_Schedule_UI_List
-	 * Description: ÏÔÊ¾ËùÓĞµÄÑİ³ö¼Æ»®ĞÅÏ¢
-	 * Input:       ÎŞ
-	 * Output:      ËùÓĞ¾çÄ¿µÄĞÅÏ¢
-	 * Return:      ÎŞ
+	 * Description: æ˜¾ç¤ºæ‰€æœ‰çš„æ¼”å‡ºè®¡åˆ’ä¿¡æ¯
+	 * Input:       æ— 
+	 * Output:      æ‰€æœ‰å‰§ç›®çš„ä¿¡æ¯
+	 * Return:      æ— 
 	 */
 	void Schedule_UI_ListAll(void);
 

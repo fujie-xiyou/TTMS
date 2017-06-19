@@ -2,9 +2,9 @@
 #define TICKET_H_
 
 typedef enum{
-	TICKET_AVL=0,		//´ıÊÛ
-	TICKET_SOLD=1,		//ÒÑÊÛ
-	TICKET_RESV=9		//Ô¤Áô
+	TICKET_AVL=0,		//å¾…å”®
+	TICKET_SOLD=1,		//å·²å”®
+	TICKET_RESV=9		//é¢„ç•™
 }ticket_status_t;
 
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 	ticket_status_t status;
 } ticket_t;
 
-//Ë«ÏòÁ´±í
+//åŒå‘é“¾è¡¨
 typedef struct ticket_node {
 	ticket_t data;
 	struct ticket_node *next, *prev;
@@ -29,13 +29,13 @@ int Ticket_Srv_Modify(const ticket_t * data);
 
 int Ticket_Srv_FetchByID(int ID, ticket_t *buf) ;
 
-//¸ù¾İ¼Æ»®IDÌáÈ¡ËùÓĞÑİ³öÆ±
+//æ ¹æ®è®¡åˆ’IDæå–æ‰€æœ‰æ¼”å‡ºç¥¨
 int Ticket_Srv_FetchBySchID(ticket_list_t list, int schedule_id);
 
-//¸ù¾İÑİ³ö¼Æ»®ID£¬Í³¼ÆÉÏ×ùÂÊ¼°Æ±·¿£¬·µ»ØÆ±·¿ÊıÊÕÈë
+//æ ¹æ®æ¼”å‡ºè®¡åˆ’IDï¼Œç»Ÿè®¡ä¸Šåº§ç‡åŠç¥¨æˆ¿ï¼Œè¿”å›ç¥¨æˆ¿æ•°æ”¶å…¥
 int Ticket_Srv_StatRevBySchID(int schedule_id, int *soldCount, int *totalCount);
 
-//¸ù¾İ×ùÎ»IDÔÚlistÖĞÕÒ¶ÔÓ¦Æ±
+//æ ¹æ®åº§ä½IDåœ¨listä¸­æ‰¾å¯¹åº”ç¥¨
 ticket_node_t * Ticket_Srv_FindBySeatID(ticket_list_t list, int seat_id);
 
 
