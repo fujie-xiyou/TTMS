@@ -20,6 +20,13 @@ typedef struct {
 	int second;
 }user_time_t;
 
+
+//安全gets
+char *sgets(char *str,int len);
+
+//清空输入缓冲区
+void ffflush();
+
 //直接读取键盘输入值
 int ScanKeyboard();
 

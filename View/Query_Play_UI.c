@@ -5,21 +5,23 @@
 #include "../Persistence/Schedule_Persist.h"
 #include "../Service/Studio.h"
 #include "../Persistence/Ticket_Persist.h"
+#include "../Common/Common.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 void DisplayQueryPlay(void)
 {
-	fflush(stdin);
+	//ffflush();
 	char fileName[30];
 	play_t play;
 
 	char choice;
 	do {
-		fflush(stdin);
+		//ffflush();
 		memset(fileName, 0, sizeof(fileName));
 		printf("请输入剧目列表:");
-		scanf("%s",fileName);
+		sgets(fileName,30);
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("\n****************  剧目信息列表  ***********\n");
 		if (Query_PlayName(fileName,&play)) {
@@ -45,8 +47,8 @@ void DisplayQueryPlay(void)
 				printf("抱歉,此剧目不上演!\n");
 			}
 			printf("[R]返回, [B]售票, [A]重新载入:");
-			fflush(stdin);
 			scanf("%c", &choice);
+			ffflush();
 			switch(choice) {
 			case 'a':
 			case 'A':
@@ -59,8 +61,8 @@ void DisplayQueryPlay(void)
 		} else {
 			printf("此剧目名不存在!\n");
 			printf("[R]返回, [B]售票, [A]重新载入:");
-			fflush(stdin);
 			scanf("%c", &choice);
+			ffflush();
 			switch(choice) {
 			case 'a':
 			case 'A':

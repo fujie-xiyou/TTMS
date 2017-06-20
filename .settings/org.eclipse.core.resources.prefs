@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding//View/Queries_Menu.c=UTF-8
+encoding//Common/Common.h=UTF-8
+encoding//Service/Play.h=UTF-8
+encoding//View/SalesAnalysis_UI.c=UTF-8
+encoding/TTMS.c=GBK

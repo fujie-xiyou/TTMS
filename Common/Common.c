@@ -9,7 +9,20 @@
 #include<stdio.h>
 #include<fcntl.h>
 #include <time.h>
-
+#include<string.h>
+char *sgets(char *str,int len){//安全gets
+	fgets(str,len,stdin);
+	if(str[strlen(str)-1]=='\n'){
+		str[strlen(str)-1]='\0';
+	}
+	return str;
+}
+void ffflush(){//清空输入缓冲区函数
+	char ch;
+	while((ch=getchar())!='\n' && ch!=EOF){
+		//printf("(%x)",ch);
+	}
+}
 //将字符串str就地转换为大写字符串，并返回字符串头指针
 char *Str2Upper(char *str) {
 	if (NULL == str)

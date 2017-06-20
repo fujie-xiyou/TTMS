@@ -64,13 +64,14 @@ void Play_UI_MgtEntry(int flag){
 	Paging_Locate_FirstPage(head,paging);
 	do{
 		//system("cls");
+		system("clear");
 		printf("\n============================================================\n");
 		printf("*********************** 剧目列表 **************************\n");
 		printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s\n","编号","名称","类型","地区","级别","时长",
 					"上映日期","结束日期","票价");
 		printf("--------------------------------------------------------\n");
 		for(i=0,pos=(play_node_t*)(paging.curPos);pos!=head && i<paging.pageSize;i++){
-			printf("%2d  %10s  %4d  %6s  %4d  %3d  %2d-%2d  %2d-%2d  %2d",pos->data.id
+			printf("%2d  %10s  %4d  %6s  %4d  %3d  %2d-%2d  %2d-%2d  %2d\n",pos->data.id
 					,pos->data.name,pos->data.type,pos->data.area,pos->data.rating
 					,pos->data.duration,pos->data.start_date.month,pos->data.start_date.day
 					,pos->data.end_date.month,pos->data.end_date.day,pos->data.price);
@@ -79,13 +80,13 @@ void Play_UI_MgtEntry(int flag){
 		printf("------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
-		printf("******************************************************************\n");
+		printf("*************************************************************\n");
 		printf("[P]上一页|[N]下一页 | [A]添加|[D]删除|[U]修改|[Q]查询|[R]返回");
-		printf("\n==================================================================\n");
+		printf("\n===========================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
+		//ffflush();
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 		switch (choice) {
 				case 'a':
 				case 'A':
@@ -99,6 +100,7 @@ void Play_UI_MgtEntry(int flag){
 				case 'D':
 					printf("输入ID:");
 					scanf("%d", &id);
+					ffflush();
 					if (Play_UI_Delete(id)) {	//从新载入数据
 						paging.totalRecords = Play_Srv_FetchAll(head);
 						List_Paging(head, paging, play_node_t);
@@ -108,6 +110,7 @@ void Play_UI_MgtEntry(int flag){
 				case 'U':
 					printf("输入ID:");
 					scanf("%d", &id);
+					ffflush();
 					if (Play_UI_Modify(id)) {	//从新载入数据
 						paging.totalRecords = Play_Srv_FetchAll(head);
 						List_Paging(head, paging, play_node_t);
@@ -117,6 +120,7 @@ void Play_UI_MgtEntry(int flag){
 				case 'Q':
 					printf("输入ID:");
 					scanf("%d", &id);
+					ffflush();
 					Play_UI_Query(id);
 					//paging.totalRecords = Play_Srv_FetchAll(head);
 					//List_Paging(head, paging, play_node_t);
@@ -155,24 +159,29 @@ int Play_UI_Add(void)
 
 	do {
 		/*system("cls");*/
+		system("clear");
 		printf("\n=======================================================\n");
-		printf("\t\t****************  添加新剧目 ***************\n");
+		printf("\t****************  添加新剧目 ***************\n");
 		printf("-------------------------------------------------------\n");
 		printf("剧目名称:");
-		fflush(stdin);
-		fgets(rec.name,30,stdin);
+		sgets(rec.name,30);
 		printf("剧目类型(1表示电影,2歌剧,3音乐会):");
 		scanf("%d", &(rec.type));
+		ffflush();
 		printf("来源地区:");
-		fgets(rec.area,9,stdin);
+		sgets(rec.area,9);
 		printf("剧目级别(1表示儿童,2青少年,3音乐会):");
 		scanf("%d", &(rec.rating));
+		ffflush();
 		printf("演出时长(分钟):");
 		scanf("%d", &(rec.duration));
+		ffflush();
 		printf("上映日期:(yyyy/mm/dd):");
 		scanf("%d/%d/%d",&rec.start_date.year,&rec.start_date.month,&rec.start_date.day);
+		ffflush();
 		printf("结束日期:(yyyy/mm/dd):");
 		scanf("%d/%d/%d",&rec.end_date.year,&rec.end_date.month,&rec.end_date.day);
+		ffflush();
 		printf("=======================================================\n");
 
 		//获取主键
@@ -184,8 +193,8 @@ int Play_UI_Add(void)
 			printf("新剧目添加失败!\n");
 		printf("-------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
+		ffflush();
 	} while ('a' == choice || 'A' == choice);
 	return newRecCount;
 }
@@ -208,26 +217,31 @@ int Play_UI_Modify(int id){
 		getchar();
 		return 0;
 	}
-
+	system("clear");
 	printf("\n=======================================================\n");
-	printf("\t\t****************  修改剧目  ****************\n");
+	printf("\t****************  修改剧目  ****************\n");
 	printf("-------------------------------------------------------\n");
 	printf("剧目编号:%d\n", rec.id);
 	printf("剧目名称:[%s]",rec.name);
-	fflush(stdin);
-	fgets(rec.name,30,stdin);
+	//ffflush();
+	sgets(rec.name,30);
 	printf("剧目类型(1表示电影,2歌剧,3音乐会):[%d]",rec.type);
 	scanf("%d", &(rec.type));
+	ffflush();
 	printf("来源地区:[%s]",rec.area);
-	fgets(rec.area,9,stdin);
+	sgets(rec.area,9);
 	printf("剧目级别(1表示儿童,2青少年,3音乐会)[%d]:",rec.rating);
 	scanf("%d", &(rec.rating));
+	ffflush();
 	printf("演出时长(分钟):[%d]",rec.duration);
 	scanf("%d", &(rec.duration));
+	ffflush();
 	printf("上映日期:(yyyy/mm/dd):[%4d/%2d/%2d]",rec.start_date.year,rec.start_date.month,rec.start_date.day);
 	scanf("%d/%d/%d",&rec.start_date.year,&rec.start_date.month,&rec.start_date.day);
+	ffflush();
 	printf("结束日期:(yyyy/mm/dd)::[%4d/%2d/%2d]",rec.end_date.year,rec.end_date.month,rec.end_date.day);
 	scanf("%d/%d/%d",&rec.end_date.year,&rec.end_date.month,&rec.end_date.day);
+	ffflush();
 	printf("-------------------------------------------------------\n");
 
 	if (Play_Srv_Modify(&rec)) {
@@ -261,11 +275,10 @@ int Play_UI_Delete(int id){
 		//在删除剧目时，同时删除演出计划
 
 		if(Schedule_Srv_DeleteByID(id))
-			printf("演出厅座位删除成功!\n");//The seats of the room deleted successfully
-		printf(	"该演出厅删除成功!\n按[Enter]键返回!\n");//The room deleted successfully!\nPress [Enter] key to return
+			printf("演出计划删除成功!按回车返回!\n");
 		rtn = 1;
 	} else {
-		printf("该演出厅不存在!\n按[Enter]键返回!\n");//The room does not exist!\nPress [Enter] key to return
+		printf("该演出计划不存在!按回车返回!\n");//The room does not exist!\nPress [Enter] key to return
 	}
 
 	getchar();
@@ -284,15 +297,16 @@ int Play_UI_Query(int id){
     int rtn=0;
     play_t buf;
     rtn=Play_Srv_FetchByID(id,&buf);
+    system("clear");
 	printf("\n============================================================\n");
 	printf("*********************** 剧目查询 **************************\n");
-	printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","编号","名称","类型","地区","级别","时长",
+	printf("%6s%10s%4s%6s%4s%4s%6s%6s%4s","编号","名称","类型","地区","级别","时长",
 				"上映日期","结束日期","票价");
-	printf("%2d  %10s  %4d  %6s  %4d  %4d  %2d-%2d  %2d-%2d  %2d\n",buf.id
+	printf("%6d%10s%4d%6s%4d%4d%2d-%2d%2d-%2d%2d\n",buf.id
 						,buf.name,buf.type,buf.area,buf.rating
 						,buf.duration,buf.start_date.month,buf.start_date.day
 						,buf.end_date.month,buf.end_date.day,buf.price);
-	printf("查询完成,请按[Enter]返回\n");
+	printf("查询完成,请按任意返回\n");
 	getchar();
 	return rtn;
 }

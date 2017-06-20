@@ -12,7 +12,8 @@
 void Main_Menu(void) {
 	char choice;
 	do {
-		printf("\n==================================================================\n");
+		system("clear");
+		printf("\n=======================================================\n");
 		printf("**************** HLW剧院票务管理系统 ****************\n");
 		printf("[S]演出厅管理.\n");
 		printf("[P]剧目管理.\n");
@@ -22,10 +23,10 @@ void Main_Menu(void) {
 		printf("[N]排序和统计.\n");
 		printf("[A]账户管理.\n");
 		printf("[E]退出.\n");
-		printf("\n==================================================================\n");
-		printf("请输入你的选择:");
-		fflush(stdin);
-		choice = getchar();
+		printf("\n=========================================================\n");
+		printf("功能选择:");
+		scanf("%c",&choice);
+		ffflush();
 		switch (choice) {
 		case 'S':
 		case 's':

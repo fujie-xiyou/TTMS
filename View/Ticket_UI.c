@@ -5,7 +5,7 @@
 #include "../Service/Schedule.h"
 #include "../Service/Play.h"
 #include "../Service/Studio.h"
-
+#include "../Common/Common.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -125,6 +125,7 @@ void ListTickets(void){
 
 	printf("请输入演出计划编号以显示票列表!\n");
 	scanf("%d",&schedule_id);
+	ffflush();
 
 	//载入数据
 	paging.totalRecords = Ticket_Srv_FetchBySchID(head,schedule_id);
@@ -134,6 +135,7 @@ void ListTickets(void){
 	Schedule_Srv_FetchByID(schedule_id,&schedule_rec);
 	Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
 	do {
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("****************  票列表  ****************\n");
 		printf("编号\t\t剧名\t\t座位行\t座位列\t 日期\t时间\t\t价格\t状态\n");
@@ -154,13 +156,14 @@ void ListTickets(void){
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf("[P]上一页|[N]下一页 | [U]修改 | [R]返回 ");
-		fflush(stdin);
 		scanf("%c", &choice);
+		ffflush();
 		switch (choice) {
 		case 'u':
 		case 'U':
 			printf("输入票编号:");
 			scanf("%d", &id);
+			ffflush();
 			if (UpdateTicket(id)) {	//重新载入数据
 				paging.totalRecords = Ticket_Srv_FetchBySchID(head,schedule_rec.id);
 				List_Paging(head, paging, ticket_node_t);
@@ -201,7 +204,7 @@ int UpdateTicket(int id){
 	Schedule_Srv_FetchByID(rec.schedule_id,&schedule_rec);
 	Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
 	//需要增加查找座位信息
-
+	system("clear");
 	printf("\n=======================================================\n");
 	printf("****************  修改票信息  ****************\n");
 	printf("-------------------------------------------------------\n");
@@ -213,8 +216,10 @@ int UpdateTicket(int id){
 	printf("演出时间[%d:%d]:",schedule_rec.time.hour,schedule_rec.time.minute);
 	printf("票价[%d]:",rec.price);
 	scanf("%d",&(rec.price));
+	ffflush();
 	printf("票状态[%s](0.to sell,1.sold):",rec.status==1?"待售":"已售");
 	scanf("%d",&rec.status);
+	ffflush();
 	printf("-------------------------------------------------------\n");
 
 	if (Ticket_Srv_Modify(&rec)) {
@@ -236,6 +241,7 @@ int QueryTicket(int id){
 	play_t play_rec;
 	ticket_t rec;
 	if (Ticket_Srv_FetchByID(id,&rec)) {
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("*******************  票信息  *******************\n");
 		printf("编号\t\t剧名\t\t座位行\t座位列\t 日期\t时间\t\t价格\t状态\n");

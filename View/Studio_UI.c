@@ -11,10 +11,12 @@
 #include "../Service/Seat.h"
 #include "../Service/EntityKey.h"
 #include "Seat_UI.h"
+#include "../Common/Common.h"
+
 #define ACCOUNT_PAGE_SIZE 5 
 
 
-static const int STUDIO_PAGE_SIZE = 5;// // 
+static const int STUDIO_PAGE_SIZE = 5;
 
 #include <stdio.h>
 
@@ -35,21 +37,21 @@ void Studio_UI_MgtEntry(void) {
 	Paging_Locate_FirstPage(head, paging);
 
 	do {
-		/*system("cls");*/
+		system("clear");
 		printf("\n==================================================================\n");
 		printf("********************** 演出厅列表 **********************\n");
-		printf("%5s  %18s  %10s  %10s  %10s\n", "编号", "演出厅名", "行数",
+		printf("%5s  %-18s  %-10s  %-10s  %-10s\n", "id", "演出厅名", "行数",
 				"列数", "座位数");
 		printf("------------------------------------------------------------------\n");
 		//显示数据
 		for (i = 0, pos = (studio_node_t *) (paging.curPos);
 				pos != head && i < paging.pageSize; i++) {
-			printf("%5d  %18s  %10d  %10d  %10d\n", pos->data.id,
+			printf("%5d  %-18s  %-10d  %-10d  %-10d\n", pos->data.id,
 					pos->data.name, pos->data.rowsCount, pos->data.colsCount,
 					pos->data.seatsCount);
 			pos = pos->next;
 		}
-		printf("------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",
+		printf("\n------- 全部记录:%2d ----------------------- 页数 %2d/%2d ----\n",
 				paging.totalRecords, Pageing_CurPage(paging),
 				Pageing_TotalPages(paging));
 		printf(
@@ -59,9 +61,9 @@ void Studio_UI_MgtEntry(void) {
 		printf(
 				"\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
+		//ffflush();
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 
 		switch (choice) {
 		case 'a':
@@ -76,6 +78,7 @@ void Studio_UI_MgtEntry(void) {
 		case 'D':
 			printf("输入ID:");
 			scanf("%d", &id);
+			ffflush();
 			if (Studio_UI_Delete(id)) {	//从新载入数据
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				List_Paging(head, paging, studio_node_t);
@@ -85,6 +88,7 @@ void Studio_UI_MgtEntry(void) {
 		case 'U':
 			printf("输入ID:");
 			scanf("%d", &id);
+			ffflush();
 			if (Studio_UI_Modify(id)) {	//从新载入数据
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				List_Paging(head, paging, studio_node_t);
@@ -94,6 +98,7 @@ void Studio_UI_MgtEntry(void) {
 		case 'S':
 			printf("输入ID:");
 			scanf("%d", &id);
+			ffflush();
 			Seat_UI_MgtEntry(id);
 			paging.totalRecords = Studio_Srv_FetchAll(head);
 			List_Paging(head, paging, studio_node_t);
@@ -122,17 +127,20 @@ int Studio_UI_Add(void) {
 	char choice;
 
 	do {
-		/*system("cls");*/
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("****************  添加新演出厅 ****************\n");// Add New Projection Room 
 		printf("-------------------------------------------------------\n");
 		printf("演出厅名称:");//Room Name
-		fflush(stdin);
-		fgets(rec.name,30,stdin);
+		//ffflush();
+		sgets(rec.name,30);
+		//ffflush();
 		printf("座位的排数:");//Row Count of Seats
 		scanf("%d", &(rec.rowsCount));
+		ffflush();
 		printf("座位的列数:");//Column Count of Seats
 		scanf("%d", &(rec.colsCount));
+		ffflush();
 		rec.seatsCount = 0;
 		printf("=======================================================\n");
 
@@ -146,8 +154,8 @@ int Studio_UI_Add(void) {
 			printf("新演出厅添加失败!\n");//The new room added failed!
 		printf("-------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
+		ffflush();
 	} while ('a' == choice || 'A' == choice);
 	return newRecCount;
 }
@@ -166,14 +174,13 @@ int Studio_UI_Modify(int id) {
 		getchar();
 		return 0;
 	}
-
+	system("clear");
 	printf("\n=======================================================\n");
 	printf("****************  更新演出厅  ****************\n");//Update Projection Room
 	printf("-------------------------------------------------------\n");
 	printf("演出厅编号:%d\n", rec.id);
 	printf("演出厅名[%s]:", rec.name);
-	fflush(stdin);
-	fgets(rec.name,30,stdin);
+	sgets(rec.name,30);
 
 	List_Init(list, seat_node_t);
 	seatcount = Seat_Srv_FetchByRoomID(list, rec.id);
@@ -181,8 +188,10 @@ int Studio_UI_Modify(int id) {
 		do{			//如果座位文件中已有座位信息，则更新的行列必须比以前大，否则不允许更改
 			printf("座位的排数应该 >= [%d]:", rec.rowsCount);//Row Count of Seats should
 			scanf("%d", &(newrow));
+			ffflush();
 			printf("座位的列数应该 >= [%d]:", rec.colsCount);//Column Count of Seats should
 			scanf("%d", &(newcolumn));
+			ffflush();
 		}while(	newrow<rec.rowsCount||newcolumn<rec.colsCount);
 		rec.rowsCount=newrow;
 		rec.colsCount=newcolumn;
@@ -191,9 +200,11 @@ int Studio_UI_Modify(int id) {
 	else{
 		printf("座位的排数:");//Row Count of Seats
 		scanf("%d", &rec.rowsCount);
+		ffflush();
 		printf("座位的列数:");
 		scanf("%d", &rec.colsCount);
-		rec.seatsCount=0;
+		ffflush();
+		rec.seatsCount=rec.colsCount*rec.rowsCount;
 	}
 
 	printf("-------------------------------------------------------\n");

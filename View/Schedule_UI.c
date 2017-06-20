@@ -17,6 +17,7 @@
 #include "../Service/EntityKey.h"
 #include "../Service/Seat.h"
 #include "../Service/Ticket.h"
+#include "../Common/Common.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,6 +44,7 @@ void Schedule_UI_ListAll(void) {
 	Paging_Locate_FirstPage(sch,paging);
 	do {
 		//system("cls");
+		system("clear");
 		printf("\n============================================================\n");
 		printf("*********************** 演出计划查询 **************************\n");
 		printf("%2s  %10s  %10s  %11s  %3s\n","编号","剧名","演出厅名","演出时间","票价");
@@ -64,9 +66,8 @@ void Schedule_UI_ListAll(void) {
 		printf(
 				"\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 
 		switch (choice) {
 		case 'p':
@@ -102,16 +103,20 @@ int Schedule_UI_Add(int play_id) {
 	char choice;
 	do{
 		//system("cls);
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("\t\t****************  添加演出计划  *****************\n");
 		printf("-------------------------------------------------------\n");
 		rec.play_id=play_id;
 		printf("放映厅编号:");
 		scanf("%d",&rec.studio_id);
+		ffflush();
 		printf("演出日期(yyyy/mm/dd):");
 		scanf("%d/%d/%d",&rec.date.year,&rec.date.month,&rec.date.day);
+		ffflush();
 		printf("演出时间(hh:mm:ss):");
 		scanf("%d/%d/%d",&rec.time.hour,&rec.time.minute,&rec.time.second);
+		ffflush();
 		rec.seat_count=Seat_Srv_FetchValidByRoomID(seatList,rec.studio_id);
 		//获取主键
 		rec.id=EntKey_Srv_CompNewKey("Schedule");
@@ -124,8 +129,8 @@ int Schedule_UI_Add(int play_id) {
 		}
 		printf("-------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
+		ffflush();
 	}while('a'==choice || 'A'==choice);
 	return newRecCount;
 }
@@ -148,17 +153,21 @@ int Schedule_UI_Modify(int id){
 		getchar();
 		return 0;
 	}
+	system("clear");
 	printf("\n=======================================================\n");
 	printf("\t\t**************** 修改演出计划 ****************\n");
 	printf("-------------------------------------------------------\n");
 	printf("演出计划编号: %d\n",rec.id);
 	printf("演出的剧目编号:[%d]",rec.play_id);
 	scanf("%d",&rec.play_id);
+	ffflush();
 	printf("演出的播放厅编号:[%d]",rec.studio_id);
 	printf("演出日期:[%4d/%2d/%2d]",rec.date.year,rec.date.month,rec.date.day);
 	scanf("%d/%d/%d",&rec.date.year,&rec.date.month,&rec.date.day);
+	ffflush();
 	printf("演出时间:[%2d/%2d/%2d]",rec.time.hour,rec.time.minute,rec.time.second);
 	scanf("%d/%d/%d",&rec.time.hour,&rec.time.minute,&rec.time.second);
+	ffflush();
 	rec.seat_count=Seat_Srv_FetchValidByRoomID(seatList,rec.studio_id);
 	if(Schedule_Srv_Modify(&rec)){
 		printf("修改演出计划成功!回车返回\n");
@@ -215,13 +224,14 @@ int Schedule_UI_Query(int id){
     rtn=Play_Srv_FetchByID(id,&pla);
     Play_Srv_FetchByID(buf.play_id,&pla);
     Studio_Srv_FetchByID(buf.studio_id,&stu);
+    system("clear");
 	printf("\n============================================================\n");
 	printf("*********************** 演出计划查询 **************************\n");
 	printf("%2s  %10s  %10s  %11s  %3s\n","编号","剧名","演出厅名","演出时间","票价");
 	printf("--------------------------------------------------------------");
 	printf("%2d  %10s  %10s  %2d/%2d %2d:%2d   %3d\n",buf.id,pla.name,stu.name,
 			buf.date.month,buf.date.day,buf.time.hour,buf.time.minute,pla.price);
-	printf("查询完成,请按[Enter]返回\n");
+	printf("查询完成,请按回车返回\n");
 	getchar();
 	return rtn;
 	return 0;
@@ -247,6 +257,7 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
 	Paging_Locate_FirstPage(list,paging);
 	do {
 		//system("cls");
+		system("clear");
 		printf("\n============================================================\n");
 		printf("*********************** 演出计划查询 **************************\n");
 		printf("%2s  %10s  %10s  %11s  %3s\n","编号","剧名","演出厅名","演出时间","票价");
@@ -268,9 +279,8 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
 		printf(
 				"\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 
 		switch (choice) {
 		case 'p':
@@ -300,6 +310,7 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
  */
 void Schedule_UI_MgtEntry(int play_id){
 	char choice;
+	system("clear");
 	printf("\n=======================================================\n");
 	printf("\t\t**************** 管理演出计划 ****************\n");
 	printf("-------------------------------------------------------\n");
@@ -316,10 +327,8 @@ void Schedule_UI_MgtEntry(int play_id){
 	printf("\t\t[R]返回上级\n");
 	printf("-------------------------------------------------------\n");
 	printf("\t\t请输入功能选项:");
-	fflush(stdin);
 	scanf("%c", &choice);
-	fflush(stdin);
-
+	ffflush();
 	switch (choice) {
 	case 'a':
 	case 'A':

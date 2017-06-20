@@ -32,6 +32,7 @@ void SalesAnalysis_UI_BoxOffice() {
 	paging.totalRecords=Salesanalysis_Srv_StaticSale(head);
 	Paging_Locate_FirstPage(head,paging);
 	do{
+		system("clear");
 		printf("\n==================================================================\n");
 		printf("********************** 票房排行榜 **********************\n");
 		printf("--------------------------------------------------------\n");
@@ -48,9 +49,8 @@ void SalesAnalysis_UI_BoxOffice() {
 		printf("[P]上一页|[N]下一页|[R]返回");
 		printf("\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 		switch(choice){
 		case 'P':
 		case 'p':
@@ -87,18 +87,21 @@ void SalesAanalysis_UI_MgtEntry() {
 	user_date_t stDate,endDate;
 	account_t user;
 	do{
-	printf("[B]浏览排行榜|[D]查询售票员的销售情况|[S]判断当前用户是否不是经理|[R]结束\n");
-	printf("输入你的选择:");
-	scanf("%c",&choice);
-	switch(choice)
-	{
+		system("clear");
+		printf("[B]浏览排行榜|[D]查询售票员的销售情况|[S]判断当前用户是否不是经理|[R]结束\n");
+		printf("输入你的选择:");
+		scanf("%c",&choice);
+		ffflush();
+		switch(choice)
+		{
 		case 'b':
 		case 'B':
 			if(gl_CurUser.type==USR_MANG){
 				SalesAnalysis_UI_BoxOffice();
 			}else{
-				printf("您不是经理,无权查看此界面\n");
+				printf("您不是经理,无权查看此界面,按任意键返回!\n");
 			}
+			getchar();
 		    break;
 		case 'd':
 		case 'D':
@@ -108,7 +111,7 @@ void SalesAanalysis_UI_MgtEntry() {
 			if(gl_CurUser.type==USR_CLERK){
 				SalesAanalysis_UI_StatSale(gl_CurUser.id,stDate,endDate);
 			}else{
-				fgets(user.username,30,stdin);
+				sgets(user.username,30);
 				if(Account_Srv_FetchByName(user.username,&user)){
 					SalesAanalysis_UI_StatSale(user.id,stDate,endDate);
 				}
@@ -117,22 +120,26 @@ void SalesAanalysis_UI_MgtEntry() {
 		case 's':
 		case 'S':
 			if(gl_CurUser.type!=USR_MANG){
-				printf("您不是经理,无权查看此页面!\n");
+				printf("您不是经理,无权查看此页面!按任意键返回!\n");
+				getchar();
 				break;
 			}
 			printf("\n==============================================================\n");
 			printf("*******************查询售票员在给定时间销量********************\n");
 			printf("请输入售票员名字:");
-			fgets(user.username,30,stdin);
+			sgets(user.username,30);
 			if(Account_Srv_FetchByName(user.username,&user)){
 				printf("请输入开始时间:(yyyy/mm/dd)\n");
 				scanf("%d/%d/%d",&stDate.year,&stDate.month,&stDate.day);
+				ffflush();
 				printf("请输入结束时间:(yyyy/mm/dd)\n");
 				scanf("%d/%d/%d",&endDate.year,&endDate.month,&endDate.day);
+				ffflush();
 				SalesAanalysis_UI_StatSale(user.id,stDate,endDate);
 			}else{
-				printf("输入的用户名不存在");
+				printf("输入的用户名不存在,按任意键返回!");
 			}
+			getchar();
 			break;
 		}
 	}while('r'==choice  && 'R'==choice);

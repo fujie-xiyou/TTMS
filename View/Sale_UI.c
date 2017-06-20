@@ -9,6 +9,7 @@
 #include "../Service/Sale.h"
 //#include "../Service/Play.h"
 #include "../Common/List.h"
+#include "../Common/Common.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +36,7 @@ void Sale_UI_ShowTicket(int schID){
 
 	do{
 		/*system("cls");*/
+		system("clear");
 		printf("\n=======================================================\n");
 		printf("********************** 演出计划票列表 **********************\n");
 		printf("%2s %10s %10s %3s %3s %3s %4s","座位号","剧名","播放厅名","行号","列号","票价","状态");
@@ -56,9 +58,8 @@ void Sale_UI_ShowTicket(int schID){
 		printf("[S]售票|[P]上一页|[N]下一页|[R]返回");
 		printf("\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 		switch(choice){
 		case 'S':
 		case 's':
@@ -88,13 +89,16 @@ inline int Sale_UI_SellTicket(ticket_list_t tickList, seat_list_t seatList){
 	seat_node_t * pSeat=NULL;
 	ticket_node_t *tic;
 	sale_t sal;
+	system("clear");
 	printf("\n===============================================================\n");
 	printf("**************************  售票  ********************************\n");
 	printf("------------------------------------------------------------------\n");
 	printf("请输入座位行号:");
 	scanf("%d",&row);
+	ffflush();
 	printf("请输入座位列号:");
 	scanf("%d",&col);
+	ffflush();
 	return 0;
 	pSeat=Seat_Srv_FindByRowCol(seatList,row,col);
 	if(!pSeat){
@@ -137,6 +141,7 @@ void Sale_UI_ShowScheduler(int playID) {
 	Paging_Locate_FirstPage(head,paging);
 	do{
 		//system("cls");
+		system("clear");
 		printf("\n========================================================\n");
 	    printf("**********************剧目演出计划列表**********************\n");
 	    printf("%4s  %10s  %10s  %5s %5s\n","编号","剧名","演出厅","日期","时间");
@@ -155,11 +160,13 @@ void Sale_UI_ShowScheduler(int playID) {
 	    printf("请输入功能选择:");
 	    //getc(choice);
 	    scanf("%c",&choice);
+	    ffflush();
 	    switch(choice){
 		  	case 'T':
 		 	case 't':
 		       	printf("请输入要显示票的演出计划ID:");
 		      	scanf("%d",&schedule_id);
+		      	ffflush();
 		       	Sale_UI_ShowTicket(schedule_id);
 		        break;
 		   	case 'P':
@@ -192,6 +199,7 @@ void Sale_UI_MgtEntry() {
 	Paging_Locate_FirstPage(head,paging);
 	do{
 		//system("cls");
+		system("clear");
 		printf("\n============================================================\n");
 		printf("*********************** 剧目列表 **************************\n");
 		printf("%2s  %10s  %4s  %6s  %4s  %4s  %6s  %6s %4s","编号","名称","类型","地区","级别","时长",
@@ -211,20 +219,20 @@ void Sale_UI_MgtEntry() {
 		printf("[C]演出计划|[S]查找剧目名|[F]过滤|[P]上一页|[N]下一页|[R]返回");
 		printf("\n==================================================================\n");
 		printf("功能选择:");//Your Choice
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 		switch (choice) {
 			case 'C':
 			case 'c':
 				printf("请输入要查询演出计划的剧目编号:");
 				scanf("%d",&play_id);
+				ffflush();
 				Sale_UI_ShowScheduler(play_id);
 				break;
 			case 'S':
 			case 's':
 				printf("请输入要查询的关键字:");
-				fgets(name,30,stdin);
+				sgets(name,30);
 				Play_Srv_FetchByName(head,name);
 				break;
             case 'P':
@@ -249,11 +257,13 @@ void Sale_UI_MgtEntry() {
 void Sale_UI_ReturnTicket(){
 	int id;
 	ticket_t tic;
+	system("clear");
 	printf("\n===============================================================\n");
 	printf("**************************  退票  ********************************\n");
 	printf("------------------------------------------------------------------\n");
 	printf("请输入要退的票的ID:");
 	scanf("%d",&id);
+	ffflush();
 	if(!Ticket_Srv_FetchByID(id,&tic)){
 		printf("要退的票不存在!\n");
 		getchar();

@@ -10,7 +10,9 @@
 #include "../Service/Studio.h"
 #include "../Service/EntityKey.h"
 #include "../Common/List.h"
+#include "../Common/Common.h"
 #include <stdio.h>//真的汉化了。。
+
 
 //根据状态返回对应表示状态符号
 inline char Seat_UI_Status2Char(seat_status_t status) {
@@ -78,6 +80,7 @@ void Seat_UI_MgtEntry(int roomID) {
 	do {
 
 		//system("cls");
+		system("clear");
 		printf("\n==================================================================\n");
 		printf("********************  放映厅 %d 座位列表  **************************\n",
 				roomID);//Room %d Seat List
@@ -108,9 +111,8 @@ void Seat_UI_MgtEntry(int roomID) {
 		}
 
 		printf("[A]添加|[D]删除|[U]修改|[R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 
 		switch (choice) {
 		case 'a':
@@ -153,6 +155,7 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //输入�
 	char choice;
 	do {
 		/*system("cls");*/
+		system("clear");
 		printf(
 				"\n==================================================================\n");
 		printf(
@@ -166,9 +169,10 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //输入�
 					row, column);//Row shouldn't great than %d and Column shouldn't great than
 			printf("座位排数:");//Row of the Seat
 			scanf("%d", &(rec.row));
+			ffflush();
 			printf("座位列数:");//Column of the Seat
 			scanf("%d", &(rec.column));
-			fflush(stdin);
+			ffflush();
 		} while (rec.row > row || rec.column > column);
 
 		p = Seat_Srv_FindByRowCol(list, rec.row, rec.column);
@@ -194,8 +198,8 @@ int Seat_UI_Add(seat_list_t list, int roomID, int row, int column) {  //输入�
 		printf(
 				"------------------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
+		ffflush();
 	} while ('a' == choice || 'A' == choice);
 	return newRecCount;
 }
@@ -205,6 +209,7 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 	int newrow, newcolumn;
 	char choice;
 	seat_node_t *p;
+	system("clear");
 
 	printf(
 			"\n==================================================================\n");
@@ -220,15 +225,16 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 					row, column);
 			printf("座位排数 :");//Row of Seat
 			scanf("%d", &newrow);
+			ffflush();
 			printf("座位列数 :");//Column of Seat
 			scanf("%d", &newcolumn);
+			ffflush();
 		} while (newrow > row || newcolumn > column);
 
 		p = Seat_Srv_FindByRowCol(list, newrow, newcolumn);
 		if (p) {
 			printf("座位情况 [%d,%d]: [%c]:", newrow, newcolumn,//State of Seat
 					Seat_UI_Status2Char(p->data.status));
-			fflush(stdin);
 			p->data.status = Seat_UI_Char2Status(getchar());
 			printf(
 					"-------------------------------------------------------------------\n");
@@ -242,9 +248,8 @@ int Seat_UI_Modify(seat_list_t list, int row, int column) {
 		printf(
 				"-------------------------------------------------------------------\n");
 		printf("[U]修改更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 	} while ('u' == choice || 'U' == choice);
 	return rtn;
 }
@@ -258,6 +263,7 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 
 	do {
 		/*system("cls");*/
+		system("clear");
 		printf(
 				"\n==================================================================\n");
 		printf(
@@ -265,14 +271,14 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 		printf(
 				"------------------------------------------------------------------\n");
 		do {
-			fflush(stdin);
 			printf("排数不应超出 %d 列数不应超出 %d!\n",//Row shouldn't great than %d and Column shouldn't great than %d!\n
 					row, column);
 			printf("座位排数:");//Row of the Seat
 			scanf("%d", &(newrow));
+			ffflush();
 			printf("座位列数:");//Column of the Seat
 			scanf("%d", &(newcolumn));
-			fflush(stdin);
+			ffflush();
 		} while (newrow > row || newcolumn > column);
 
 		p = Seat_Srv_FindByRowCol(list, newrow, newcolumn);
@@ -293,9 +299,8 @@ int Seat_UI_Delete(seat_list_t list, int row, int column) {
 		printf(
 				"------------------------------------------------------------------\n");
 		printf("[D]删除更多, [R]返回:");
-		fflush(stdin);
 		scanf("%c", &choice);
-		fflush(stdin);
+		ffflush();
 	} while ('d' == choice || 'D' == choice);
 	return delSeatCount;
 }

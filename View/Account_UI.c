@@ -7,6 +7,7 @@
 
 #include "Account_UI.h"//
 #include "../Common/List.h"
+#include "../Common/Common.h"
 #include "../Service/Account.h"
 #include "../Service/EntityKey.h"
 //#include<windows.h>
@@ -20,21 +21,24 @@
 int SysLogin() {
     Account_Srv_InitSys();
     int i=0;
-    printf("==========欢迎使用HLW剧院票务管理系统!==========\n\n\n\t\t请您先登录!");
+    system("clear");
+    printf("==========欢迎使用HLW剧院票务管理系统!==========\n\n\t请您先登录!\n");
     char usrName[30];
     char passwd[30];
     while(i<3){
-        printf("请输入账号:");
+        printf("\t请输入账号:");
         scanf("%s",usrName);
-        printf("请输入密码:");
+        ffflush();
+        printf("\t请输入密码:");
         scanf("%s",passwd);
+        ffflush();
         if(Account_Srv_Verify(usrName,passwd)){
             return 1;
         }
-        printf("账号或密码错误!请重新输入\n");
+        printf("\t账号或密码错误!请重新输入\n");
 
     }
-    printf("密码错误超过3次!\n");
+    printf("\t密码错误超过3次!\n");
 
 
 	return 0;
@@ -54,7 +58,7 @@ void Account_UI_MgtEntry() {
     paging.totalRecords = Account_Srv_FetchAll(head);
     Paging_Locate_FirstPage(head,paging);
     do{
-        //system("cls");
+    	system("clear");
         printf("\n========================================================\n");
         printf("************************用户列表************************\n");
         printf("%5s  %10s  %10s  %10s\n","编号","用户名","密码","职位");
@@ -66,6 +70,7 @@ void Account_UI_MgtEntry() {
         printf("\n[A]新增|[M]修改|[D]删除|[Q]查询|[P]上一页|[N]下一页|[R]返回\n");
         printf("请输入功能选项:");
         scanf("%c",&choice);
+        ffflush();
         switch(choice){
             case 'A':
             case 'a':
@@ -113,9 +118,11 @@ void Account_UI_MgtEntry() {
 //添加一个用户账号信息，如果账号名存在，提示出错信息
 int Account_UI_Add(account_list_t list ) {
     account_t newUser;
+    system("clear");
     printf("\n===================添加新用户=====================\n");
     printf("---------------------------------------------------\n");
     printf("请输入要添加的用户名:");
+    ffflush();
     fgets(newUser.username,30,stdin);
     if(Account_Srv_FindByUsrName(list,newUser.username)){
         printf("该用户已存在!!!\n");
@@ -126,12 +133,15 @@ int Account_UI_Add(account_list_t list ) {
     fgets(newUser.password,30,stdin);
     printf("请输入新用户角色(0表示匿名,1票员,2经理,9系统管理员):");
     scanf("%d",&newUser.type);
+    ffflush();
     if(Account_Srv_Add(&newUser)){
-        printf("新用户添加成功!\n");
+        printf("新用户添加成功!按任意键返回!\n");
+        getchar();
         return 1;
     }
     else{
-        printf("新用户添加失败!\n");
+        printf("新用户添加失败!按任意键返回!\n");
+        getchar();
         return 0;
     }
 	return 0;
@@ -143,7 +153,8 @@ int Account_UI_Add(account_list_t list ) {
 int Account_UI_Modify(account_list_t list ,char usrName[]) {
 	account_list_t  user;
     if(!(user=Account_Srv_FindByUsrName(list,usrName))){
-        printf("输入的用户名不存在!\n");
+        printf("输入的用户名不存在!按任意键返回!\n");
+        getchar();
         return 0;
     }
     printf("请输入新的密码:");
@@ -173,6 +184,7 @@ int Account_UI_Delete(account_list_t list ,char usrName[]) {
 //根据用户账号名查找该用户账号是否存在，存在返回1，否则返回0，并提示错误信息
 int Account_UI_Query(account_list_t  list ,char usrName[]) {
 	account_list_t user;
+	system("clear");
 	printf("\n===============查询用户信息================\n");
 	if((!(user=Account_Srv_FindByUsrName(list,usrName)))){
 		printf("用户名不存在!\n");
