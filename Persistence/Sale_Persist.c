@@ -42,11 +42,12 @@ int Sale_Perst_DeleteByID(int saleID) {
     }
     sale_t buf;
     while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id!=saleID){
-            fwrite(&buf,sizeof(buf),1,fd);
-        } else{
-            rtn=1;
+        if(fread(&buf,sizeof(buf),1,fp)){
+        	if(buf.id!=saleID){
+        		fwrite(&buf,sizeof(buf),1,fd);
+        	} else{
+        		rtn=1;
+        	}
         }
     }
     fclose(fp);
@@ -70,19 +71,20 @@ int Sale_Perst_SelectByUsrID(sale_list_t list, int usrID, user_date_t stDate,
         printf("%s打开失败!\n",SALE_DATA_FILE);
         return rtn;
     }
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.user_id==usrID && DateCmp(buf.date,stDate)!=-1 &&
-           DateCmp(buf.date,endDate)!=1 ){
-               if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-                   printf("内存申请失败!\n");
-                   return rtn;
-               }
-               newNode->data=buf;
-               List_AddTail(list,newNode);
-               rtn++;
-           }
-     }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (buf.user_id == usrID && DateCmp(buf.date, stDate) != -1
+					&& DateCmp(buf.date, endDate) != 1) {
+				if (!(newNode = (sale_list_t) malloc(sizeof(sale_node_t)))) {
+					printf("内存申请失败!\n");
+					return rtn;
+				}
+				newNode->data = buf;
+				List_AddTail(list, newNode);
+				rtn++;
+			}
+		}
+	}
 
 	fclose(fp);
 	return rtn;
@@ -104,19 +106,20 @@ int Sale_Perst_SelectByDate(sale_list_t list, user_date_t stDate,
         printf("%s打开失败!\n",SALE_DATA_FILE);
         return rtn;
     }
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(DateCmp(buf.date,stDate)!=-1 && DateCmp(buf.date,endDate)!=1 ){
-            if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-                printf("内存申请失败!\n");
-                return rtn;
-            }
-            newNode->data=buf;
-            List_AddTail(list,newNode);
-            rtn++;
-        }
-
-    }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (DateCmp(buf.date, stDate) != -1
+					&& DateCmp(buf.date, endDate) != 1) {
+				if (!(newNode = (sale_list_t) malloc(sizeof(sale_node_t)))) {
+					printf("内存申请失败!\n");
+					return rtn;
+				}
+				newNode->data = buf;
+				List_AddTail(list, newNode);
+				rtn++;
+			}
+		}
+	}
     fclose(fp);
 	return rtn;
 

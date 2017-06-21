@@ -52,26 +52,26 @@ int Schedule_Perst_Insert(const schedule_t *data)
  * Return:      更新的演出计划信息数，0表示未找到，1表示找到并更新
  */
 int Schedule_Perst_Update(const schedule_t *data){
-    FILE *fp=fopen(SCHEDULE_DATA_FILE,"wb+");
+    FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb+");
     schedule_t buf;
     int rtn=0;
     if(fp==NULL){//看看人家这么写也挺不错的嘻嘻
         printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return 0;
     }
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id==data->id){
-            fseek(fp,-sizeof(buf),SEEK_CUR);
-            if(!fwrite(data,sizeof(buf),1,fp)){
-                printf("%s写入失败!\n",SCHEDULE_DATA_FILE);
-            }
-            else{
-                rtn=1;
-            }
-            break;
-        }
-    }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (buf.id == data->id) {
+				fseek(fp, -sizeof(buf), SEEK_CUR);
+				if (!fwrite(data, sizeof(buf), 1, fp)) {
+					printf("%s写入失败!\n", SCHEDULE_DATA_FILE);
+				} else {
+					rtn = 1;
+				}
+				break;
+			}
+		}
+	}
     fclose(fp);
     return rtn;
 }
@@ -86,28 +86,33 @@ int Schedule_Perst_Update(const schedule_t *data){
  */
 int Schedule_Perst_DeleteByID(int ID){
 
-    rename(SCHEDULE_DATA_FILE,SCHEDULE_DATA_TEMP_FILE);
+    if(rename(SCHEDULE_DATA_FILE,SCHEDULE_DATA_TEMP_FILE)){
+    	printf("重命名失败!\n");
+    	getchar();
+    }
     schedule_t buf;
     int rtn=0;
     FILE *fp=fopen(SCHEDULE_DATA_TEMP_FILE,"rb");
     if(fp==NULL){
         printf("%s打开失败\n",SCHEDULE_DATA_TEMP_FILE);
+        getchar();
         return 0;
     }
     FILE *fd=fopen(SCHEDULE_DATA_FILE,"wb");
     if(fd==NULL){
         printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
+        getchar();
         return 0;
     }
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id!=ID){
-            fwrite(&buf,sizeof(buf),1,fd);
-        }
-        else{
-            rtn=1;
-        }
-    }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (buf.id != ID) {
+				fwrite(&buf, sizeof(buf), 1, fd);
+			} else {
+				rtn = 1;
+			}
+		}
+	}
     return rtn;
 
 }
@@ -128,14 +133,15 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
         return rtn;
     }
     schedule_t data;
-    while(!feof(fp)){
-        fread(&data,sizeof(data),1,fp);
-        if(data.id==ID){
-            *buf=data;
-            rtn=1;
-            break;
-        }
-    }
+	while (!feof(fp)) {
+		if (fread(&data, sizeof(data), 1, fp)) {
+			if (data.id == ID) {
+				*buf = data;
+				rtn = 1;
+				break;
+			}
+		}
+	}
     fclose(fp);
     return rtn;
 }
@@ -148,36 +154,35 @@ int Schedule_Perst_SelectByID(int ID, schedule_t *buf){
  * Output:      提示建立链表时，申请空间失败
  * Return:      返回查找到的记录数目
  */
-int Schedule_Perst_SelectAll(schedule_list_t list){
+int Schedule_Perst_SelectAll(schedule_list_t list) {
 
-    int recCount=0;
-    schedule_list_t newNode;
-    schedule_t data;
+	int recCount = 0;
+	schedule_list_t newNode;
+	schedule_t data;
 
-    assert(NULL!=list);
+	assert(NULL!=list);
 
-    List_Free(list,schedule_node_t);
+	List_Free(list, schedule_node_t);
 
-    FILE *fp=fopen(SCHEDULE_DATA_FILE,"rb");
-    if(fp==NULL){
-        printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
-        return recCount;
-    }
-    while(!feof(fp)){
-        fread(&data,sizeof(data),1,fp);
-        newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
-        if(newNode==NULL){
-            printf("内存申请失败!\n");
-            break;
-        }
-        newNode->data=data;
-        List_AddTail(list,newNode);
-        recCount++;
-    }
-    fclose(fp);
-
-
-    return recCount;
+	FILE *fp = fopen(SCHEDULE_DATA_FILE, "rb");
+	if (fp == NULL) {
+		printf("%s打开失败!\n", SCHEDULE_DATA_FILE);
+		return recCount;
+	}
+	while (!feof(fp)) {
+		if (fread(&data, sizeof(data), 1, fp)) {
+			newNode = (schedule_list_t) malloc(sizeof(schedule_node_t));
+			if (newNode == NULL) {
+				printf("内存申请失败!\n");
+				break;
+			}
+			newNode->data = data;
+			List_AddTail(list, newNode);
+			recCount++;
+		}
+	}
+	fclose(fp);
+	return recCount;
 
 }
 
@@ -201,19 +206,20 @@ int Schedule_Perst_SelectByPlay(schedule_list_t list, int play_id){
         printf("%s打开失败!\n",SCHEDULE_DATA_FILE);
         return recCount;
     }
-    while(!feof(fp)){
-        fread(&data,sizeof(data),1,fp);
-        if(data.id==play_id){
-            newNode=(schedule_list_t)malloc(sizeof(schedule_node_t));
-            if(newNode==NULL){
-                printf("内存申请失败!\n");
-                break;
-            }
-            newNode->data=data;
-            List_AddTail(list,newNode);
-            recCount++;
-        }
-    }
+	while (!feof(fp)) {
+		if (fread(&data, sizeof(data), 1, fp)) {
+			if (data.play_id == play_id) {
+				newNode = (schedule_list_t) malloc(sizeof(schedule_node_t));
+				if (newNode == NULL) {
+					printf("内存申请失败!\n");
+					break;
+				}
+				newNode->data = data;
+				List_AddTail(list, newNode);
+				recCount++;
+			}
+		}
+	}
     fclose(fp);
     return recCount;
 

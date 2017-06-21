@@ -240,17 +240,19 @@ int QueryTicket(int id){
 	schedule_t schedule_rec;
 	play_t play_rec;
 	ticket_t rec;
+	seat_t seat;
 	if (Ticket_Srv_FetchByID(id,&rec)) {
 		system("clear");
 		printf("\n=======================================================\n");
 		printf("*******************  票信息  *******************\n");
-		printf("编号\t\t剧名\t\t座位行\t座位列\t 日期\t时间\t\t价格\t状态\n");
+		printf("编号\t剧名\t座位行\t座位列\t\t日期\t时间\t价格\t状态\n");
 		printf("-------------------------------------------------------\n");
-		Schedule_Srv_FetchByID(id,&schedule_rec);
+		Schedule_Srv_FetchByID(rec.schedule_id,&schedule_rec);
 		Play_Srv_FetchByID(schedule_rec.play_id,&play_rec);
-		//添加查找座位行列信息的函数
-		printf("%d\t%s\\t%d-%d-%d\t%d:%d\t%d\t%d\n"/*t%d\t%d*/, rec.id, play_rec.name,
-//					seat_rec.row, seat_rec.column,
+		Seat_Srv_FetchByID(rec.seat_id,&seat);
+		//添加查找座位行列信息的函数.
+		printf("%d\t%s\t%d\t%d\t%d-%d-%d\t%d:%d\t%d\t%d\n", rec.id, play_rec.name,
+					seat.row, seat.column,
 				schedule_rec.date.year,schedule_rec.date.month,
 				schedule_rec.date.day,schedule_rec.time.hour,
 				schedule_rec.time.minute,rec.price,rec.status);
@@ -262,6 +264,6 @@ int QueryTicket(int id){
 	}
 	printf("-------------------------------------------------------\n");
 
-	system("pause");
+	getchar();
 	return rtn;
 }

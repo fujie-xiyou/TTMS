@@ -9,6 +9,7 @@
 #include "Sale_UI.h"
 #include "SalesAnalysis_UI.h"
 
+extern account_t gl_CurUser;
 void Main_Menu(void) {
 	char choice;
 	do {
@@ -30,10 +31,20 @@ void Main_Menu(void) {
 		switch (choice) {
 		case 'S':
 		case 's':
+			if(gl_CurUser.type!=USR_ADMIN){
+				printf("您不是系统管理员!无权使用此功能!");
+				getchar();
+				break;
+			}
 			Studio_UI_MgtEntry();
 			break;
 		case 'P':
 		case 'p':
+			if(gl_CurUser.type!=USR_MANG){
+				printf("您不是经理!无权使用此功能!");
+				getchar();
+				break;
+			}
 			Play_UI_MgtEntry(0);
 			break;
 		case 'Q':
@@ -42,10 +53,20 @@ void Main_Menu(void) {
 			break;
 		case 'T':
 		case 't':
+			if(gl_CurUser.type!=USR_CLERK){
+				printf("您不是售票员!无权使用此功能!");
+				getchar();
+				break;
+			}
 			Sale_UI_MgtEntry();
 			break;
 		case 'R':
 		case 'r':
+			if(gl_CurUser.type!=USR_CLERK){
+				printf("您不是售票员!无权使用此功能!");
+				getchar();
+				break;
+			}
 			Sale_UI_ReturnTicket();
 			break;
 		case 'N':

@@ -36,9 +36,9 @@ void SalesAnalysis_UI_BoxOffice() {
 		printf("\n==================================================================\n");
 		printf("********************** 票房排行榜 **********************\n");
 		printf("--------------------------------------------------------\n");
-		printf("%2s %10s %4s %4s %4s %4s","编号","名称","区域","销量","票价","票房");
+		printf("%2s %10s %4s %4s %4s %4s\n","编号","名称","区域","销量","票价","票房");
 		for(i=0,pos=(salesanalysis_list_t)paging.curPos;pos!=head && i<paging.pageSize;i++){
-			printf("%2d %10s %4s %4ld %4d %4ld",pos->data.play_id,pos->data.name,pos->data.area,pos->data.totaltickets
+			printf("%2d %10s %4s %4ld %4d %4ld\n",pos->data.play_id,pos->data.name,pos->data.area,pos->data.totaltickets
 					,pos->data.price,pos->data.sales);
 			pos=pos->next;
 		}
@@ -78,6 +78,8 @@ void SalesAanalysis_UI_StatSale(int usrID, user_date_t stDate, user_date_t endDa
 	printf("售票员:%s 在 %4d/%2d/%2d 到 %4d/%2d/%2d 间销售额为%d\n",user.username,stDate.year
 			,stDate.month,stDate.day,endDate.year,endDate.month,endDate.day,amount);
 	printf("-------------------------------------------------------------\n");
+	printf("按回车返回!");
+	getchar();
 }
 
 //销售分析入口函数，显示菜单，菜单包含"降序显示截止目前剧院电影票房排行榜"，“显示或查询当日售票员售票情况”，
@@ -88,8 +90,8 @@ void SalesAanalysis_UI_MgtEntry() {
 	account_t user;
 	do{
 		system("clear");
-		printf("[B]浏览排行榜|[D]查询售票员的销售情况|[S]判断当前用户是否不是经理|[R]结束\n");
-		printf("输入你的选择:");
+		printf("[B]浏览排行榜\n[D]查询售票员当天的销售情况\n[S]查询销售员给定时间的销量\n[R]结束\n");
+		printf("\n输入你的选择:");
 		scanf("%c",&choice);
 		ffflush();
 		switch(choice)
@@ -99,9 +101,9 @@ void SalesAanalysis_UI_MgtEntry() {
 			if(gl_CurUser.type==USR_MANG){
 				SalesAnalysis_UI_BoxOffice();
 			}else{
-				printf("您不是经理,无权查看此界面,按任意键返回!\n");
+				printf("您不是经理,无权查看此界面,按回车返回!\n");
+				getchar();
 			}
-			getchar();
 		    break;
 		case 'd':
 		case 'D':
@@ -111,6 +113,7 @@ void SalesAanalysis_UI_MgtEntry() {
 			if(gl_CurUser.type==USR_CLERK){
 				SalesAanalysis_UI_StatSale(gl_CurUser.id,stDate,endDate);
 			}else{
+				printf("请输入售票员名字:");
 				sgets(user.username,30);
 				if(Account_Srv_FetchByName(user.username,&user)){
 					SalesAanalysis_UI_StatSale(user.id,stDate,endDate);
@@ -120,7 +123,7 @@ void SalesAanalysis_UI_MgtEntry() {
 		case 's':
 		case 'S':
 			if(gl_CurUser.type!=USR_MANG){
-				printf("您不是经理,无权查看此页面!按任意键返回!\n");
+				printf("您不是经理,无权查看此页面!按回车返回!\n");
 				getchar();
 				break;
 			}
@@ -138,8 +141,9 @@ void SalesAanalysis_UI_MgtEntry() {
 				SalesAanalysis_UI_StatSale(user.id,stDate,endDate);
 			}else{
 				printf("输入的用户名不存在,按任意键返回!");
+				getchar();
 			}
-			getchar();
+
 			break;
 		}
 	}while('r'==choice  && 'R'==choice);

@@ -12,10 +12,11 @@
 #include "../Service/EntityKey.h"
 #include "Seat_UI.h"
 #include "../Common/Common.h"
+#include "../Service/Account.h"
 
 #define ACCOUNT_PAGE_SIZE 5 
 
-
+extern account_t gl_CurUser;
 static const int STUDIO_PAGE_SIZE = 5;
 
 #include <stdio.h>
@@ -40,13 +41,13 @@ void Studio_UI_MgtEntry(void) {
 		system("clear");
 		printf("\n==================================================================\n");
 		printf("********************** 演出厅列表 **********************\n");
-		printf("%5s  %-18s  %-10s  %-10s  %-10s\n", "id", "演出厅名", "行数",
+		printf("%5s  %-18s  %-10s  %-5s  %-5s\n", "编号", "演出厅名", "行数",
 				"列数", "座位数");
 		printf("------------------------------------------------------------------\n");
 		//显示数据
 		for (i = 0, pos = (studio_node_t *) (paging.curPos);
 				pos != head && i < paging.pageSize; i++) {
-			printf("%5d  %-18s  %-10d  %-10d  %-10d\n", pos->data.id,
+			printf("%5d  %-18s  %-5d  %-5d  %-10d\n", pos->data.id,
 					pos->data.name, pos->data.rowsCount, pos->data.colsCount,
 					pos->data.seatsCount);
 			pos = pos->next;
@@ -56,8 +57,13 @@ void Studio_UI_MgtEntry(void) {
 				Pageing_TotalPages(paging));
 		printf(
 				"******************************************************************\n");
-		printf(
-				"[P]上一页|[N]下一页 | [A]添加|[D]删除|[U]修改 | [S]座位 | [R]返回");
+		if(gl_CurUser.type!=9){
+				printf("[P]上一页|[N]下一页|[R]返回");
+		}else{
+			printf(
+							"[P]上一页|[N]下一页 | [A]添加|[D]删除|[U]修改 | [S]座位 | [R]返回");
+		}
+
 		printf(
 				"\n==================================================================\n");
 		printf("功能选择:");//Your Choice
@@ -66,16 +72,17 @@ void Studio_UI_MgtEntry(void) {
 		ffflush();
 
 		switch (choice) {
-		case 'a':
-		case 'A':
+		if(gl_CurUser.type==9){
+			case 'a':
+			case 'A':
 			if (Studio_UI_Add()) //新添加成功，跳到最后一页显示
 			{
 				paging.totalRecords = Studio_Srv_FetchAll(head);
 				Paging_Locate_LastPage(head, paging, studio_node_t);
 			}
 			break;
-		case 'd':
-		case 'D':
+			case 'd':
+			case 'D':
 			printf("输入ID:");
 			scanf("%d", &id);
 			ffflush();
@@ -84,8 +91,8 @@ void Studio_UI_MgtEntry(void) {
 				List_Paging(head, paging, studio_node_t);
 			}
 			break;
-		case 'u':
-		case 'U':
+			case 'u':
+			case 'U':
 			printf("输入ID:");
 			scanf("%d", &id);
 			ffflush();
@@ -94,8 +101,8 @@ void Studio_UI_MgtEntry(void) {
 				List_Paging(head, paging, studio_node_t);
 			}
 			break;
-		case 's':
-		case 'S':
+			case 's':
+			case 'S':
 			printf("输入ID:");
 			scanf("%d", &id);
 			ffflush();
@@ -103,6 +110,7 @@ void Studio_UI_MgtEntry(void) {
 			paging.totalRecords = Studio_Srv_FetchAll(head);
 			List_Paging(head, paging, studio_node_t);
 			break;
+		}
 		case 'p':
 		case 'P':
 			if (1 < Pageing_CurPage(paging)) {
@@ -141,7 +149,7 @@ int Studio_UI_Add(void) {
 		printf("座位的列数:");//Column Count of Seats
 		scanf("%d", &(rec.colsCount));
 		ffflush();
-		rec.seatsCount = 0;
+		rec.seatsCount = rec.colsCount*rec.rowsCount;
 		printf("=======================================================\n");
 
 		//获取主键
@@ -149,9 +157,9 @@ int Studio_UI_Add(void) {
 
 		if (Studio_Srv_Add(&rec)) {
 			newRecCount += 1;
-			printf("新演出厅添加成功!\n");//The new room added successfully	
+			printf("新演出厅添加成功!\n");
 		} else
-			printf("新演出厅添加失败!\n");//The new room added failed!
+			printf("新演出厅添加失败!\n");
 		printf("-------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
 		scanf("%c", &choice);

@@ -48,11 +48,11 @@ void Schedule_UI_ListAll(void) {
 		printf("\n============================================================\n");
 		printf("*********************** 演出计划查询 **************************\n");
 		printf("%2s  %10s  %10s  %11s  %3s\n","编号","剧名","演出厅名","演出时间","票价");
-		printf("--------------------------------------------------------------");
+		printf("--------------------------------------------------------------\n");
 		for(i=0,pos=(schedule_node_t*)(paging.curPos);pos!=sch && i<paging.pageSize;i++){
 		    Play_Srv_FetchByID(pos->data.play_id,&pla);
 		    Studio_Srv_FetchByID(pos->data.studio_id,&stu);
-		    printf("%2d  %10s  %10s  %2d/%2d %2d:%2d   %3d\n",pos->data.id,pla.name,stu.name,
+		    printf("%2d  %10s  %10s  %02d/%02d %02d:%02d   %3d\n",pos->data.id,pla.name,stu.name,
 		    		pos->data.date.month,pos->data.date.day,pos->data.time.hour,pos->data.time.minute,pla.price);
 		    pos=pos->next;
 		}
@@ -105,7 +105,7 @@ int Schedule_UI_Add(int play_id) {
 		//system("cls);
 		system("clear");
 		printf("\n=======================================================\n");
-		printf("\t\t****************  添加演出计划  *****************\n");
+		printf("****************  添加演出计划  *****************\n");
 		printf("-------------------------------------------------------\n");
 		rec.play_id=play_id;
 		printf("放映厅编号:");
@@ -149,7 +149,7 @@ int Schedule_UI_Modify(int id){
 	List_Init(seatList,seat_node_t);
 	int rtn=0;
 	if(!Schedule_Srv_FetchByID(id,&rec)){
-		printf("该演出厅不存在!回车返回!\n");
+		printf("该演出计划不存在!回车返回!\n");
 		getchar();
 		return 0;
 	}
@@ -162,10 +162,10 @@ int Schedule_UI_Modify(int id){
 	scanf("%d",&rec.play_id);
 	ffflush();
 	printf("演出的播放厅编号:[%d]",rec.studio_id);
-	printf("演出日期:[%4d/%2d/%2d]",rec.date.year,rec.date.month,rec.date.day);
+	printf("演出日期:[%04d/%02d/%02d]",rec.date.year,rec.date.month,rec.date.day);
 	scanf("%d/%d/%d",&rec.date.year,&rec.date.month,&rec.date.day);
 	ffflush();
-	printf("演出时间:[%2d/%2d/%2d]",rec.time.hour,rec.time.minute,rec.time.second);
+	printf("演出时间:[%02d:%02d:%02d]",rec.time.hour,rec.time.minute,rec.time.second);
 	scanf("%d/%d/%d",&rec.time.hour,&rec.time.minute,&rec.time.second);
 	ffflush();
 	rec.seat_count=Seat_Srv_FetchValidByRoomID(seatList,rec.studio_id);
@@ -193,14 +193,7 @@ int Schedule_UI_Delete(int id){
 	if(Schedule_Srv_DeleteByID(id)){
 		printf("演出计划删除成功!\n");
 		rtn = 1;
-		//删除是成功时,同时删除对应的票
-		if(Ticket_Srv_DeleteBatch(id)){
-			printf("对应票删除成功!\n");
-			rtn=2;
-		}else{
-			printf("对应票删除失败!\n");
-			rtn=3;
-		}
+
 	}else{
 		printf("演出计划删除失败!\n");
 	}
@@ -216,25 +209,84 @@ int Schedule_UI_Delete(int id){
  * Output:      查找到的剧目信息
  * Return:      0表示未找到，1表示找到了
  */
-int Schedule_UI_Query(int id){
-    int rtn=0;
-    schedule_t buf;
-    play_t pla;
-    studio_t stu;
-    rtn=Play_Srv_FetchByID(id,&pla);
-    Play_Srv_FetchByID(buf.play_id,&pla);
-    Studio_Srv_FetchByID(buf.studio_id,&stu);
-    system("clear");
-	printf("\n============================================================\n");
-	printf("*********************** 演出计划查询 **************************\n");
-	printf("%2s  %10s  %10s  %11s  %3s\n","编号","剧名","演出厅名","演出时间","票价");
-	printf("--------------------------------------------------------------");
-	printf("%2d  %10s  %10s  %2d/%2d %2d:%2d   %3d\n",buf.id,pla.name,stu.name,
-			buf.date.month,buf.date.day,buf.time.hour,buf.time.minute,pla.price);
-	printf("查询完成,请按回车返回\n");
-	getchar();
+int Schedule_UI_Query(int id) {
+	int rtn = 0,i,sch_id;
+	char choice;
+	play_t pla;
+	studio_t stu;
+	schedule_list_t head, pos;
+	Pagination_t paging;
+	List_Init(head, schedule_node_t);
+	rtn=paging.totalRecords = Schedule_Srv_FetchByPlay(head, id);
+	paging.offset = 0;
+	paging.pageSize = SCHEDULE_PAGE_SIZE;
+	Paging_Locate_FirstPage(head, paging);
+
+	/*if(!rtn){
+	 printf("查询失败!按回车返回!\n");
+	 getchar();
+	 return rtn;
+	 }*/
+	Play_Srv_FetchByID(id, &pla);
+	do {
+		system("clear");
+		printf(
+				"\n============================================================\n");
+		printf("*********************** 演出计划查询 **************************\n");
+		printf("%2s  %10s  %10s  %11s  %3s\n", "编号", "剧名", "演出厅名", "演出时间",
+				"票价");
+		printf(
+				"--------------------------------------------------------------\n");
+	for(i=0,pos=(schedule_node_t*)(paging.curPos);pos!=head && i<paging.pageSize;i++){
+			Studio_Srv_FetchByID(pos->data.studio_id, &stu);
+			printf("%-2d  %-10s  %-10s  %d/%d %d:%d   %-3d\n", pos->data.id,
+					pla.name, stu.name, pos->data.date.month,
+					pos->data.date.day, pos->data.time.hour,
+					pos->data.time.minute, pla.price);
+			pos=pos->next;
+		}
+		printf(
+				"--------------------------------------------------------------\n");
+
+		printf("[A]添加|[D]删除|[U]修改|[][P]上一页|[N]下一页|[R]返回\n");
+		printf("-------------------------------------------------------\n");
+		printf("请输入功能选项:");
+		scanf("%c", &choice);
+		ffflush();
+		switch (choice) {
+		case 'a':
+		case 'A':
+			Schedule_UI_Add(id);
+			break;
+		case 'd':
+		case 'D':
+			printf("请输入要删除的演出计划id:");
+			scanf("%d",&sch_id);
+			ffflush();
+			Schedule_UI_Delete(sch_id);
+			break;
+		case 'u':
+		case 'U':
+			printf("请输入要修改的演出计划id：");
+			scanf("%d",&sch_id);
+			ffflush();
+			Schedule_UI_Modify(sch_id);
+			break;
+		case 'p':
+		case 'P':
+			if (1 < Pageing_CurPage(paging)) {
+				Paging_Locate_OffsetPage(head, paging, -1, schedule_node_t);
+			}
+			break;
+		case 'n':
+		case 'N':
+			if (Pageing_TotalPages(paging) > Pageing_CurPage(paging)) {
+				Paging_Locate_OffsetPage(head, paging, 1, schedule_node_t);
+			}
+			break;
+		}
+	} while ('r' != choice && 'R' != choice);
 	return rtn;
-	return 0;
 }
 
 /*
@@ -308,51 +360,54 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
  * Output:      演出计划信息
  * Return:      无
  */
-void Schedule_UI_MgtEntry(int play_id){
+void Schedule_UI_MgtEntry(int play_id) {
 	char choice;
-	system("clear");
-	printf("\n=======================================================\n");
-	printf("\t\t**************** 管理演出计划 ****************\n");
-	printf("-------------------------------------------------------\n");
-	play_t ply;
-	Play_Srv_FetchByID(play_id,&ply);
-	printf("\t\t当前剧目: %s\n",ply.name);
-	printf("\t请选择功能:\n");
-	printf("\t\t[A]添加演出计划\n");
-	printf("\t\t[D]删除演出计划\n");
-	printf("\t\t[U]修改演出计划\n");
-	printf("\t\t[Q]查询演出计划\n");
-	printf("\t\t[N]列出当前剧目演出计划\n");
-	printf("\t\t[L]列出所有演出计划\n");
-	printf("\t\t[R]返回上级\n");
-	printf("-------------------------------------------------------\n");
-	printf("\t\t请输入功能选项:");
-	scanf("%c", &choice);
-	ffflush();
-	switch (choice) {
-	case 'a':
-	case 'A':
-		Schedule_UI_Add(play_id);
-		break;
-	case 'd':
-	case 'D':
-		Schedule_UI_Delete(play_id);
-		break;
-	case 'u':
-	case 'U':
-		Schedule_UI_Modify(play_id);
-		break;
-	case 'q':
-	case 'Q':
-		Schedule_UI_Query(play_id);
-		break;
-	case 'N':
-	case 'n':
-		//Schedule_UI_ListByPlay();
-		printf("敬请期待!\n");
-		break;
-	case 'r':
-	case 'R':
-		break;
+	while (1) {
+		system("clear");
+		printf("\n=======================================================\n");
+		printf("**************** 管理演出计划 ****************\n");
+		printf("-------------------------------------------------------\n");
+		play_t ply;
+		Play_Srv_FetchByID(play_id, &ply);
+		printf("\t\t当前剧目: %s\n", ply.name);
+		printf("\t请选择功能:\n");
+		printf("\t\t[A]添加演出计划\n");
+		printf("\t\t[D]删除演出计划\n");
+		printf("\t\t[U]修改演出计划\n");
+		printf("\t\t[Q]查询演出计划\n");
+		printf("\t\t[N]列出当前剧目演出计划\n");
+		printf("\t\t[L]列出所有演出计划\n");
+		printf("\t\t[R]返回上级\n");
+		printf("-------------------------------------------------------\n");
+		printf("\t\t请输入功能选项:");
+		scanf("%c", &choice);
+		ffflush();
+		switch (choice) {
+		case 'a':
+		case 'A':
+			Schedule_UI_Add(play_id);
+			break;
+		case 'd':
+		case 'D':
+			Schedule_UI_Delete(play_id);
+			break;
+		case 'u':
+		case 'U':
+			Schedule_UI_Modify(play_id);
+			break;
+		case 'q':
+		case 'Q':
+			Schedule_UI_Query(play_id);
+			break;
+		case 'N':
+		case 'n':
+			//Schedule_UI_ListByPlay();
+			Schedule_UI_Query(play_id);
+			break;
+		case 'r':
+		case 'R':
+			return;
+			break;
+		}
 	}
 }

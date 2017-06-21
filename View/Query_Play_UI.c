@@ -2,6 +2,7 @@
 #include "../Service/Play.h"
 #include "../Persistence/Query_Persist.h"
 #include "../Service/Schedule.h"
+#include "../Service/Account.h"
 #include "../Persistence/Schedule_Persist.h"
 #include "../Service/Studio.h"
 #include "../Persistence/Ticket_Persist.h"
@@ -9,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+extern account_t gl_CurUser;
 void DisplayQueryPlay(void)
 {
 	//ffflush();
@@ -19,15 +21,15 @@ void DisplayQueryPlay(void)
 	do {
 		//ffflush();
 		memset(fileName, 0, sizeof(fileName));
-		printf("请输入剧目列表:");
+		printf("请输入剧目名称:");
 		sgets(fileName,30);
 		system("clear");
 		printf("\n=======================================================\n");
 		printf("\n****************  剧目信息列表  ***********\n");
 		if (Query_PlayName(fileName,&play)) {
-			printf("编号\t\t剧名\t\t地区\t 级别\t\t上演时间\t 结束时间\t票价\n");
+			printf("编号\t剧名\t地区\t级别\t上演时间\t结束时间\t票价\n");
 			printf("-------------------------------------------------------\n");
-			printf("%d\t\t%s\t\t%s\t%s\t%d-%d-%d\t%d-%d-%d\t%d\n", play.id,
+			printf("%d\t%s\t%s\t%s\t%d-%d-%d\t%d-%d-%d\t%d\n", play.id,
 								play.name,	play.area,
 								(play.rating==1?"儿童   ":(play.rating==2?"青年":"成人   ")),
 								play.start_date.year,play.start_date.month,
@@ -56,11 +58,19 @@ void DisplayQueryPlay(void)
 			case 'B':
 			case 'b':
 				//Sale the ticket
+				if(gl_CurUser.type!=USR_CLERK){
+					printf("您不是售票员!无权使用此功能!");
+					getchar();
+					return;
+					break;
+				}
+				Sale_UI_ShowScheduler(play.id);
+				return;
 				break;
 			}
 		} else {
 			printf("此剧目名不存在!\n");
-			printf("[R]返回, [B]售票, [A]重新载入:");
+			printf("[R]返回,[A]重新载入:");
 			scanf("%c", &choice);
 			ffflush();
 			switch(choice) {

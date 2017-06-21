@@ -48,16 +48,18 @@ int SalesAnalysis_Perst_SelectAll(salesanalysis_list_t list) {
     }
     salesanalysis_t buf;
     salesanalysis_list_t newNode=NULL;
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(!(newNode=(salesanalysis_list_t)malloc(sizeof(salesanalysis_node_t)))){
-            printf("内存申请失败\n");
-            break;
-        }
-        newNode->data=buf;
-        List_AddTail(list,newNode);
-        rtn++;
-    }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (!(newNode = (salesanalysis_list_t) malloc(
+					sizeof(salesanalysis_node_t)))) {
+				printf("内存申请失败\n");
+				break;
+			}
+			newNode->data = buf;
+			List_AddTail(list, newNode);
+			rtn++;
+		}
+	}
     fclose(fp);
 	return rtn;
 
@@ -77,20 +79,18 @@ int Sale_Perst_SelectAll(sale_list_t list) {
         return rtn;
     }
     sale_t buf;
-    while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(!(newNode=(sale_list_t)malloc(sizeof(sale_node_t)))){
-            printf("内存申请失败!\n");
-            return rtn;
-        }
-        newNode->data=buf;
-        List_AddTail(list,newNode);
-        rtn++;
-    }
+	while (!feof(fp)) {
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (!(newNode = (sale_list_t) malloc(sizeof(sale_node_t)))) {
+				printf("内存申请失败!\n");
+				return rtn;
+			}
+			newNode->data = buf;
+			List_AddTail(list, newNode);
+			rtn++;
+		}
+	}
     fclose(fp);
-
 	return rtn;
-
-
 }
 

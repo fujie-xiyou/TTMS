@@ -40,11 +40,12 @@ int Account_Perst_SelByName(char usrName[], account_t *buf) {
         return rtn;
     }
     while(!feof(fp)){
-        fread(&data,sizeof(data),1,fp);
-        if(strcmp(data.username,usrName)==0){
-            *buf=data;
-            rtn=1;
-            break;
+        if(fread(&data,sizeof(data),1,fp)){
+        	if(strcmp(data.username,usrName)==0){
+            	*buf=data;
+            	rtn=1;
+            	break;
+        	}
         }
     }
     fclose(fp);
@@ -70,19 +71,21 @@ int Account_Perst_Insert(const account_t *data) {
 
 //在账号文件中查找与参数账号匹配的账号，找到 return 1；否则 return 0；并进行覆盖重写
 int Account_Perst_Update(const account_t * data) {
-
     int rtn=0;
-    FILE *fp=fopen(ACCOUNT_DATA_FILE,"wb+");
+    FILE *fp=fopen(ACCOUNT_DATA_FILE,"rb+");
     if(fp==NULL){
         printf("%s打开失败!\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     account_t buf;
     while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id==data->id){
-            fseek(fp,-sizeof(buf),SEEK_CUR);
-            rtn=fwrite(data,sizeof(buf),1,fp);
+
+        if(fread(&buf,sizeof(buf),1,fp)){
+        	if(buf.id==data->id){
+        		//printf("名字:%s 密码:%s\n",buf.username,buf.password);
+        		fseek(fp,-sizeof(buf),SEEK_CUR);
+        		rtn=fwrite(data,sizeof(buf),1,fp);
+        	}
         }
     }
     fclose(fp);
@@ -94,8 +97,8 @@ int Account_Perst_Update(const account_t * data) {
 int Account_Perst_DeleteByID(int id) {
 
     int rtn=0;
-    if(!rename(ACCOUNT_DATA_FILE,ACCOUNT_DATA_TEMP_FILE)){
-        printf("%s重命名失败!",ACCOUNT_DATA_FILE);
+    if(rename(ACCOUNT_DATA_FILE,ACCOUNT_DATA_TEMP_FILE)){
+        printf("%s重命名失败!\n",ACCOUNT_DATA_FILE);
         return rtn;
     }
     FILE *fp=fopen(ACCOUNT_DATA_TEMP_FILE,"rb");
@@ -109,11 +112,13 @@ int Account_Perst_DeleteByID(int id) {
     }
     account_t buf;
     while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id!=id){
-            fwrite(&buf,sizeof(buf),1,fd);
-        }else{
-            rtn=1;
+        if(fread(&buf,sizeof(buf),1,fp)){
+        	if(buf.id!=id){
+        		if(!fwrite(&buf,sizeof(buf),1,fd))
+        			printf("文件写入失败!\n");
+        	}else{
+        		rtn=1;
+        	}
         }
     }
     fclose(fp);
@@ -135,11 +140,12 @@ int Account_Perst_SelectByID(int id, account_t *buf) {
     }
     account_t data;
     while(!feof(fp)){
-        fread(&data,sizeof(data),1,fp);
-        if(data.id==id){
-            *buf=data;
-            rtn=1;
-            break;
+        if(fread(&data,sizeof(data),1,fp)){
+        	if(data.id==id){
+        		*buf=data;
+        		rtn=1;
+        		break;
+        	}
         }
     }
     fclose(fp);
@@ -161,14 +167,15 @@ int Account_Perst_SelectAll(account_list_t list) {
     account_t buf;
     account_list_t newNode=NULL;
     while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if(!(newNode=(account_list_t)malloc(sizeof(account_node_t)))){
-           printf("内存申请失败!\n");
-            return rtn;
+        if(fread(&buf,sizeof(buf),1,fp)){
+        	if(!(newNode=(account_list_t)malloc(sizeof(account_node_t)))){
+        		printf("内存申请失败!\n");
+        		return rtn;
+        	}
+        	newNode->data=buf;
+        	List_AddTail(list,newNode);
+        	rtn++;
         }
-        newNode->data=buf;
-        List_AddTail(list,newNode);
-        rtn++;
     }
     fclose(fp);
 	return rtn;

@@ -51,7 +51,7 @@ int Play_Perst_Update(const play_t *data) {
     FILE *fp;
     int found=0;
     play_t buf;
-    if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"rb+"))==NULL){
         fprintf(stderr,"%s打开失败!",PLAY_DATA_FILE);
         return found;
     }
@@ -91,14 +91,19 @@ int Play_Perst_DeleteByID(int ID) {
         return found;
     }
     while(!feof(fp)) {
-        fread(&buf,sizeof(buf),1,fp);
-        if(buf.id==ID) {
-            found=1;
-        }
-        else {
-            fwrite(&buf,sizeof(buf),1,fd);
-        }
-    }
+		if (fread(&buf, sizeof(buf), 1, fp)) {
+			if (buf.id == ID) {
+				found = 1;
+			}
+
+			else {
+				if (!fwrite(&buf, sizeof(buf), 1, fd)) {
+					printf("文件写入失败!");
+					getchar();
+				}
+			}
+		}
+	}
 
     fclose(fp);
     fclose(fd);
@@ -119,18 +124,19 @@ int Play_Perst_SelectByID(int ID, play_t *buf) {
     FILE *fp;
     int found=0;
     play_t data;
-    if((fp=fopen(PLAY_DATA_FILE,"wb+"))==NULL){
+    if((fp=fopen(PLAY_DATA_FILE,"rb"))==NULL){
         printf("%s打开失败!\n",PLAY_DATA_FILE);
         return found;
     }
-    while(!feof(fp)){
-        fread(&data,sizeof(play_t),1,fp);
-        if(data.id==ID){
-            *buf=data;
-            found=1;
-            break; 
-        }
-    }
+	while (!feof(fp)) {
+		if (fread(&data, sizeof(play_t), 1, fp)) {
+			if (data.id == ID) {
+				*buf = data;
+				found = 1;
+				break;
+			}
+		}
+	}
     fclose(fp);
     return found;
 }
@@ -159,15 +165,18 @@ int Play_Perst_SelectAll(play_list_t list) {
         return 0;
     }
     while(!feof(fp)){
-        fread(&buf,sizeof(buf),1,fp);
-        if((newNode=(play_list_t)malloc(sizeof(play_node_t)))==NULL){
-            printf("内存申请失败!\n");
-            break;
+        if(fread(&buf,sizeof(buf),1,fp)){
+        	if((newNode=(play_list_t)malloc(sizeof(play_node_t)))==NULL){
+        		printf("内存申请失败!\n");
+        		break;
+        	}
+
+        	newNode->data=buf;
+        	List_AddTail(list,newNode);
+        	recCount++;
         }
-        newNode->data=buf;
-        List_AddTail(list,newNode);
-        recCount++;
     }
+    //printf("我在这!\n");
     fclose(fp);
     return recCount;
 }

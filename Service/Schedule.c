@@ -26,7 +26,12 @@ inline int Schedule_Srv_Add(const schedule_t *data) {
     rtn=Schedule_Perst_Insert(data);
     if(!rtn) return rtn;
     rtn=Ticket_Srv_AddBatch(data->id,data->studio_id);
-    if(rtn) return rtn;
+    if(rtn) {
+    	printf("票添加成功\n");
+    	return rtn;
+    }else{
+    	printf("票添加失败!\n");
+    }
 	return 2;
 }
 
@@ -57,9 +62,8 @@ inline int Schedule_Srv_Modify(const schedule_t *data) {
  */
 inline int Schedule_Srv_DeleteByID(int ID) {
     int rtn=Schedule_Perst_DeleteByID(ID);
-    if (!rtn) return rtn;
-    return Ticket_Srv_DeleteBatch(ID);
-
+    Ticket_Srv_DeleteBatch(ID);
+    return rtn;
 }
 
 /*
