@@ -40,7 +40,7 @@ int SysLogin() {
         if(Account_Srv_Verify(usrName,passwd)){
             return 1;
         }
-        printf("\t账号或密码错误!请重新输入\n");
+        printf("\t\n账号或密码错误!请重新输入\n");
         i++;
     }
     printf("\t密码错误超过3次!\n");

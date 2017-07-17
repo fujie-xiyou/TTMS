@@ -31,10 +31,10 @@ int Ticket_Perst_Insert(ticket_list_t list){
 }
 int Ticket_Perst_Delete(int schedule_id){
 
-	char cmd[100];
-	sprintf(cmd, "rename  %s %s", TICKET_DATA_FILE, TICKET_DATA_TEMP_FILE);
-	system(cmd);
-
+	//char cmd[100];
+	//sprintf(cmd, "rename  %s %s", TICKET_DATA_FILE, TICKET_DATA_TEMP_FILE);
+	rename(TICKET_DATA_FILE, TICKET_DATA_TEMP_FILE);
+	//system(cmd);
 	FILE *fpSour, *fpTarg;
 	fpSour = fopen(TICKET_DATA_TEMP_FILE, "rb");
 	fpTarg = fopen(TICKET_DATA_FILE, "wb");

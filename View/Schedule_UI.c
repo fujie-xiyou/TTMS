@@ -121,12 +121,13 @@ int Schedule_UI_Add(int play_id) {
 		//获取主键
 		rec.id=EntKey_Srv_CompNewKey("Schedule");
 		if(Schedule_Srv_Add(&rec)){
-			printf("添加演出计划成功!\n");
+			//printf("添加演出计划成功!\n");
 			newRecCount++;
+			
 		}
-		else {
+		/*else {
 			printf("添加演出计划失败!\n");
-		}
+		}*/
 		printf("-------------------------------------------------------\n");
 		printf("[A]添加更多, [R]返回:");
 		scanf("%c", &choice);
@@ -162,6 +163,7 @@ int Schedule_UI_Modify(int id){
 	scanf("%d",&rec.play_id);
 	ffflush();
 	printf("演出的播放厅编号:[%d]",rec.studio_id);
+	scanf("%d",&rec.studio_id);
 	printf("演出日期:[%04d/%02d/%02d]",rec.date.year,rec.date.month,rec.date.day);
 	scanf("%d/%d/%d",&rec.date.year,&rec.date.month,&rec.date.day);
 	ffflush();
@@ -256,21 +258,30 @@ int Schedule_UI_Query(int id) {
 		switch (choice) {
 		case 'a':
 		case 'A':
-			Schedule_UI_Add(id);
+			if(Schedule_UI_Add(id)){
+				paging.totalRecords = Schedule_Srv_FetchAll(head);
+            	List_Paging(head, paging, schedule_node_t);
+               }
 			break;
 		case 'd':
 		case 'D':
 			printf("请输入要删除的演出计划id:");
 			scanf("%d",&sch_id);
 			ffflush();
-			Schedule_UI_Delete(sch_id);
+			if(Schedule_UI_Delete(sch_id)){
+				paging.totalRecords = Schedule_Srv_FetchAll(head);
+            	List_Paging(head, paging, schedule_node_t);
+               }
 			break;
 		case 'u':
 		case 'U':
 			printf("请输入要修改的演出计划id：");
 			scanf("%d",&sch_id);
 			ffflush();
-			Schedule_UI_Modify(sch_id);
+			if(Schedule_UI_Modify(sch_id)){
+				paging.totalRecords = Schedule_Srv_FetchAll(head);
+            	List_Paging(head, paging, schedule_node_t);
+               }
 			break;
 		case 'p':
 		case 'P':
@@ -317,7 +328,7 @@ void Schedule_UI_ListByPlay(const play_t *play, schedule_list_t list, Pagination
 		for(i=0,pos=(schedule_node_t*)(paging.curPos);pos!=list && i<paging.pageSize;i++){
 		    Play_Srv_FetchByID(pos->data.play_id,&pla);
 		    Studio_Srv_FetchByID(pos->data.studio_id,&stu);
-		    printf("%2d  %10s  %10s  %2d/%2d %2d:%2d   %3d\n",pos->data.id,pla.name,stu.name,
+		    printf("%02d  %10s  %10s  %02d/%02d %02d:%02d   %3d\n",pos->data.id,pla.name,stu.name,
 		    		pos->data.date.month,pos->data.date.day,pos->data.time.hour,pos->data.time.minute,pla.price);
 		    pos=pos->next;
 		}
